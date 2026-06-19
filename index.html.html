@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akshay Yadav — Software Engineer</title>
+  <meta name="description" content="Akshay Yadav — software engineer building service facades, secure multi-tenant integrations, and event-driven pipelines across backend, cloud, and UI." />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Styles (inlined) -->
+  <style>
+/* ============================================================
+   Akshay Yadav — Portfolio
+   Design: "Systems Schematic" — engineering as a living network
+   ============================================================ */
+
+:root {
+  /* Palette */
+  --ink:        #0A1018;   /* deep schematic base            */
+  --ink-2:      #0E1726;   /* slightly raised                */
+  --panel:      #111E31;   /* cards / panels                 */
+  --panel-edge: rgba(143, 167, 201, 0.16);
+  --blueprint:  #3B8CFF;   /* primary accent                */
+  --blueprint-soft: rgba(59, 140, 255, 0.14);
+  --signal:     #F6A623;   /* warm secondary, used sparingly */
+  --mist:       #8FA7C9;   /* secondary text                 */
+  --mist-dim:   #5C708C;   /* tertiary / captions            */
+  --paper:      #EAF1FB;   /* primary text                   */
+  --grid-line:  rgba(96, 130, 178, 0.08);
+
+  /* Type */
+  --display: "Space Grotesk", system-ui, sans-serif;
+  --body:    "Inter", system-ui, sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--ink);
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  /* Blueprint grid texture */
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 46px 46px;
+  background-position: center top;
+}
+
+::selection { background: var(--blueprint); color: #fff; }
+
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; margin: 0; }
+
+.mono { font-family: var(--mono); }
+
+/* ---------- Layout helpers ---------- */
+.section { padding: 110px 0; position: relative; }
+.container-tight { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--blueprint);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 26px; height: 1px;
+  background: var(--blueprint);
+  display: inline-block;
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  letter-spacing: -0.02em;
+  margin: 18px 0 0;
+  max-width: 18ch;
+}
+.section-lead {
+  color: var(--mist);
+  max-width: 56ch;
+  margin-top: 18px;
+  font-size: 1.05rem;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: fixed; inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 28px;
+  transition: background .35s var(--ease), backdrop-filter .35s var(--ease), border-color .35s var(--ease);
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(10, 16, 24, 0.78);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--panel-edge);
+}
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-brand .dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 12px var(--signal);
+  animation: pulse 2.6s var(--ease) infinite;
+}
+.nav-links { display: flex; gap: 30px; align-items: center; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--mist);
+  position: relative;
+  transition: color .25s var(--ease);
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; bottom: -6px;
+  width: 0; height: 1px; background: var(--blueprint);
+  transition: width .3s var(--ease);
+}
+.nav-links a:hover { color: var(--paper); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links .num { color: var(--mist-dim); margin-right: 5px; }
+
+@media (max-width: 860px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+}
+
+.nav-cta {
+  border: 1px solid var(--blueprint);
+  color: var(--blueprint) !important;
+  padding: 9px 16px; border-radius: 999px;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.nav-cta::after { display: none; }
+.nav-cta:hover { background: var(--blueprint); color: #fff !important; }
+
+/* ============================================================
+   HERO  — interactive node network
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+#net {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+.hero::after { /* vignette so text stays legible over the graph */
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(120% 90% at 22% 50%, rgba(10,16,24,0.92) 0%, rgba(10,16,24,0.55) 45%, rgba(10,16,24,0.15) 100%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 2; width: 100%; }
+
+.hero-tag {
+  font-family: var(--mono);
+  color: var(--mist);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  opacity: 0; transform: translateY(14px);
+  animation: rise .8s var(--ease) .15s forwards;
+}
+.hero-tag b { color: var(--blueprint); font-weight: 600; }
+
+.hero h1 {
+  font-size: clamp(3rem, 9vw, 6.6rem);
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+}
+.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: rise .9s var(--ease) forwards;
+}
+.hero h1 .line:nth-child(1) span { animation-delay: .25s; }
+.hero h1 .line:nth-child(2) span { animation-delay: .38s; color: var(--mist); }
+
+.hero-sub {
+  margin-top: 30px;
+  max-width: 50ch;
+  color: var(--mist);
+  font-size: 1.18rem;
+  opacity: 0; transform: translateY(14px);
+  animation: rise .9s var(--ease) .6s forwards;
+}
+.hero-sub .hl { color: var(--paper); }
+
+.hero-actions {
+  margin-top: 40px;
+  display: flex; gap: 16px; flex-wrap: wrap;
+  opacity: 0; transform: translateY(14px);
+  animation: rise .9s var(--ease) .78s forwards;
+}
+.btn-primary, .btn-ghost {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  padding: 14px 26px;
+  border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 10px;
+  cursor: pointer;
+  transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.btn-primary {
+  background: var(--blueprint); color: #fff; border: 1px solid var(--blueprint);
+  box-shadow: 0 8px 30px rgba(59,140,255,0.28);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(59,140,255,0.4); }
+.btn-ghost { background: transparent; color: var(--paper); border: 1px solid var(--panel-edge); }
+.btn-ghost:hover { border-color: var(--mist); transform: translateY(-3px); }
+
+.hero-hint {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  z-index: 3;
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--mist-dim);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.hero-hint .bar { width: 1px; height: 34px; background: linear-gradient(var(--mist-dim), transparent); animation: drop 1.8s var(--ease) infinite; }
+
+/* node tooltip */
+.node-tip {
+  position: fixed; z-index: 60; pointer-events: none;
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em;
+  background: var(--panel); color: var(--paper);
+  border: 1px solid var(--panel-edge); border-radius: 7px;
+  padding: 6px 10px; transform: translate(-50%, -150%);
+  opacity: 0; transition: opacity .15s var(--ease);
+  white-space: nowrap;
+}
+.node-tip .k { color: var(--blueprint); }
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats {
+  border-top: 1px solid var(--panel-edge);
+  border-bottom: 1px solid var(--panel-edge);
+  background: linear-gradient(var(--ink-2), var(--ink));
+}
+/* Self-sufficient grid: renders correctly even if Bootstrap fails to load */
+.stats .row { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; }
+.stats .row > [class*="col-"] { width: auto; max-width: none; flex: none; padding: 0 14px; }
+@media (max-width: 767px) { .stats .row { grid-template-columns: 1fr 1fr; } }
+.stat { padding: 46px 0; text-align: left; position: relative; }
+.stat + .stat::before {
+  content: ""; position: absolute; left: 0; top: 30px; bottom: 30px; width: 1px;
+  background: var(--panel-edge);
+}
+.stat .num {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  letter-spacing: -0.03em; line-height: 1;
+  color: var(--paper);
+}
+.stat .num .u { color: var(--blueprint); }
+.stat .num.word {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--blueprint);
+  line-height: 1.05;
+}
+.stat .lbl {
+  font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em;
+  color: var(--mist); margin-top: 14px; max-width: 24ch;
+}
+@media (max-width: 767px) {
+  .stat + .stat::before { display: none; }
+  .stat { padding: 28px 0; border-top: 1px solid var(--panel-edge); }
+  .stats .row > div:first-child .stat { border-top: none; }
+}
+
+/* ============================================================
+   EXPERIENCE TIMELINE
+   ============================================================ */
+.timeline { position: relative; margin-top: 60px; }
+.timeline::before {
+  content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1px;
+  background: linear-gradient(var(--blueprint), var(--panel-edge));
+}
+.tl-item {
+  position: relative; padding: 0 0 56px 44px;
+  opacity: 0; transform: translateX(22px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+}
+.tl-item.in { opacity: 1; transform: none; }
+.tl-item::before {
+  content: ""; position: absolute; left: 0; top: 6px;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--ink); border: 2px solid var(--blueprint);
+  box-shadow: 0 0 0 5px rgba(59,140,255,0.12);
+}
+.tl-item.cur::before { background: var(--signal); border-color: var(--signal); box-shadow: 0 0 0 5px rgba(246,166,35,0.16); }
+
+.tl-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; }
+.tl-role { font-family: var(--display); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+.tl-co { color: var(--blueprint); font-weight: 600; }
+.tl-date {
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
+  color: var(--mist-dim); margin-left: auto;
+}
+.tl-points { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 14px; }
+.tl-points li {
+  position: relative; padding-left: 22px; color: var(--mist); font-size: 0.98rem; max-width: 70ch;
+}
+.tl-points li::before {
+  content: "▹"; position: absolute; left: 0; top: 0; color: var(--blueprint); font-size: 0.85rem;
+}
+.tl-points li b { color: var(--paper); font-weight: 600; }
+
+/* ============================================================
+   SIGNATURE INTERACTIVE — Event-driven vs polling
+   ============================================================ */
+.demo-wrap {
+  margin-top: 46px;
+  background: var(--panel);
+  border: 1px solid var(--panel-edge);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.demo-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  padding: 22px 26px; border-bottom: 1px solid var(--panel-edge);
+}
+.toggle {
+  display: inline-flex; background: var(--ink-2); border: 1px solid var(--panel-edge);
+  border-radius: 999px; padding: 4px;
+}
+.toggle button {
+  font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.04em;
+  border: none; background: transparent; color: var(--mist);
+  padding: 9px 18px; border-radius: 999px; cursor: pointer;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.toggle button.active { background: var(--blueprint); color: #fff; }
+.demo-readout { font-family: var(--mono); font-size: 0.78rem; color: var(--mist); }
+.demo-readout b { color: var(--paper); }
+.demo-readout .good { color: var(--signal); }
+
+.demo-stage { position: relative; height: 220px; }
+.demo-stage.tall { height: 360px; }
+@media (max-width: 560px) { .demo-stage.tall { height: 300px; } }
+#demoCanvas, #tenementCanvas { width: 100%; height: 100%; display: block; }
+
+.sub-demo-title {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(1.3rem, 3vw, 1.9rem); letter-spacing: -0.01em; margin-top: 64px;
+}
+.steps { display: flex; gap: 18px; flex-wrap: wrap; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.03em; }
+.steps .step { color: var(--mist-dim); display: inline-flex; align-items: center; gap: 8px; transition: color .3s var(--ease); }
+.steps .step .n {
+  width: 21px; height: 21px; border-radius: 50%; border: 1px solid var(--panel-edge);
+  display: grid; place-items: center; font-size: 0.66rem; transition: all .3s var(--ease);
+}
+.steps .step.active { color: var(--paper); }
+.steps .step.active .n { border-color: var(--blueprint); background: var(--blueprint-soft); color: var(--blueprint); }
+.replay {
+  font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.04em;
+  border: 1px solid var(--blueprint); color: var(--blueprint); background: transparent;
+  border-radius: 999px; padding: 9px 16px; cursor: pointer; margin-left: auto;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.replay:hover { background: var(--blueprint); color: #fff; }
+.demo-legend {
+  display: flex; gap: 26px; flex-wrap: wrap;
+  padding: 16px 26px; border-top: 1px solid var(--panel-edge);
+  font-family: var(--mono); font-size: 0.72rem; color: var(--mist-dim);
+}
+.demo-legend span { display: inline-flex; align-items: center; gap: 8px; }
+.demo-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+/* ============================================================
+   SKILLS — system map
+   ============================================================ */
+.skill-grid { margin-top: 54px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 900px) { .skill-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .skill-grid { grid-template-columns: 1fr; } }
+
+.skill-card {
+  background: var(--panel); border: 1px solid var(--panel-edge);
+  border-radius: 16px; padding: 26px 24px;
+  position: relative; overflow: hidden;
+  transition: transform .35s var(--ease), border-color .35s var(--ease);
+  opacity: 0; transform: translateY(22px);
+}
+.skill-card.in { opacity: 1; transform: none; }
+.skill-card:hover { transform: translateY(-6px); border-color: var(--blueprint); }
+.skill-card::after {
+  content: ""; position: absolute; right: -40px; top: -40px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: var(--blueprint-soft); filter: blur(10px);
+  opacity: 0; transition: opacity .35s var(--ease);
+}
+.skill-card:hover::after { opacity: 1; }
+.skill-card .idx { font-family: var(--mono); font-size: 0.72rem; color: var(--mist-dim); }
+.skill-card h3 { font-size: 1.12rem; margin: 10px 0 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.02em;
+  color: var(--mist); background: var(--ink-2);
+  border: 1px solid var(--panel-edge); border-radius: 7px; padding: 6px 11px;
+  transition: color .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+}
+.chip:hover { color: var(--paper); border-color: var(--blueprint); background: var(--blueprint-soft); }
+
+/* ============================================================
+   PROJECT
+   ============================================================ */
+.project {
+  margin-top: 50px;
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 0;
+  background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 18px;
+  overflow: hidden;
+}
+@media (max-width: 820px) { .project { grid-template-columns: 1fr; } }
+.project-body { padding: 40px; }
+.project-body h3 { font-size: 1.6rem; letter-spacing: -0.01em; }
+.project-body p { color: var(--mist); margin-top: 16px; max-width: 48ch; }
+.project-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.project-link {
+  margin-top: 28px; font-family: var(--mono); font-size: 0.8rem; color: var(--blueprint);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.project-link span { transition: transform .25s var(--ease); }
+.project-link:hover span { transform: translateX(5px); }
+
+/* mini schematic visual inside project */
+.project-vis {
+  background: var(--ink-2); border-left: 1px solid var(--panel-edge);
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  min-height: 240px;
+}
+@media (max-width: 820px) { .project-vis { border-left: none; border-top: 1px solid var(--panel-edge); } }
+.project-vis svg { width: 100%; max-width: 320px; height: auto; }
+
+/* ============================================================
+   EDUCATION
+   ============================================================ */
+.edu-grid { margin-top: 46px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 700px) { .edu-grid { grid-template-columns: 1fr; } }
+.edu-card {
+  background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 16px;
+  padding: 28px 26px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  opacity: 0; transform: translateY(20px); transition: opacity .7s var(--ease), transform .7s var(--ease);
+}
+.edu-card.in { opacity: 1; transform: none; }
+.edu-card h3 { font-size: 1.16rem; }
+.edu-card .where { color: var(--blueprint); font-family: var(--mono); font-size: 0.78rem; margin-top: 8px; }
+.edu-card .when { color: var(--mist-dim); font-family: var(--mono); font-size: 0.72rem; margin-top: 6px; }
+.edu-cgpa {
+  font-family: var(--display); font-weight: 600; font-size: 1.6rem; color: var(--signal);
+  white-space: nowrap;
+}
+.edu-cgpa small { font-family: var(--mono); font-size: 0.62rem; color: var(--mist-dim); display: block; text-align: right; }
+
+/* ============================================================
+   CONTACT / FOOTER
+   ============================================================ */
+.contact { text-align: center; border-top: 1px solid var(--panel-edge); background: linear-gradient(var(--ink), var(--ink-2)); }
+.contact .eyebrow { justify-content: center; }
+.contact .eyebrow::before { display: none; }
+.contact h2 { font-size: clamp(2.2rem, 6vw, 4.2rem); letter-spacing: -0.03em; margin-top: 18px; }
+.contact-mail {
+  display: inline-block; margin-top: 26px;
+  font-family: var(--display); font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--blueprint); border-bottom: 1px solid transparent; transition: border-color .25s var(--ease);
+}
+.contact-mail:hover { border-color: var(--blueprint); }
+.socials { margin-top: 40px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.social {
+  font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--mist);
+  border: 1px solid var(--panel-edge); border-radius: 999px; padding: 11px 20px;
+  transition: color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+}
+.social:hover { color: var(--paper); border-color: var(--blueprint); transform: translateY(-3px); }
+.foot {
+  margin-top: 70px; padding-top: 26px; border-top: 1px solid var(--panel-edge);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  font-family: var(--mono); font-size: 0.72rem; color: var(--mist-dim);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes rise { to { transform: translateY(0); opacity: 1; } }
+@keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: .55; } }
+@keyframes drop { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+/* ============================================================
+   CONTACT MODAL
+   ============================================================ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  background: rgba(6, 10, 16, 0.66); backdrop-filter: blur(8px);
+  opacity: 0; transition: opacity .3s var(--ease);
+}
+.modal-overlay[hidden] { display: none; }
+.modal-overlay.open { opacity: 1; }
+.modal-card {
+  position: relative; width: 100%; max-width: 440px;
+  background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 22px;
+  padding: 34px 30px;
+  transform: translateY(18px) scale(.98); opacity: 0;
+  transition: transform .35s var(--ease), opacity .35s var(--ease);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
+}
+.modal-overlay.open .modal-card { transform: none; opacity: 1; }
+.modal-close {
+  position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--panel-edge); background: var(--ink-2); color: var(--mist);
+  cursor: pointer; font-size: 0.85rem; display: grid; place-items: center;
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.modal-close:hover { color: var(--paper); border-color: var(--mist); }
+.modal-card .eyebrow::before { display: none; }
+.modal-card h3 { font-size: 1.9rem; letter-spacing: -0.02em; margin-top: 14px; }
+.modal-sub { color: var(--mist); margin-top: 8px; font-size: 0.98rem; }
+.contact-options { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
+.contact-opt {
+  display: flex; align-items: center; gap: 16px; padding: 15px 18px; border-radius: 14px;
+  background: var(--ink-2); border: 1px solid var(--panel-edge);
+  transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+}
+.contact-opt:hover { transform: translateY(-3px); border-color: var(--blueprint); background: var(--blueprint-soft); }
+.co-icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; flex: none; }
+.co-icon svg { width: 22px; height: 22px; }
+.co-icon.li   { background: rgba(59, 140, 255, 0.14); color: #3B8CFF; }
+.co-icon.mail { background: rgba(246, 166, 35, 0.14); color: #F6A623; }
+.co-icon.tel  { background: rgba(61, 214, 140, 0.14); color: #3DD68C; }
+.co-text { display: flex; flex-direction: column; line-height: 1.25; }
+.co-text b { font-family: var(--display); font-weight: 600; font-size: 1.02rem; }
+.co-text small { font-family: var(--mono); font-size: 0.74rem; color: var(--mist); margin-top: 3px; }
+.co-arrow { margin-left: auto; color: var(--mist-dim); font-family: var(--mono); transition: transform .25s var(--ease), color .25s var(--ease); }
+.contact-opt:hover .co-arrow { color: var(--blueprint); transform: translateX(4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay, .modal-card { transition: none; }
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+:focus-visible { outline: 2px solid var(--blueprint); outline-offset: 3px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .hero h1 .line span, .hero-tag, .hero-sub, .hero-actions { opacity: 1 !important; transform: none !important; }
+  .tl-item, .skill-card, .edu-card { opacity: 1 !important; transform: none !important; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================ NAV ============================ -->
+  <nav class="nav">
+    <a href="#top" class="nav-brand"><span class="dot"></span> akshay&nbsp;yadav</a>
+    <div class="nav-links">
+      <a href="#experience"><span class="num">01</span>Experience</a>
+      <a href="#approach"><span class="num">02</span>How I build</a>
+      <a href="#skills"><span class="num">03</span>Stack</a>
+      <a href="#work"><span class="num">04</span>Work</a>
+      <a href="#contact" class="nav-cta" data-open-contact>Get in touch</a>
+    </div>
+  </nav>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hero" id="top">
+    <canvas id="net" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div class="container-tight">
+        <p class="hero-tag">Software Engineer · <b>Pune, India</b> · since 2022</p>
+        <h1>
+          <span class="line"><span>Akshay</span></span>
+          <span class="line"><span>Yadav</span></span>
+        </h1>
+        <p class="hero-sub">
+          I build backend systems that <span class="hl">automate complex workflows</span>
+          and <span class="hl">connect enterprise platforms</span> — engineered to scale,
+          stay secure, and respond in real time.
+        </p>
+        <div class="hero-actions">
+          <a href="#experience" class="btn-primary">View experience →</a>
+          <a href="#contact" class="btn-ghost" data-open-contact>Get in touch</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-hint" aria-hidden="true">
+      <span>drag your cursor through the graph</span>
+      <span class="bar"></span>
+    </div>
+  </header>
+  <div id="nodeTip" class="node-tip" role="status" aria-live="polite"></div>
+
+  <!-- ============================ STATS ============================ -->
+  <section class="stats">
+    <div class="container-tight">
+      <div class="row">
+        <div class="col-6 col-md-3">
+          <div class="stat">
+            <div class="num"><span data-count="4">0</span><span class="u">+</span></div>
+            <div class="lbl">Years shipping production software, backend through UI</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat">
+            <div class="num"><span data-count="50">0</span><span class="u">%</span></div>
+            <div class="lbl">Lower integration complexity via a shared service facade</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat">
+            <div class="num word">Automated</div>
+            <div class="lbl">Manual, repetitive workflows engineered to run themselves</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat">
+            <div class="num word">Real-time</div>
+            <div class="lbl">Event-driven pipelines that replaced polling overhead</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ EXPERIENCE ============================ -->
+  <section class="section" id="experience">
+    <div class="container-tight">
+      <span class="eyebrow">01 — Experience</span>
+      <h2 class="section-title">Four years turning hard backend problems into shipped product.</h2>
+
+      <div class="timeline">
+        <!-- Current -->
+        <article class="tl-item cur" data-delay="0">
+          <div class="tl-head">
+            <span class="tl-role">Software Developer&nbsp;II · <span class="tl-co">SoftTech Engineers</span></span>
+            <span class="tl-date">MAY 2023 — PRESENT</span>
+          </div>
+          <ul class="tl-points">
+            <li>Designed and led a <b>platform facade layer</b> that standardized API contracts across microservices — cutting integration complexity <b>~50%</b> and speeding up cross-team delivery.</li>
+            <li>Built a centralized <b>multi-tenant OAuth proxy</b> for third-party integrations using opaque, browser-scoped session IDs and server-side ownership checks, so bearer tokens never reach the client.</li>
+            <li>Delivered a full-stack <b>4D scheduling capability</b> end to end — backend services, persistence models, and React UI — under tight timelines, using AI-assisted workflows to move faster.</li>
+            <li>Engineered the <b>project-reference mapping layer</b> linking internal projects to third-party cloud systems, unifying scheduling, cost, and document workflows under one reference.</li>
+            <li>Replaced a polling workflow with an <b>event-driven</b> one for long-running jobs — removing API overhead and artificial latency, and making the UI respond in real time.</li>
+          </ul>
+        </article>
+
+        <!-- SD1 -->
+        <article class="tl-item" data-delay="80">
+          <div class="tl-head">
+            <span class="tl-role">Software Developer&nbsp;I · <span class="tl-co">SoftTech Engineers</span></span>
+            <span class="tl-date">MAY 2022 — MAY 2023</span>
+          </div>
+          <ul class="tl-points">
+            <li>Built a <b>graph-based detection microservice</b> — modeling spatial data as connectivity graphs and running <b>BFS</b> to find connected components, automating away <b>~70%</b> of previously manual work.</li>
+            <li>Helped migrate desktop workflows to <b>cloud-native services</b>, including a real-time visualization engine and event-driven modules with live updates.</li>
+          </ul>
+        </article>
+
+        <!-- Intern -->
+        <article class="tl-item" data-delay="160">
+          <div class="tl-head">
+            <span class="tl-role">Software Developer Intern · <span class="tl-co">Centre for Computational Technologies</span></span>
+            <span class="tl-date">JAN 2022 — MAY 2022</span>
+          </div>
+          <ul class="tl-points">
+            <li>Implemented core <b>subscription-lifecycle</b> logic — credit expiry/renewal and SES-based notifications — improving accuracy and cutting manual account updates.</li>
+            <li>Optimized simulation APIs by removing redundant DB queries and caching static metadata, improving stage-transition latency and throughput under concurrent load.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ APPROACH / SIGNATURE DEMO ============================ -->
+  <section class="section" id="approach" style="background: var(--ink-2); border-top: 1px solid var(--panel-edge); border-bottom: 1px solid var(--panel-edge);">
+    <div class="container-tight">
+      <span class="eyebrow">02 — How I build</span>
+      <h2 class="section-title">Polling wastes the line. Events fire only when something changes.</h2>
+      <p class="section-lead">
+        One of my favourite refactors: a long-running job that the UI used to poll on a timer. Watch the difference —
+        flip the toggle and count the requests on the wire.
+      </p>
+
+      <div class="demo-wrap">
+        <div class="demo-toolbar">
+          <div class="toggle" role="tablist" aria-label="Workflow mode">
+            <button data-mode="poll" role="tab">Polling</button>
+            <button data-mode="event" role="tab" class="active">Event-driven</button>
+          </div>
+          <div class="demo-readout">
+            requests: <b id="demoReqs">0</b>
+            &nbsp;·&nbsp; wasted: <b id="demoWaste">0</b>
+            &nbsp;·&nbsp; UI update: <b class="good" id="demoLat">real-time</b>
+          </div>
+        </div>
+        <div class="demo-stage">
+          <canvas id="demoCanvas" aria-label="Animated comparison of polling versus event-driven request traffic between a client and a service"></canvas>
+        </div>
+        <div class="demo-legend">
+          <span><i style="background:#3B8CFF"></i> request</span>
+          <span><i style="background:#7b8faa"></i> wasted poll (nothing changed yet)</span>
+          <span><i style="background:#F6A623"></i> event pushed on change</span>
+        </div>
+      </div>
+
+      <h3 class="sub-demo-title">From floor plan to graph — finding tenements with BFS.</h3>
+      <p class="section-lead" style="margin-top:14px;">
+        A real one from my work: given a floor full of rooms, which spaces belong together? I model each
+        room as a node and every door or opening as an edge, then run breadth-first search to pull out the
+        connected components — each one is a tenement. Watch it run.
+      </p>
+
+      <div class="demo-wrap">
+        <div class="demo-toolbar">
+          <div class="steps" id="tenementSteps">
+            <span class="step"><span class="n">1</span> Floor plan</span>
+            <span class="step"><span class="n">2</span> Openings</span>
+            <span class="step"><span class="n">3</span> BFS grouping</span>
+            <span class="step"><span class="n">4</span> Tenements</span>
+          </div>
+          <button class="replay" id="tenementReplay" type="button">↻ Replay</button>
+        </div>
+        <div class="demo-stage tall">
+          <canvas id="tenementCanvas" aria-label="Animation: rooms on a floor plan are connected through doors, then grouped with breadth-first search into three tenements"></canvas>
+        </div>
+        <div class="demo-legend">
+          <span class="mono" id="tenementReadout" style="color:var(--paper)">Reading the floor plan…</span>
+          <span><i style="background:#3B8CFF"></i><i style="background:#F6A623;margin-left:-3px"></i><i style="background:#3DD68C;margin-left:-3px"></i> tenements</span>
+          <span><i style="background:transparent;border:1px solid #F6A623"></i> door / opening</span>
+          <span><i style="width:16px;height:2px;border-radius:2px;background:#8FA7C9"></i> connection</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ SKILLS ============================ -->
+  <section class="section" id="skills">
+    <div class="container-tight">
+      <span class="eyebrow">03 — Stack</span>
+      <h2 class="section-title">The toolkit, grouped the way I actually use it.</h2>
+
+      <div class="skill-grid">
+        <div class="skill-card" data-delay="0">
+          <div class="idx">/ 01</div>
+          <h3>Languages</h3>
+          <div class="chips">
+            <span class="chip">C#</span><span class="chip">C++</span>
+            <span class="chip">JavaScript</span><span class="chip">Java</span>
+          </div>
+        </div>
+        <div class="skill-card" data-delay="60">
+          <div class="idx">/ 02</div>
+          <h3>Backend</h3>
+          <div class="chips">
+            <span class="chip">.NET Core</span><span class="chip">ASP.NET MVC</span>
+            <span class="chip">Microservices</span><span class="chip">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-card" data-delay="120">
+          <div class="idx">/ 03</div>
+          <h3>System Design</h3>
+          <div class="chips">
+            <span class="chip">API Design</span><span class="chip">Event-Driven</span>
+            <span class="chip">OAuth</span><span class="chip">Microservices</span>
+          </div>
+        </div>
+        <div class="skill-card" data-delay="0">
+          <div class="idx">/ 04</div>
+          <h3>Cloud &amp; DevOps</h3>
+          <div class="chips">
+            <span class="chip">Azure Functions</span><span class="chip">Azure Storage</span>
+            <span class="chip">AWS EC2</span><span class="chip">S3</span>
+            <span class="chip">Lambda</span><span class="chip">CI/CD</span><span class="chip">Git</span>
+          </div>
+        </div>
+        <div class="skill-card" data-delay="60">
+          <div class="idx">/ 05</div>
+          <h3>Data</h3>
+          <div class="chips">
+            <span class="chip">MS SQL</span><span class="chip">DynamoDB</span>
+          </div>
+        </div>
+        <div class="skill-card" data-delay="120">
+          <div class="idx">/ 06</div>
+          <h3>Frontend &amp; Testing</h3>
+          <div class="chips">
+            <span class="chip">React UI</span><span class="chip">HTML/CSS</span>
+            <span class="chip">API-driven UI</span><span class="chip">xUnit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ WORK / PROJECT ============================ -->
+  <section class="section" id="work" style="background: var(--ink-2); border-top: 1px solid var(--panel-edge);">
+    <div class="container-tight">
+      <span class="eyebrow">04 — Selected work</span>
+      <h2 class="section-title">A full-stack recommendation engine, built end to end.</h2>
+
+      <div class="project">
+        <div class="project-body">
+          <h3>News Recommendation App</h3>
+          <p>
+            A full-stack news platform with user authentication and real-time personalized feeds.
+            A lightweight recommendation service scores and ranks articles by content similarity and
+            user interests, served back to the web app over REST in real time.
+          </p>
+          <div class="project-tech">
+            <span class="chip">Node.js</span><span class="chip">Express</span>
+            <span class="chip">Python</span><span class="chip">MongoDB</span>
+            <span class="chip">JavaScript</span>
+          </div>
+          <a href="https://github.com/Akshay646/News-Recommendation" class="project-link" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+        </div>
+        <div class="project-vis" aria-hidden="true">
+          <!-- mini recommendation-flow schematic -->
+          <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#3B8CFF"/>
+              </marker>
+            </defs>
+            <line x1="60" y1="50" x2="150" y2="100" stroke="#3B8CFF" stroke-width="1.4" marker-end="url(#ah)" opacity=".7"/>
+            <line x1="60" y1="150" x2="150" y2="100" stroke="#3B8CFF" stroke-width="1.4" marker-end="url(#ah)" opacity=".7"/>
+            <line x1="150" y1="100" x2="240" y2="100" stroke="#F6A623" stroke-width="1.6" marker-end="url(#ah)"/>
+            <g font-family="JetBrains Mono, monospace" font-size="9" fill="#8FA7C9" text-anchor="middle">
+              <rect x="18" y="36" width="84" height="28" rx="6" fill="#111E31" stroke="#3B8CFF" stroke-width="1"/>
+              <text x="60" y="54" fill="#EAF1FB">user profile</text>
+              <rect x="18" y="136" width="84" height="28" rx="6" fill="#111E31" stroke="#3B8CFF" stroke-width="1"/>
+              <text x="60" y="154" fill="#EAF1FB">article corpus</text>
+              <circle cx="150" cy="100" r="26" fill="#111E31" stroke="#F6A623" stroke-width="1.4"/>
+              <text x="150" y="97" fill="#EAF1FB">score</text>
+              <text x="150" y="108" fill="#F6A623">+ rank</text>
+              <rect x="200" y="86" width="80" height="28" rx="6" fill="#111E31" stroke="#F6A623" stroke-width="1"/>
+              <text x="240" y="104" fill="#EAF1FB">feed</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ EDUCATION ============================ -->
+  <section class="section" id="education">
+    <div class="container-tight">
+      <span class="eyebrow">05 — Education</span>
+      <h2 class="section-title">A strong academic foundation.</h2>
+
+      <div class="edu-grid">
+        <div class="edu-card" data-delay="0">
+          <div>
+            <h3>Master's in Computer Science</h3>
+            <div class="where">University of Pune</div>
+            <div class="when">OCT 2022</div>
+          </div>
+          <div class="edu-cgpa">9.73<small>/ 10 CGPA</small></div>
+        </div>
+        <div class="edu-card" data-delay="80">
+          <div>
+            <h3>B.Sc. Information Technology</h3>
+            <div class="where">University of Mumbai</div>
+            <div class="when">MAY 2020</div>
+          </div>
+          <div class="edu-cgpa">9.20<small>/ 10 CGPA</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CONTACT ============================ -->
+  <section class="section contact" id="contact">
+    <div class="container-tight">
+      <span class="eyebrow">Let's build something</span>
+      <h2>Have a hard systems problem?</h2>
+      <a class="contact-mail" href="mailto:ady23617@gmail.com">ady23617@gmail.com</a>
+      <div class="socials">
+        <a class="social" href="#contact" data-open-contact>Get in touch ↗</a>
+        <a class="social" href="https://www.linkedin.com/in/akshay-yadav-a412a2147/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="social" href="https://github.com/Akshay646" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="social" href="tel:+919850775487">+91 98507 75487</a>
+      </div>
+      <div class="foot">
+        <span>© <span id="year">2026</span> Akshay Yadav · Pune, India</span>
+        <span class="mono">Designed &amp; built as a systems schematic</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CONTACT MODAL ============================ -->
+  <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="cmTitle" hidden>
+    <div class="modal-card">
+      <button class="modal-close" id="cmClose" type="button" aria-label="Close">✕</button>
+      <span class="eyebrow">Get in touch</span>
+      <h3 id="cmTitle">Let's talk.</h3>
+      <p class="modal-sub">Pick whatever's easiest — I'll get back to you quickly.</p>
+
+      <div class="contact-options">
+        <a class="contact-opt" href="https://www.linkedin.com/in/akshay-yadav-a412a2147/" target="_blank" rel="noopener">
+          <span class="co-icon li" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.78v2.2h.07c.67-1.2 2.3-2.46 4.73-2.46 5.06 0 6 3.33 6 7.66V24h-5v-7.4c0-1.77-.03-4.05-2.47-4.05-2.47 0-2.85 1.93-2.85 3.92V24h-5V8z"/></svg>
+          </span>
+          <span class="co-text"><b>LinkedIn</b><small>in/akshay-yadav</small></span>
+          <span class="co-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a class="contact-opt" href="mailto:ady23617@gmail.com">
+          <span class="co-icon mail" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
+          </span>
+          <span class="co-text"><b>Email</b><small>ady23617@gmail.com</small></span>
+          <span class="co-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a class="contact-opt" href="tel:+919850775487">
+          <span class="co-icon tel" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.66A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span class="co-text"><b>Call or text</b><small>+91 98507 75487</small></span>
+          <span class="co-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+/* ============================================================
+   Akshay Yadav — Portfolio interactions
+   ============================================================ */
+(function () {
+  "use strict";
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- Nav scroll state ---------------- */
+  const nav = document.querySelector(".nav");
+  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 30);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ============================================================
+     HERO — interactive competency network
+     Nodes = skills/services. Edges = how they connect in real work.
+     Cursor gently repels nodes; hover highlights neighbours.
+     ============================================================ */
+  const canvas = document.getElementById("net");
+  const tip = document.getElementById("nodeTip");
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let W, H, dpr;
+
+    // label, fixed=hub, radius weight
+    const labels = [
+      { id: "core",  t: "Systems",        hub: true,  r: 7 },
+      { id: "ms",    t: "Microservices",  r: 6 },
+      { id: "fac",   t: "API Facade",     r: 5 },
+      { id: "oauth", t: "OAuth Proxy",    r: 5 },
+      { id: "evt",   t: "Event-Driven",   r: 6 },
+      { id: "graph", t: "Graphs · BFS",   r: 6 },
+      { id: "bim",   t: "CI/CD",          r: 5 },
+      { id: "net",   t: ".NET · C#",      r: 6 },
+      { id: "cloud", t: "Azure · AWS",    r: 5 },
+      { id: "data",  t: "SQL · DynamoDB", r: 4 },
+      { id: "react", t: "React UI",       r: 4 }
+    ];
+    const links = [
+      ["core","ms"],["core","net"],["core","evt"],["core","graph"],
+      ["ms","fac"],["ms","oauth"],["ms","evt"],["ms","cloud"],
+      ["fac","react"],["oauth","cloud"],["evt","react"],
+      ["graph","bim"],["bim","net"],["net","data"],["cloud","data"],
+      ["graph","ms"],["fac","data"]
+    ];
+
+    let nodes = [];
+    const mouse = { x: -9999, y: -9999, active: false };
+    let hovered = null;
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = canvas.clientWidth; H = canvas.clientHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed();
+    }
+
+    function seed() {
+      if (nodes.length === labels.length) {
+        // keep positions on resize, just clamp
+        nodes.forEach(n => { n.x = Math.min(Math.max(n.x, 40), W - 40); n.y = Math.min(Math.max(n.y, 40), H - 40); });
+        return;
+      }
+      nodes = labels.map((l, i) => {
+        const a = (i / labels.length) * Math.PI * 2;
+        const spread = l.hub ? 0 : 0.22 + Math.random() * 0.3;
+        return {
+          ...l,
+          x: W * (0.5 + Math.cos(a) * spread) + (Math.random() - 0.5) * 60,
+          y: H * (0.5 + Math.sin(a) * spread) + (Math.random() - 0.5) * 60,
+          vx: 0, vy: 0,
+          hx: W * (0.5 + Math.cos(a) * (l.hub ? 0 : spread)), // home
+          hy: H * (0.5 + Math.sin(a) * (l.hub ? 0 : spread)),
+          phase: Math.random() * Math.PI * 2
+        };
+      });
+    }
+
+    function neighbours(id) {
+      const set = new Set();
+      links.forEach(([a, b]) => { if (a === id) set.add(b); if (b === id) set.add(a); });
+      return set;
+    }
+
+    function tickPhysics(time) {
+      nodes.forEach(n => {
+        // gentle float around home
+        const fx = n.hx + Math.cos(time / 2600 + n.phase) * (n.hub ? 6 : 26);
+        const fy = n.hy + Math.sin(time / 3100 + n.phase) * (n.hub ? 6 : 26);
+        n.vx += (fx - n.x) * 0.012;
+        n.vy += (fy - n.y) * 0.012;
+
+        // cursor repulsion
+        if (mouse.active) {
+          const dx = n.x - mouse.x, dy = n.y - mouse.y;
+          const d2 = dx * dx + dy * dy;
+          const R = 150;
+          if (d2 < R * R) {
+            const d = Math.sqrt(d2) || 1;
+            const f = (1 - d / R) * 2.6;
+            n.vx += (dx / d) * f;
+            n.vy += (dy / d) * f;
+          }
+        }
+        n.vx *= 0.86; n.vy *= 0.86;
+        n.x += n.vx; n.y += n.vy;
+      });
+    }
+
+    function draw(time) {
+      ctx.clearRect(0, 0, W, H);
+      const map = Object.fromEntries(nodes.map(n => [n.id, n]));
+      const hot = hovered ? neighbours(hovered) : null;
+
+      // edges
+      links.forEach(([a, b]) => {
+        const na = map[a], nb = map[b];
+        const lit = hovered && (a === hovered || b === hovered);
+        ctx.beginPath();
+        ctx.moveTo(na.x, na.y);
+        ctx.lineTo(nb.x, nb.y);
+        ctx.strokeStyle = lit ? "rgba(59,140,255,0.85)" : "rgba(96,130,178,0.18)";
+        ctx.lineWidth = lit ? 1.4 : 0.8;
+        ctx.stroke();
+
+        // travelling pulse along edges (data flow)
+        if (!reduceMotion) {
+          const t = ((time / 2200) + (a.charCodeAt(0) + b.charCodeAt(0)) / 30) % 1;
+          const px = na.x + (nb.x - na.x) * t;
+          const py = na.y + (nb.y - na.y) * t;
+          ctx.beginPath();
+          ctx.arc(px, py, lit ? 2.4 : 1.4, 0, Math.PI * 2);
+          ctx.fillStyle = lit ? "rgba(246,166,35,0.95)" : "rgba(59,140,255,0.32)";
+          ctx.fill();
+        }
+      });
+
+      // nodes
+      nodes.forEach(n => {
+        const isHover = n.id === hovered;
+        const isNeighbour = hot && hot.has(n.id);
+        const active = isHover || isNeighbour || !hovered;
+        const r = n.r + (isHover ? 3 : 0);
+
+        if (active) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r + 8, 0, Math.PI * 2);
+          ctx.fillStyle = n.hub ? "rgba(246,166,35,0.10)" : "rgba(59,140,255,0.10)";
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = n.hub ? "#F6A623" : (active ? "#3B8CFF" : "#33486a");
+        ctx.fill();
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = "rgba(10,16,24,0.9)";
+        ctx.stroke();
+
+        // hub always labelled
+        if (n.hub) {
+          ctx.font = "600 13px 'Space Grotesk', sans-serif";
+          ctx.fillStyle = "rgba(234,241,251,0.92)";
+          ctx.textAlign = "center";
+          ctx.fillText(n.t, n.x, n.y - r - 12);
+        }
+      });
+    }
+
+    let raf;
+    function loop(time) {
+      tickPhysics(time);
+      draw(time);
+      raf = requestAnimationFrame(loop);
+    }
+
+    // pointer
+    canvas.addEventListener("pointermove", e => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+
+      // hover detection
+      hovered = null;
+      let best = 22 * 22;
+      nodes.forEach(n => {
+        const dx = n.x - mouse.x, dy = n.y - mouse.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < best) { best = d2; hovered = n.id; }
+      });
+      if (hovered) {
+        const n = nodes.find(x => x.id === hovered);
+        tip.style.left = (rect.left + n.x) + "px";
+        tip.style.top = (rect.top + n.y) + "px";
+        tip.innerHTML = '<span class="k">●</span> ' + n.t;
+        tip.style.opacity = "1";
+        canvas.style.cursor = "pointer";
+      } else {
+        tip.style.opacity = "0";
+        canvas.style.cursor = "default";
+      }
+    });
+    canvas.addEventListener("pointerleave", () => {
+      mouse.active = false; mouse.x = mouse.y = -9999; hovered = null;
+      tip.style.opacity = "0"; canvas.style.cursor = "default";
+    });
+    canvas.addEventListener("pointerdown", () => {
+      if (hovered) document.getElementById("experience").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+    });
+
+    window.addEventListener("resize", resize);
+    resize();
+    if (reduceMotion) { draw(0); } else { raf = requestAnimationFrame(loop); }
+  }
+
+  /* ============================================================
+     Scroll reveals
+     ============================================================ */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        const el = en.target;
+        const delay = el.dataset.delay ? parseInt(el.dataset.delay, 10) : 0;
+        setTimeout(() => el.classList.add("in"), reduceMotion ? 0 : delay);
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.18 });
+  document.querySelectorAll(".tl-item, .skill-card, .edu-card").forEach(el => io.observe(el));
+
+  /* ============================================================
+     Animated counters
+     ============================================================ */
+  const fmt = (v, dec) => dec ? v.toFixed(dec) : Math.round(v).toString();
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      const target = parseFloat(el.dataset.count);
+      const dec = parseInt(el.dataset.dec || "0", 10);
+      const dur = 1300;
+      const start = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.firstChild.textContent = fmt(target * eased, dec);
+        if (p < 1) requestAnimationFrame(step);
+        else el.firstChild.textContent = fmt(target, dec);
+      };
+      if (reduceMotion) el.firstChild.textContent = fmt(target, dec);
+      else requestAnimationFrame(step);
+      counterIO.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll("[data-count]").forEach(el => counterIO.observe(el));
+
+  /* ============================================================
+     SIGNATURE DEMO — Event-driven vs Polling
+     Shows why he replaced polling with an event-driven workflow:
+     polling = constant wasted requests + latency; events = fire on change.
+     ============================================================ */
+  const dc = document.getElementById("demoCanvas");
+  if (dc) {
+    const x = dc.getContext("2d");
+    let DW, DH, ddpr;
+    let mode = "event"; // 'poll' | 'event'
+    let reqs = 0, wasted = 0;
+    const reqEl = document.getElementById("demoReqs");
+    const wasteEl = document.getElementById("demoWaste");
+    const latEl = document.getElementById("demoLat");
+
+    function dResize() {
+      ddpr = Math.min(window.devicePixelRatio || 1, 2);
+      DW = dc.clientWidth; DH = dc.clientHeight;
+      dc.width = DW * ddpr; dc.height = DH * ddpr;
+      x.setTransform(ddpr, 0, 0, ddpr, 0, 0);
+    }
+
+    const client = () => ({ x: DW * 0.16, y: DH / 2 });
+    const server = () => ({ x: DW * 0.84, y: DH / 2 });
+    let pulses = []; // {t, dir, kind}
+    let lastPoll = 0;
+    let nextEvent = 0;
+    let jobDone = false;
+    let jobTimer = 0;
+
+    function spawnPoll(time) {
+      pulses.push({ start: time, dur: 900, dir: 1, kind: "poll" });
+      reqs++;
+    }
+    function spawnEvent(time) {
+      pulses.push({ start: time, dur: 900, dir: -1, kind: "event" });
+      reqs++;
+    }
+
+    function dDraw(time) {
+      x.clearRect(0, 0, DW, DH);
+      const c = client(), s = server();
+
+      // schedule traffic
+      if (mode === "poll") {
+        if (time - lastPoll > 700) { spawnPoll(time); lastPoll = time; }
+      } else {
+        if (time > nextEvent) {
+          spawnEvent(time);
+          nextEvent = time + 1600 + Math.random() * 1800; // events only when something changes
+        }
+      }
+
+      // connection line
+      x.strokeStyle = "rgba(96,130,178,0.25)";
+      x.lineWidth = 1; x.setLineDash([5, 6]);
+      x.beginPath(); x.moveTo(c.x, c.y); x.lineTo(s.x, s.y); x.stroke();
+      x.setLineDash([]);
+
+      // pulses
+      pulses = pulses.filter(p => time - p.start < p.dur);
+      pulses.forEach(p => {
+        const t = (time - p.start) / p.dur;
+        const fromX = p.dir === 1 ? c.x : s.x;
+        const toX = p.dir === 1 ? s.x : c.x;
+        const px = fromX + (toX - fromX) * t;
+        const isWaste = p.kind === "poll" && !jobDone; // polling before job ready = wasted
+        if (p.kind === "poll" && t > 0.98) { if (!jobDone) wasted++; }
+        x.beginPath();
+        x.arc(px, c.y, 5, 0, Math.PI * 2);
+        x.fillStyle = p.kind === "event" ? "#F6A623" : (isWaste ? "rgba(123,143,170,0.7)" : "#3B8CFF");
+        x.fill();
+      });
+
+      // nodes
+      function box(p, label, color) {
+        const w = 92, h = 54;
+        x.fillStyle = "rgba(17,30,49,0.95)";
+        x.strokeStyle = color; x.lineWidth = 1.5;
+        roundRect(x, p.x - w / 2, p.y - h / 2, w, h, 10);
+        x.fill(); x.stroke();
+        x.fillStyle = "#EAF1FB";
+        x.font = "600 13px 'Space Grotesk', sans-serif";
+        x.textAlign = "center"; x.textBaseline = "middle";
+        x.fillText(label, p.x, p.y - 6);
+        x.font = "10px 'JetBrains Mono', monospace";
+        x.fillStyle = "#8FA7C9";
+        x.fillText(p.x === c.x ? "React UI" : "long job", p.x, p.y + 12);
+      }
+      box(c, "Client", "#3B8CFF");
+      box(s, "Service", mode === "event" ? "#F6A623" : "#3B8CFF");
+
+      // readouts
+      if (reqEl) reqEl.textContent = reqs;
+      if (wasteEl) wasteEl.textContent = mode === "poll" ? wasted : 0;
+      if (latEl) latEl.textContent = mode === "poll" ? "~700ms" : "real-time";
+
+      requestAnimationFrame(dDraw);
+    }
+
+    function roundRect(c, x0, y0, w, h, r) {
+      c.beginPath();
+      c.moveTo(x0 + r, y0);
+      c.arcTo(x0 + w, y0, x0 + w, y0 + h, r);
+      c.arcTo(x0 + w, y0 + h, x0, y0 + h, r);
+      c.arcTo(x0, y0 + h, x0, y0, r);
+      c.arcTo(x0, y0, x0 + w, y0, r);
+      c.closePath();
+    }
+
+    document.querySelectorAll(".toggle button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".toggle button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        mode = btn.dataset.mode;
+        reqs = 0; wasted = 0; pulses = []; lastPoll = 0; nextEvent = 0;
+      });
+    });
+
+    window.addEventListener("resize", dResize);
+    dResize();
+    requestAnimationFrame(dDraw);
+  }
+
+  /* ============================================================
+     SIGNATURE DEMO 2 — BFS tenement detection
+     Rooms = nodes, doors/openings = edges. BFS finds the
+     connected components; each component is a tenement.
+     Beats: floor plan → detect openings → BFS grouping → tenements.
+     ============================================================ */
+  const tc = document.getElementById("tenementCanvas");
+  if (tc) {
+    const g = tc.getContext("2d");
+    const COLS = 4, ROWS = 3, CW = 150, CH = 120;
+    const LW = COLS * CW, LH = ROWS * CH;
+
+    // doors are within-tenement connections; cross-tenement walls stay solid
+    const doors = [
+      [0,1],[0,4],[1,5],[4,5],      // tenement 1 (2x2 top-left)
+      [2,3],[2,6],[3,7],[6,7],      // tenement 2 (2x2 top-right)
+      [8,9],[9,10],[10,11]          // tenement 3 (bottom row)
+    ];
+    const doorSet = new Set(doors.map(d => d[0] + "-" + d[1]));
+    const tenements = [
+      { rooms: [0,1,4,5],   color: "#3B8CFF", seed: 0 },
+      { rooms: [2,3,6,7],   color: "#F6A623", seed: 2 },
+      { rooms: [8,9,10,11], color: "#3DD68C", seed: 8 }
+    ];
+
+    const adj = {}; for (let i = 0; i < 12; i++) adj[i] = [];
+    doors.forEach(([a, b]) => { adj[a].push(b); adj[b].push(a); });
+
+    // BFS per component → reveal fraction + colour per room
+    const reveal = {}, colorOf = {};
+    tenements.forEach(t => {
+      const order = [], seen = new Set([t.seed]), q = [t.seed];
+      while (q.length) { const x = q.shift(); order.push(x); adj[x].forEach(y => { if (!seen.has(y)) { seen.add(y); q.push(y); } }); }
+      order.forEach((id, i) => { reveal[id] = order.length > 1 ? i / (order.length - 1) : 0; colorOf[id] = t.color; });
+    });
+
+    const room = (id) => { const c = id % COLS, r = (id / COLS | 0); return { x: c*CW, y: r*CH, w: CW, h: CH, cx: c*CW + CW/2, cy: r*CH + CH/2 }; };
+
+    // all adjacent room pairs (for walls)
+    const pairs = [];
+    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+      const id = r*COLS + c;
+      if (c < COLS-1) pairs.push([id, id+1, "V"]);
+      if (r < ROWS-1) pairs.push([id, id+COLS, "H"]);
+    }
+
+    let TW, TH, tdpr, pad, scale;
+    function tResize() {
+      tdpr = Math.min(window.devicePixelRatio || 1, 2);
+      TW = tc.clientWidth; TH = tc.clientHeight;
+      tc.width = TW * tdpr; tc.height = TH * tdpr; g.setTransform(tdpr, 0, 0, tdpr, 0, 0);
+      const padX = 44, padY = 38;
+      scale = Math.min((TW - padX*2) / LW, (TH - padY*2) / LH);
+      pad = { x: (TW - LW*scale) / 2, y: (TH - LH*scale) / 2 };
+    }
+    const X = lx => pad.x + lx*scale, Y = ly => pad.y + ly*scale, S = v => v*scale;
+    const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+    const hexA = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`; };
+    function rr(x, y, w, h, r) { g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+    function seg(x1,y1,x2,y2,a) { g.lineWidth = 2.2; g.strokeStyle = `rgba(176,200,230,${0.55*a})`; g.beginPath(); g.moveTo(X(x1),Y(y1)); g.lineTo(X(x2),Y(y2)); g.stroke(); }
+    function wall(a, b, o, fade) {
+      const ra = room(a);
+      const isDoor = doorSet.has(a+"-"+b) || doorSet.has(b+"-"+a);
+      const gap = 0.42;
+      if (o === "V") {
+        const wx = ra.x + CW;
+        if (!isDoor) seg(wx, ra.y, wx, ra.y+CH, fade);
+        else { seg(wx, ra.y, wx, ra.y+CH*(0.5-gap/2), fade); seg(wx, ra.y+CH*(0.5+gap/2), wx, ra.y+CH, fade); }
+      } else {
+        const wy = ra.y + CH;
+        if (!isDoor) seg(ra.x, wy, ra.x+CW, wy, fade);
+        else { seg(ra.x, wy, ra.x+CW*(0.5-gap/2), wy, fade); seg(ra.x+CW*(0.5+gap/2), wy, ra.x+CW, wy, fade); }
+      }
+    }
+
+    const P0 = 1100, P1 = 2700, P2 = 2700, P3 = 2000, GAP = 1800;
+    const TOTAL = P0 + P1 + P2 + P3 + GAP;
+    let start = 0, rafT = null, started = false;
+    const stepEls = [...document.querySelectorAll("#tenementSteps .step")];
+    const readout = document.getElementById("tenementReadout");
+    const texts = [
+      "Reading the floor plan…",
+      "Detecting openings between adjacent spaces",
+      "Grouping connected spaces with BFS",
+      "3 tenements identified — connected components"
+    ];
+
+    function draw(now) {
+      let t = now - start;
+      if (reduceMotion) t = P0 + P1 + P2 + P3 - 1;
+      else if (t >= TOTAL) { start = now; t = 0; }
+
+      g.clearRect(0, 0, TW, TH);
+      const pFloor = clamp(t / P0, 0, 1);
+      const p1 = clamp((t - P0) / P1, 0, 1);
+      const p2 = clamp((t - P0 - P1) / P2, 0, 1);
+      const p3 = clamp((t - P0 - P1 - P2) / P3, 0, 1);
+      const phase = t < P0 ? 0 : t < P0+P1 ? 1 : t < P0+P1+P2 ? 2 : 3;
+
+      // floor
+      g.globalAlpha = pFloor; g.fillStyle = "rgba(18,30,49,0.7)"; rr(X(0), Y(0), S(LW), S(LH), 10); g.fill(); g.globalAlpha = 1;
+
+      // tenement room fills
+      for (let id = 0; id < 12; id++) {
+        const on = (phase >= 2 && p2 >= reveal[id]) || phase >= 3;
+        if (on) { const rm = room(id); g.fillStyle = hexA(colorOf[id], phase >= 3 ? 0.22 : 0.15); rr(X(rm.x)+3, Y(rm.y)+3, S(rm.w)-6, S(rm.h)-6, 7); g.fill(); }
+      }
+
+      // walls + outer border
+      pairs.forEach(([a, b, o]) => wall(a, b, o, pFloor));
+      g.lineWidth = 2.6; g.strokeStyle = `rgba(196,216,240,${0.72*pFloor})`; rr(X(0), Y(0), S(LW), S(LH), 10); g.stroke();
+
+      // graph edges + door markers
+      if (phase >= 1) {
+        doors.forEach(([a, b], di) => {
+          const ea = phase >= 2 ? 1 : clamp((p1 - di/doors.length) / (1/doors.length), 0, 1);
+          if (ea <= 0) return;
+          const ra = room(a), rb = room(b);
+          g.lineWidth = 1.6;
+          g.strokeStyle = phase >= 2 ? hexA(colorOf[a], 0.85) : `rgba(130,158,193,${0.8*ea})`;
+          g.beginPath(); g.moveTo(X(ra.cx), Y(ra.cy)); g.lineTo(X(rb.cx), Y(rb.cy)); g.stroke();
+          if (phase === 1) {
+            const mx = (ra.cx + rb.cx) / 2, my = (ra.cy + rb.cy) / 2;
+            const pr = 4 + Math.sin(now/180 + di) * 1.6;
+            g.beginPath(); g.arc(X(mx), Y(my), pr, 0, 7); g.fillStyle = hexA("#F6A623", 0.9*ea); g.fill();
+          }
+        });
+      }
+
+      // nodes (room centres)
+      if (phase >= 1) {
+        for (let id = 0; id < 12; id++) {
+          const rm = room(id);
+          const colored = (phase >= 2 && p2 >= reveal[id]) || phase >= 3;
+          if (phase === 2 && Math.abs(p2 - reveal[id]) < 0.07) {
+            g.beginPath(); g.arc(X(rm.cx), Y(rm.cy), 13, 0, 7); g.strokeStyle = hexA(colorOf[id], 0.6); g.lineWidth = 2; g.stroke();
+          }
+          g.beginPath(); g.arc(X(rm.cx), Y(rm.cy), colored ? 6 : 5, 0, 7);
+          g.fillStyle = colored ? colorOf[id] : "rgba(150,172,203,0.92)"; g.fill();
+          g.lineWidth = 1.5; g.strokeStyle = "rgba(10,16,24,0.9)"; g.stroke();
+        }
+      }
+
+      // tenement badges
+      if (phase >= 3) {
+        g.globalAlpha = p3;
+        tenements.forEach((t0, i) => {
+          let cx = 0, cy = 0; t0.rooms.forEach(id => { const r = room(id); cx += r.cx; cy += r.cy; });
+          cx /= t0.rooms.length; cy /= t0.rooms.length;
+          const label = "Tenement " + (i+1);
+          g.font = "600 12px 'Space Grotesk', sans-serif";
+          const tw = g.measureText(label).width + 30;
+          g.fillStyle = "rgba(10,16,24,0.88)"; rr(X(cx)-tw/2, Y(cy)-12, tw, 24, 12); g.fill();
+          g.strokeStyle = t0.color; g.lineWidth = 1.3; rr(X(cx)-tw/2, Y(cy)-12, tw, 24, 12); g.stroke();
+          g.fillStyle = t0.color; g.beginPath(); g.arc(X(cx)-tw/2+12, Y(cy), 3.5, 0, 7); g.fill();
+          g.fillStyle = "#EAF1FB"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(label, X(cx)+6, Y(cy));
+        });
+        g.globalAlpha = 1;
+      }
+
+      stepEls.forEach((el, i) => el.classList.toggle("active", i === phase));
+      if (readout) readout.textContent = texts[phase];
+
+      if (!reduceMotion) rafT = requestAnimationFrame(draw); else rafT = null;
+    }
+
+    function run() { tResize(); start = performance.now(); if (rafT) cancelAnimationFrame(rafT); draw(performance.now()); }
+
+    const tio = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting && !started) { started = true; run(); tio.disconnect(); } });
+    }, { threshold: 0.3 });
+    tio.observe(tc);
+
+    const replayBtn = document.getElementById("tenementReplay");
+    if (replayBtn) replayBtn.addEventListener("click", () => { started = true; run(); });
+    window.addEventListener("resize", () => { if (started) tResize(); });
+  }
+
+  /* ============================================================
+     CONTACT MODAL
+     ============================================================ */
+  const cm = document.getElementById("contactModal");
+  if (cm) {
+    const closeEl = document.getElementById("cmClose");
+    let lastFocus = null, hideTimer = null;
+    const openModal = (e) => {
+      if (e) e.preventDefault();
+      lastFocus = document.activeElement;
+      clearTimeout(hideTimer);
+      cm.hidden = false;
+      requestAnimationFrame(() => cm.classList.add("open"));
+      document.body.style.overflow = "hidden";
+      closeEl.focus();
+    };
+    const closeModal = () => {
+      cm.classList.remove("open");
+      document.body.style.overflow = "";
+      hideTimer = setTimeout(() => { cm.hidden = true; }, 320);
+      if (lastFocus) lastFocus.focus();
+    };
+    document.querySelectorAll("[data-open-contact]").forEach(b => b.addEventListener("click", openModal));
+    closeEl.addEventListener("click", closeModal);
+    cm.addEventListener("click", (e) => { if (e.target === cm) closeModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !cm.hidden) closeModal(); });
+  }
+
+  /* ---------------- footer year ---------------- */
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+})();
+
+  </script>
+</body>
+</html>
