@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Akshay Yadav — Software Engineer</title>
-  <meta name="description" content="Akshay Yadav — software engineer building service facades, secure multi-tenant integrations, and event-driven pipelines across backend, cloud, and UI." />
+  <meta name="description" content="Akshay Yadav — software engineer who owns product areas from discovery to release, and builds the service facades, secure multi-tenant integrations, and event-driven pipelines underneath them." />
 
   <!-- Bootstrap 5 -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
@@ -151,6 +151,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
 .nav-links a:hover::after { width: 100%; }
 .nav-links .num { color: var(--mist-dim); margin-right: 5px; }
 
+@media (max-width: 980px) {
+  .nav-links { gap: 22px; }
+}
 @media (max-width: 860px) {
   .nav-links a:not(.nav-cta) { display: none; }
 }
@@ -405,6 +408,79 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
 .demo-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
 
 /* ============================================================
+   PRODUCT OWNERSHIP — the delivery loop
+   Reuses .demo-wrap / .steps so the panel reads as part of the
+   same schematic family as the two engineering demos.
+   ============================================================ */
+.steps button.step {
+  border: none; background: transparent; padding: 0;
+  font-family: inherit; font-size: inherit; letter-spacing: inherit;
+  cursor: pointer; line-height: 1.6;
+}
+.loop-hint { margin-left: auto; color: var(--mist-dim); font-size: 0.72rem; letter-spacing: 0.04em; }
+
+.loop-stage { padding: 30px 20px 12px; }
+.loop-svg { width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto; }
+.loop-svg .ring {
+  fill: none; stroke: rgba(96,130,178,0.22);
+  stroke-width: 1; stroke-dasharray: 4 8;
+  animation: ringdash 7s linear infinite;
+}
+.loop-svg .arc { fill: none; stroke: rgba(96,130,178,0.36); stroke-width: 1.4; }
+.loop-svg .lnode { cursor: pointer; }
+.loop-svg .lnode circle.disc {
+  fill: var(--panel); stroke: var(--panel-edge); stroke-width: 1.5;
+  transition: fill .35s var(--ease), stroke .35s var(--ease);
+}
+.loop-svg .lnode circle.halo {
+  fill: rgba(59,140,255,0.12); stroke: none;
+  opacity: 0; transition: opacity .35s var(--ease);
+}
+.loop-svg .lnode .num {
+  font-family: var(--mono); font-size: 15px; fill: var(--mist);
+  text-anchor: middle; dominant-baseline: central;
+  transition: fill .35s var(--ease);
+}
+.loop-svg .lnode .lbl {
+  font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em;
+  fill: var(--mist-dim); text-transform: uppercase;
+  transition: fill .3s var(--ease);
+}
+.loop-svg .lnode:hover circle.disc { stroke: var(--blueprint); }
+.loop-svg .lnode:hover .lbl { fill: var(--mist); }
+.loop-svg .lnode.on circle.disc { fill: var(--blueprint); stroke: var(--blueprint); }
+.loop-svg .lnode.on circle.halo { opacity: 1; }
+.loop-svg .lnode.on .num { fill: #fff; }
+.loop-svg .lnode.on .lbl { fill: var(--paper); }
+.loop-svg .core-t {
+  font-family: var(--display); font-weight: 600; font-size: 19px;
+  fill: var(--paper); text-anchor: middle;
+}
+.loop-svg .core-m {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+  fill: var(--blueprint); text-anchor: middle;
+}
+
+.loop-detail { border-top: 1px solid var(--panel-edge); padding: 26px; min-height: 168px; }
+.loop-detail-inner { transition: opacity .25s var(--ease), transform .25s var(--ease); }
+.loop-detail.fade .loop-detail-inner { opacity: 0; transform: translateY(7px); }
+.loop-detail .idx { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em; color: var(--blueprint); }
+.loop-detail h3 { font-size: 1.32rem; letter-spacing: -0.01em; margin-top: 12px; }
+.loop-detail p { color: var(--mist); margin: 12px 0 0; max-width: 64ch; font-size: 0.98rem; }
+.loop-aside { max-width: 64ch; }
+
+@media (max-width: 700px) {
+  /* keep the diagram, scale its type up so it stays legible when the SVG shrinks */
+  .loop-svg .lnode .lbl { font-size: 23px; letter-spacing: 0.05em; }
+  .loop-svg .lnode .num { font-size: 26px; }
+  .loop-svg .core-t { font-size: 30px; }
+  .loop-svg .core-m { font-size: 19px; }
+  .loop-stage { padding: 22px 6px 6px; }
+  .loop-detail { min-height: 0; }
+}
+@keyframes ringdash { to { stroke-dashoffset: -24; } }
+
+/* ============================================================
    SKILLS — system map
    ============================================================ */
 .skill-grid { margin-top: 54px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -419,6 +495,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
   opacity: 0; transform: translateY(22px);
 }
 .skill-card.in { opacity: 1; transform: none; }
+.skill-card.wide { grid-column: 1 / -1; }
 .skill-card:hover { transform: translateY(-6px); border-color: var(--blueprint); }
 .skill-card::after {
   content: ""; position: absolute; right: -40px; top: -40px;
@@ -593,9 +670,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
     <a href="#top" class="nav-brand"><span class="dot"></span> akshay&nbsp;yadav</a>
     <div class="nav-links">
       <a href="#experience"><span class="num">01</span>Experience</a>
-      <a href="#approach"><span class="num">02</span>How I build</a>
-      <a href="#skills"><span class="num">03</span>Stack</a>
-      <a href="#work"><span class="num">04</span>Work</a>
+      <a href="#product"><span class="num">02</span>Product</a>
+      <a href="#approach"><span class="num">03</span>How I build</a>
+      <a href="#skills"><span class="num">04</span>Toolkit</a>
+      <a href="#work"><span class="num">05</span>Work</a>
       <a href="#contact" class="nav-cta" data-open-contact>Get in touch</a>
     </div>
   </nav>
@@ -611,9 +689,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
           <span class="line"><span>Yadav</span></span>
         </h1>
         <p class="hero-sub">
-          I build backend systems that <span class="hl">automate complex workflows</span>
-          and <span class="hl">connect enterprise platforms</span> — engineered to scale,
-          stay secure, and respond in real time.
+          I own <span class="hl">product areas from discovery to release</span> —
+          and build the <span class="hl">backend systems underneath them</span>:
+          engineered to scale, stay secure, and respond in real time.
         </p>
         <div class="hero-actions">
           <a href="#experience" class="btn-primary">View experience →</a>
@@ -709,10 +787,108 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
     </div>
   </section>
 
+  <!-- ============================ PRODUCT OWNERSHIP ============================ -->
+  <section class="section" id="product" style="border-top: 1px solid var(--panel-edge);">
+    <div class="container-tight">
+      <span class="eyebrow">02 — Product ownership</span>
+      <h2 class="section-title">I own product areas, not just the code inside them.</h2>
+      <p class="section-lead">
+        I own a capability area of an enterprise platform end to end — discovery through release.
+        Our first large enterprise deployment shaped what that area had to become, so the work ran from
+        early requirement discussions all the way to standing in front of the room and showing it working.
+        Writing the code was the middle third.
+      </p>
+
+      <div class="demo-wrap">
+        <div class="demo-toolbar">
+          <div class="steps" id="loopSteps" role="tablist" aria-label="Stages of the delivery loop">
+            <button class="step active" type="button" role="tab" data-stage="0" aria-selected="true"><span class="n">1</span> Discovery</button>
+            <button class="step" type="button" role="tab" data-stage="1" aria-selected="false"><span class="n">2</span> Scope</button>
+            <button class="step" type="button" role="tab" data-stage="2" aria-selected="false"><span class="n">3</span> Release line</button>
+            <button class="step" type="button" role="tab" data-stage="3" aria-selected="false"><span class="n">4</span> Breakdown</button>
+            <button class="step" type="button" role="tab" data-stage="4" aria-selected="false"><span class="n">5</span> Demo</button>
+          </div>
+          <span class="mono loop-hint">pick a stage</span>
+        </div>
+
+        <div class="loop-stage">
+          <svg class="loop-svg" viewBox="0 0 660 462" xmlns="http://www.w3.org/2000/svg"
+               role="img" aria-label="A five-stage loop: discovery, agreed scope, release line, work breakdown, demo — and back to discovery.">
+            <defs>
+              <marker id="loopArrow" markerWidth="7" markerHeight="7" refX="5.5" refY="2.6" orient="auto">
+                <path d="M0,0 L5.5,2.6 L0,5.2 Z" fill="rgba(96,130,178,0.6)" />
+              </marker>
+            </defs>
+
+            <!-- ambient ring -->
+            <circle class="ring" cx="330" cy="250" r="152" />
+
+            <!-- directed arcs: the loop closes back on itself -->
+            <g class="loop-arcs">
+              <path class="arc" d="M369.3,103.2 A152,152 0 0 1 457.5,167.2" marker-end="url(#loopArrow)" />
+              <path class="arc" d="M481.8,242.0 A152,152 0 0 1 448.1,345.7" marker-end="url(#loopArrow)" />
+              <path class="arc" d="M384.5,391.9 A152,152 0 0 1 275.5,391.9" marker-end="url(#loopArrow)" />
+              <path class="arc" d="M211.9,345.7 A152,152 0 0 1 178.2,242.0" marker-end="url(#loopArrow)" />
+              <path class="arc" d="M202.5,167.2 A152,152 0 0 1 290.7,103.2" marker-end="url(#loopArrow)" />
+            </g>
+
+            <!-- centre readout -->
+            <text class="core-t" x="330" y="244" id="loopCoreTitle">Discovery</text>
+            <text class="core-m" x="330" y="272" id="loopCoreMeta">STAGE 01 / 05</text>
+
+            <!-- stage nodes -->
+            <g class="lnode on" data-stage="0">
+              <circle class="halo" cx="330" cy="98" r="38" />
+              <circle class="disc" cx="330" cy="98" r="27" />
+              <text class="num" x="330" y="98">1</text>
+              <text class="lbl" x="330" y="42" text-anchor="middle">Discovery</text>
+            </g>
+            <g class="lnode" data-stage="1">
+              <circle class="halo" cx="474.6" cy="203" r="38" />
+              <circle class="disc" cx="474.6" cy="203" r="27" />
+              <text class="num" x="474.6" y="203">2</text>
+              <text class="lbl" x="513" y="191" text-anchor="start">Scope</text>
+            </g>
+            <g class="lnode" data-stage="2">
+              <circle class="halo" cx="419.3" cy="373" r="38" />
+              <circle class="disc" cx="419.3" cy="373" r="27" />
+              <text class="num" x="419.3" y="373">3</text>
+              <text class="lbl" x="443" y="424" text-anchor="start">Release line</text>
+            </g>
+            <g class="lnode" data-stage="3">
+              <circle class="halo" cx="240.7" cy="373" r="38" />
+              <circle class="disc" cx="240.7" cy="373" r="27" />
+              <text class="num" x="240.7" y="373">4</text>
+              <text class="lbl" x="217" y="424" text-anchor="end">Breakdown</text>
+            </g>
+            <g class="lnode" data-stage="4">
+              <circle class="halo" cx="185.4" cy="203" r="38" />
+              <circle class="disc" cx="185.4" cy="203" r="27" />
+              <text class="num" x="185.4" y="203">5</text>
+              <text class="lbl" x="147" y="191" text-anchor="end">Demo</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="loop-detail" id="loopDetail" aria-live="polite">
+          <div class="loop-detail-inner">
+            <div class="idx" id="loopIdx">STAGE 01</div>
+            <h3 id="loopTitle">Understand the real problem</h3>
+            <p id="loopBody">I work from first-hand requirement discussions rather than second-hand tickets, separating what the customer actually needs from how they first described it.</p>
+          </div>
+        </div>
+
+        <div class="demo-legend">
+          <span>Alongside the delivery work: a phased product roadmap, a requirement register mapping scope to delivery phase, and recurring progress reporting for leadership.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================ APPROACH / SIGNATURE DEMO ============================ -->
   <section class="section" id="approach" style="background: var(--ink-2); border-top: 1px solid var(--panel-edge); border-bottom: 1px solid var(--panel-edge);">
     <div class="container-tight">
-      <span class="eyebrow">02 — How I build</span>
+      <span class="eyebrow">03 — How I build</span>
       <h2 class="section-title">Polling wastes the line. Events fire only when something changes.</h2>
       <p class="section-lead">
         One of my favourite refactors: a long-running job that the UI used to poll on a timer. Watch the difference —
@@ -774,7 +950,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
   <!-- ============================ SKILLS ============================ -->
   <section class="section" id="skills">
     <div class="container-tight">
-      <span class="eyebrow">03 — Stack</span>
+      <span class="eyebrow">04 — Toolkit</span>
       <h2 class="section-title">The toolkit, grouped the way I actually use it.</h2>
 
       <div class="skill-grid">
@@ -826,6 +1002,18 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
             <span class="chip">API-driven UI</span><span class="chip">xUnit</span>
           </div>
         </div>
+        <div class="skill-card wide" data-delay="0">
+          <div class="idx">/ 07</div>
+          <h3>Leadership</h3>
+          <div class="chips">
+            <span class="chip">Requirement Discovery</span><span class="chip">Scope Definition</span>
+            <span class="chip">Prioritisation</span><span class="chip">Release Planning</span>
+            <span class="chip">Roadmapping</span><span class="chip">User Stories</span>
+            <span class="chip">Task Breakdown</span><span class="chip">Technical Scoping</span>
+            <span class="chip">Estimation</span><span class="chip">Feature Ownership</span>
+            <span class="chip">Product Demos</span><span class="chip">Leadership Reporting</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -833,7 +1021,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
   <!-- ============================ WORK / PROJECT ============================ -->
   <section class="section" id="work" style="background: var(--ink-2); border-top: 1px solid var(--panel-edge);">
     <div class="container-tight">
-      <span class="eyebrow">04 — Selected work</span>
+      <span class="eyebrow">05 — Selected work</span>
       <h2 class="section-title">A full-stack recommendation engine, built end to end.</h2>
 
       <div class="project">
@@ -882,7 +1070,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
   <!-- ============================ EDUCATION ============================ -->
   <section class="section" id="education">
     <div class="container-tight">
-      <span class="eyebrow">05 — Education</span>
+      <span class="eyebrow">06 — Education</span>
       <h2 class="section-title">A strong academic foundation.</h2>
 
       <div class="edu-grid">
@@ -1219,6 +1407,111 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; m
     });
   }, { threshold: 0.6 });
   document.querySelectorAll("[data-count]").forEach(el => counterIO.observe(el));
+
+  /* ============================================================
+     PRODUCT OWNERSHIP — the delivery loop
+     Five stages on a closed ring: discovery → scope → release line
+     → breakdown → demo → back to discovery. Auto-advances once the
+     section is in view; any interaction hands control to the reader.
+     ============================================================ */
+  const loopSteps = document.getElementById("loopSteps");
+  if (loopSteps) {
+    const stages = [
+      {
+        short: "Discovery",
+        title: "Understand the real problem",
+        body: "I work from first-hand requirement discussions rather than second-hand tickets, separating what the customer actually needs from how they first described it."
+      },
+      {
+        short: "Scope",
+        title: "Turn it into agreed scope",
+        body: "I partner with the business analyst to convert open requirements into documented, committed scope — pushing back where an ask is under-specified, or where it would cost far more than it returns."
+      },
+      {
+        short: "Release line",
+        title: "Decide what ships first",
+        body: "I set the line for release one: sequenced by dependency, and by what the deployment will actually be judged on. Cutting well-liked items is the part nobody thanks you for."
+      },
+      {
+        short: "Breakdown",
+        title: "Translate scope into work",
+        body: "I break agreed user stories into sized, ordered tasks the team can pick up without me in the room, then lead the area through implementation to release."
+      },
+      {
+        short: "Demo",
+        title: "Demo it, then back the people demoing it",
+        body: "I run internal demos through the build, then support the BA in front of the customer at the real one — a good forcing function for finding out whether we built the right thing."
+      }
+    ];
+
+    const stepBtns = [...loopSteps.querySelectorAll(".step")];
+    const svgNodes = [...document.querySelectorAll(".loop-svg .lnode")];
+    const detail = document.getElementById("loopDetail");
+    const idxEl = document.getElementById("loopIdx");
+    const titleEl = document.getElementById("loopTitle");
+    const bodyEl = document.getElementById("loopBody");
+    const coreT = document.getElementById("loopCoreTitle");
+    const coreM = document.getElementById("loopCoreMeta");
+    const hintEl = document.querySelector(".loop-hint");
+
+    let current = 0, timer = null, swapT = null, taken = false;
+    const pad = (n) => String(n + 1).padStart(2, "0");
+
+    function select(i, byUser) {
+      if (byUser) {
+        taken = true;
+        clearInterval(timer); timer = null;
+        if (hintEl) hintEl.textContent = "stage " + pad(i) + " / 05";
+      }
+      if (i === current && byUser) return;
+      current = i;
+
+      stepBtns.forEach((b, n) => {
+        b.classList.toggle("active", n === i);
+        b.setAttribute("aria-selected", n === i ? "true" : "false");
+      });
+      svgNodes.forEach((g, n) => g.classList.toggle("on", n === i));
+      if (coreT) coreT.textContent = stages[i].short;
+      if (coreM) coreM.textContent = "STAGE " + pad(i) + " / 05";
+
+      // fade the detail panel across the swap
+      clearTimeout(swapT);
+      detail.classList.add("fade");
+      swapT = setTimeout(() => {
+        idxEl.textContent = "STAGE " + pad(i);
+        titleEl.textContent = stages[i].title;
+        bodyEl.textContent = stages[i].body;
+        detail.classList.remove("fade");
+      }, reduceMotion ? 0 : 190);
+    }
+
+    stepBtns.forEach(b => b.addEventListener("click", () => select(parseInt(b.dataset.stage, 10), true)));
+    svgNodes.forEach(g => g.addEventListener("click", () => select(parseInt(g.dataset.stage, 10), true)));
+
+    // keyboard: arrow keys walk the loop
+    loopSteps.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      const next = e.key === "ArrowRight"
+        ? (current + 1) % stages.length
+        : (current - 1 + stages.length) % stages.length;
+      select(next, true);
+      stepBtns[next].focus();
+    });
+
+    const loopIO = new IntersectionObserver((es) => {
+      es.forEach(e => {
+        if (e.isIntersecting && !taken && !timer && !reduceMotion) {
+          timer = setInterval(() => select((current + 1) % stages.length, false), 3400);
+        } else if (!e.isIntersecting && timer) {
+          clearInterval(timer); timer = null;
+        }
+      });
+    }, { threshold: 0.35 });
+    loopIO.observe(document.getElementById("product"));
+
+    select(0, false);
+  }
 
   /* ============================================================
      SIGNATURE DEMO — Event-driven vs Polling
