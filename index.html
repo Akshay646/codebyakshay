@@ -1,1853 +1,957 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Akshay Yadav — Software Engineer</title>
-  <meta name="description" content="Akshay Yadav — software engineer who owns product areas from discovery to release, and builds the service facades, secure multi-tenant integrations, and event-driven pipelines underneath them." />
-
-  <!-- Bootstrap 5 -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <!-- Styles (inlined) -->
-  <style>
-/* ============================================================
-   Akshay Yadav — Portfolio
-   Design: "Systems Schematic" — engineering as a living network
-   ============================================================ */
-
-:root {
-  /* Palette */
-  --ink:        #0A1018;   /* deep schematic base            */
-  --ink-2:      #0E1726;   /* slightly raised                */
-  --panel:      #111E31;   /* cards / panels                 */
-  --panel-edge: rgba(143, 167, 201, 0.16);
-  --blueprint:  #3B8CFF;   /* primary accent                */
-  --blueprint-soft: rgba(59, 140, 255, 0.14);
-  --signal:     #F6A623;   /* warm secondary, used sparingly */
-  --mist:       #8FA7C9;   /* secondary text                 */
-  --mist-dim:   #5C708C;   /* tertiary / captions            */
-  --paper:      #EAF1FB;   /* primary text                   */
-  --grid-line:  rgba(96, 130, 178, 0.08);
-
-  /* Type */
-  --display: "Space Grotesk", system-ui, sans-serif;
-  --body:    "Inter", system-ui, sans-serif;
-  --mono:    "JetBrains Mono", ui-monospace, monospace;
-
-  /* Motion */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Akshay Yadav — Software Engineer</title>
+<meta name="description" content="Akshay Yadav — senior software engineer. Multi-tenant integration platforms, distributed .NET systems, observability, and product ownership from discovery to release." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0B0B0E; --bg-2:#131317; --card:#1B1B21; --card-2:#24242C;
+  --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.24);
+  --fg:#F4F4F7; --fg-2:#A6A6B0; --fg-3:#6E6E79;
+  --red:#E50914; --red-2:#FF2A36; --ok:#46D369;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --head:66px;
+  color-scheme:dark;
 }
-
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  background-color: var(--ink);
-  color: var(--paper);
-  font-family: var(--body);
-  font-size: 17px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  /* Blueprint grid texture */
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 46px 46px;
-  background-position: center top;
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:var(--head)}
+body{
+  margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.05;margin:0;letter-spacing:-.03em}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red-2);outline-offset:3px;border-radius:4px}
+.mono{font-family:var(--mono)}
 
-::selection { background: var(--blueprint); color: #fff; }
-
-a { color: inherit; text-decoration: none; }
-
-h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; margin: 0; }
-
-.mono { font-family: var(--mono); }
-
-/* ---------- Layout helpers ---------- */
-.section { padding: 110px 0; position: relative; }
-.container-tight { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
-
-.eyebrow {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--blueprint);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+/* ================= top bar ================= */
+.top{
+  position:fixed;top:0;left:0;right:0;z-index:80;height:calc(var(--head) + env(safe-area-inset-top,0px));
+  padding:0 clamp(16px,3.4vw,48px);padding-top:env(safe-area-inset-top,0px);
+  display:flex;align-items:center;gap:26px;
+  background:linear-gradient(to bottom,rgba(11,11,14,.94),rgba(11,11,14,.55) 60%,transparent);
+  transition:background .3s var(--ease),border-color .3s var(--ease);
+  border-bottom:1px solid transparent;
 }
-.eyebrow::before {
-  content: "";
-  width: 26px; height: 1px;
-  background: var(--blueprint);
-  display: inline-block;
+.top.solid{background:rgba(11,11,14,.97);border-bottom-color:var(--line);backdrop-filter:blur(14px)}
+.brand{
+  font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.045em;
+  color:var(--red);text-transform:uppercase;display:flex;align-items:center;gap:2px;flex:none;
+}
+.brand span{color:var(--fg)}
+.tnav{display:flex;gap:22px;font-size:13.5px}
+.tnav button{color:var(--fg-2);transition:color .2s var(--ease)}
+.tnav button:hover,.tnav button.on{color:var(--fg)}
+.tsp{margin-left:auto;display:flex;align-items:center;gap:12px;flex:none}
+.tbtn{
+  display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--fg-2);
+  border:1px solid var(--line);border-radius:999px;padding:8px 15px;
+  transition:border-color .2s var(--ease),color .2s var(--ease);
+}
+.tbtn:hover{border-color:var(--line-2);color:var(--fg)}
+.tbtn.hot{background:var(--red);border-color:var(--red);color:#fff}
+.tbtn.hot:hover{background:var(--red-2);border-color:var(--red-2)}
+.tbtn svg{width:14px;height:14px}
+#burger{display:none;padding:7px;border-radius:8px}
+@media(max-width:900px){
+  .tnav{display:none}
+  .tnav.open{
+    display:flex;position:absolute;top:100%;left:14px;right:14px;flex-direction:column;gap:0;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px;
+  }
+  .tnav.open button{padding:12px 14px;border-radius:9px}
+  .tnav.open button:hover{background:var(--card-2)}
+  #burger{display:grid;place-items:center}
+  .tbtn span{display:none}
+  .tbtn{padding:9px}
 }
 
-.section-title {
-  font-size: clamp(1.9rem, 4vw, 2.9rem);
-  letter-spacing: -0.02em;
-  margin: 18px 0 0;
-  max-width: 18ch;
+/* ================= billboard ================= */
+.bill{position:relative;min-height:92vh;min-height:92svh;display:flex;align-items:flex-end;overflow:hidden}
+#net{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.bill::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(to right,rgba(11,11,14,.96) 0%,rgba(11,11,14,.78) 38%,rgba(11,11,14,.12) 78%),
+    linear-gradient(to top,var(--bg) 2%,rgba(11,11,14,.1) 46%);
 }
-.section-lead {
-  color: var(--mist);
-  max-width: 56ch;
-  margin-top: 18px;
-  font-size: 1.05rem;
+.bill-in{position:relative;z-index:2;width:100%;padding:0 clamp(16px,3.4vw,48px) clamp(46px,7vh,88px)}
+.tagrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.badge{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--red);color:#fff;padding:5px 11px;border-radius:4px;font-weight:500;
 }
+.tagrow .meta{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--fg-2);text-transform:uppercase}
+.bill h1{font-size:clamp(3.1rem,10vw,7.2rem);line-height:.9;max-width:11ch}
+.bill h1 em{font-style:normal;display:block;color:var(--fg-2)}
+.bill .lede{max-width:50ch;color:var(--fg-2);font-size:clamp(1rem,1.5vw,1.16rem);margin:24px 0 0}
+.bill .lede b{color:var(--fg);font-weight:500}
+.bill-cta{display:flex;gap:11px;margin-top:30px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border-radius:5px;
+  font-weight:600;font-size:15px;transition:transform .2s var(--ease),background .2s var(--ease);
+}
+.btn svg{width:17px;height:17px;flex:none}
+.btn.play{background:var(--fg);color:#111}
+.btn.play:hover{background:#fff;transform:scale(1.03)}
+.btn.info{background:rgba(109,109,120,.62);color:var(--fg)}
+.btn.info:hover{background:rgba(109,109,120,.82)}
+.bill-stats{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap}
+.bill-stats div{display:flex;flex-direction:column}
+.bill-stats b{font-family:var(--display);font-size:1.75rem;font-weight:700;letter-spacing:-.04em;line-height:1}
+.bill-stats b i{font-style:normal;color:var(--red-2)}
+.bill-stats span{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--fg-3);margin-top:8px;max-width:19ch}
 
-/* ============================================================
-   NAV
-   ============================================================ */
-.nav {
-  position: fixed; inset: 0 0 auto 0;
-  z-index: 50;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 28px;
-  transition: background .35s var(--ease), backdrop-filter .35s var(--ease), border-color .35s var(--ease);
-  border-bottom: 1px solid transparent;
+/* ================= rails ================= */
+.rails{position:relative;z-index:3;margin-top:-6vh;padding-bottom:40px}
+.rail{margin-bottom:38px;position:relative}
+.rail-h{
+  display:flex;align-items:baseline;gap:12px;
+  padding:0 clamp(16px,3.4vw,48px);margin-bottom:14px;
 }
-.nav.scrolled {
-  background: rgba(10, 16, 24, 0.78);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--panel-edge);
+.rail-h h2{font-size:clamp(1.05rem,1.9vw,1.35rem);letter-spacing:-.02em}
+.rail-h em{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--fg-3);text-transform:uppercase}
+.rail-h .more{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--fg-3);opacity:0;transition:opacity .2s}
+.rail:hover .rail-h .more{opacity:1}
+.track{
+  display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x proximity;
+  padding:10px clamp(16px,3.4vw,48px) 22px;scrollbar-width:none;
 }
-.nav-brand {
-  font-family: var(--mono);
-  font-size: 0.92rem;
-  letter-spacing: 0.04em;
-  display: flex; align-items: center; gap: 10px;
+.track::-webkit-scrollbar{display:none}
+.arrow{
+  position:absolute;top:calc(50% + 6px);transform:translateY(-50%);z-index:12;
+  width:42px;height:92px;display:grid;place-items:center;
+  background:rgba(11,11,14,.72);color:var(--fg);font-size:22px;
+  opacity:0;transition:opacity .2s var(--ease),background .2s var(--ease);
 }
-.nav-brand .dot {
-  width: 9px; height: 9px; border-radius: 50%;
-  background: var(--signal);
-  box-shadow: 0 0 12px var(--signal);
-  animation: pulse 2.6s var(--ease) infinite;
-}
-.nav-links { display: flex; gap: 30px; align-items: center; }
-.nav-links a {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.05em;
-  color: var(--mist);
-  position: relative;
-  transition: color .25s var(--ease);
-}
-.nav-links a::after {
-  content: ""; position: absolute; left: 0; bottom: -6px;
-  width: 0; height: 1px; background: var(--blueprint);
-  transition: width .3s var(--ease);
-}
-.nav-links a:hover { color: var(--paper); }
-.nav-links a:hover::after { width: 100%; }
-.nav-links .num { color: var(--mist-dim); margin-right: 5px; }
+.arrow:hover{background:rgba(11,11,14,.92)}
+.rail:hover .arrow{opacity:1}
+.arrow[disabled]{opacity:0!important;pointer-events:none}
+.arrow.l{left:0;border-radius:0 6px 6px 0}
+.arrow.r{right:0;border-radius:6px 0 0 6px}
+@media(max-width:900px){.arrow{display:none}}
 
-@media (max-width: 980px) {
-  .nav-links { gap: 22px; }
+.tile{
+  flex:0 0 282px;scroll-snap-align:start;position:relative;border-radius:7px;overflow:hidden;
+  background:var(--card);transition:transform .26s var(--ease),box-shadow .26s var(--ease);
+  display:flex;flex-direction:column;
 }
-@media (max-width: 860px) {
-  .nav-links a:not(.nav-cta) { display: none; }
+.tile:hover{transform:scale(1.07);z-index:10;box-shadow:0 18px 44px rgba(0,0,0,.6)}
+.tile .art{position:relative;aspect-ratio:16/9;display:flex;align-items:flex-end;padding:13px}
+.tile .art svg.motif{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.tile .art .lbl{
+  position:relative;font-family:var(--display);font-weight:600;font-size:15.5px;
+  letter-spacing:-.02em;line-height:1.22;text-shadow:0 2px 14px rgba(0,0,0,.6);
 }
+.tile .art .pill{
+  position:absolute;top:11px;left:13px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;
+  background:rgba(0,0,0,.52);padding:3px 8px;border-radius:3px;color:var(--fg-2);text-transform:uppercase;
+}
+.tile .art .pill.hot{background:var(--red);color:#fff}
+.g1{background:linear-gradient(135deg,#E50914,#6B0309)}
+.g2{background:linear-gradient(135deg,#2E2E38,#111116)}
+.g3{background:linear-gradient(135deg,#8E1119,#2A0407)}
+.g4{background:linear-gradient(135deg,#3A3A46,#17171C)}
+.g5{background:linear-gradient(135deg,#B4121C,#44060A)}
+.tile .foot{padding:11px 13px 14px;border-top:1px solid var(--line);background:var(--card)}
+.tile .foot p{
+  margin:0;font-size:12.5px;color:var(--fg-2);line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.tile .foot .row{display:flex;align-items:center;gap:8px;margin-top:10px}
+.tile .foot .go{
+  width:25px;height:25px;border-radius:50%;border:1px solid var(--line-2);
+  display:grid;place-items:center;font-size:11px;color:var(--fg);flex:none;
+}
+.tile:hover .foot .go{background:var(--fg);color:#111;border-color:var(--fg)}
+.tile .foot .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--fg-3);text-transform:uppercase}
+@media(max-width:620px){.tile{flex-basis:76vw}.tile:hover{transform:none}}
 
-.nav-cta {
-  border: 1px solid var(--blueprint);
-  color: var(--blueprint) !important;
-  padding: 9px 16px; border-radius: 999px;
-  transition: background .25s var(--ease), color .25s var(--ease);
+/* ================= modal ================= */
+.scrim{
+  position:fixed;inset:0;z-index:100;background:rgba(5,5,8,.76);backdrop-filter:blur(5px);
+  opacity:0;transition:opacity .25s var(--ease);overflow-y:auto;padding:0 0 60px;
 }
-.nav-cta::after { display: none; }
-.nav-cta:hover { background: var(--blueprint); color: #fff !important; }
+.scrim[hidden]{display:none}
+.scrim.open{opacity:1}
+.sheet{
+  max-width:860px;margin:max(5vh,70px) auto 0;background:var(--bg-2);border-radius:10px;
+  overflow:hidden;transform:translateY(22px) scale(.985);opacity:0;
+  transition:transform .3s var(--ease),opacity .3s var(--ease);
+  box-shadow:0 40px 90px rgba(0,0,0,.7);
+}
+.scrim.open .sheet{transform:none;opacity:1}
+@media(max-width:900px){.sheet{margin:0;border-radius:0;min-height:100vh}}
+.sheet-hero{position:relative;aspect-ratio:21/9;display:flex;align-items:flex-end;padding:clamp(20px,3vw,34px)}
+.sheet-hero svg.motif{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.sheet-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--bg-2) 1%,transparent 62%)}
+.sheet-hero .wrap{position:relative;z-index:2}
+.sheet-hero h2{font-size:clamp(1.5rem,3.6vw,2.4rem);max-width:19ch;text-shadow:0 3px 20px rgba(0,0,0,.6)}
+.sheet-close{
+  position:absolute;top:16px;right:16px;z-index:5;width:36px;height:36px;border-radius:50%;
+  background:rgba(11,11,14,.84);color:var(--fg);display:grid;place-items:center;font-size:15px;
+}
+.sheet-close:hover{background:#000}
+.sheet-body{padding:clamp(20px,3vw,34px);padding-top:18px}
+.sheet-meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+.sheet-meta .m{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--fg-3);text-transform:uppercase}
+.sheet-meta .m.ok{color:var(--ok)}
+.sheet-meta .m.hot{color:var(--red-2)}
+.sheet-body p{margin:0 0 14px;color:#DCDCE2;font-size:16.5px;line-height:1.65}
+.sheet-body p b{color:var(--fg);font-weight:600}
+.sheet-body h3{font-size:1.02rem;margin:26px 0 10px}
+.sheet-body ul{margin:0 0 16px;padding-left:20px;color:#DCDCE2}
+.sheet-body li{margin-bottom:7px}
+.sheet-body li::marker{color:var(--red-2)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.chip{
+  font-family:var(--mono);font-size:11px;color:var(--fg-2);background:var(--card);
+  border:1px solid var(--line);border-radius:5px;padding:6px 11px;
+}
+.sheet-cta{
+  display:inline-flex;align-items:center;gap:9px;margin-top:8px;
+  background:var(--red);color:#fff;font-weight:600;font-size:14px;padding:12px 24px;border-radius:5px;
+  transition:background .2s var(--ease);
+}
+.sheet-cta:hover{background:var(--red-2)}
 
-/* ============================================================
-   HERO  — interactive node network
-   ============================================================ */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex; align-items: center;
-  overflow: hidden;
-}
-#net {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-}
-.hero::after { /* vignette so text stays legible over the graph */
-  content: ""; position: absolute; inset: 0; z-index: 1;
-  background: radial-gradient(120% 90% at 22% 50%, rgba(10,16,24,0.92) 0%, rgba(10,16,24,0.55) 45%, rgba(10,16,24,0.15) 100%);
-  pointer-events: none;
-}
-.hero-inner { position: relative; z-index: 2; width: 100%; }
+/* demo panels inside the sheet */
+.demo{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--card);margin-top:6px}
+.demo-bar{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--line)}
+.toggle{display:inline-flex;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;padding:4px}
+.toggle button{font-family:var(--mono);font-size:11.5px;padding:8px 15px;border-radius:999px;color:var(--fg-2)}
+.toggle button.active{background:var(--red);color:#fff}
+.readout{font-family:var(--mono);font-size:11.5px;color:var(--fg-2)}
+.readout b{color:var(--fg)}
+.readout .good{color:var(--ok)}
+.replay{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line-2);border-radius:999px;padding:7px 14px;margin-left:auto;color:var(--fg-2)}
+.replay:hover{color:var(--fg)}
+.stage{height:210px}
+.stage.tall{height:320px}
+.stage canvas{width:100%;height:100%;display:block}
+.legend{display:flex;gap:18px;flex-wrap:wrap;padding:13px 18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--fg-3)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+.steps{display:flex;gap:15px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--fg-3)}
+.steps .step{display:inline-flex;align-items:center;gap:7px}
+.steps .step .n{width:19px;height:19px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:9.5px}
+.steps .step.active{color:var(--fg)}
+.steps .step.active .n{border-color:var(--red);background:rgba(229,9,20,.18);color:var(--red-2)}
 
-.hero-tag {
-  font-family: var(--mono);
-  color: var(--mist);
-  font-size: 0.82rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-bottom: 22px;
-  opacity: 0; transform: translateY(14px);
-  animation: rise .8s var(--ease) .15s forwards;
+/* ================= footer ================= */
+.foot{border-top:1px solid var(--line);background:#08080A;padding:44px clamp(16px,3.4vw,48px) 34px}
+.foot-in{max-width:1180px;margin:0 auto}
+.foot-links{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.sl{
+  display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:999px;
+  padding:10px 18px;font-size:13px;color:var(--fg-2);transition:border-color .2s,color .2s,transform .2s;
 }
-.hero-tag b { color: var(--blueprint); font-weight: 600; }
+.sl:hover{border-color:var(--red);color:var(--fg);transform:translateY(-2px)}
+.sl svg{width:15px;height:15px}
+.foot-bar{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--fg-3);padding-top:20px;border-top:1px solid var(--line)}
+.foot-bar .r{margin-left:auto}
 
-.hero h1 {
-  font-size: clamp(3rem, 9vw, 6.6rem);
-  letter-spacing: -0.035em;
-  line-height: 0.94;
-}
-.hero h1 .line { display: block; overflow: hidden; }
-.hero h1 .line span {
-  display: inline-block;
-  transform: translateY(110%);
-  animation: rise .9s var(--ease) forwards;
-}
-.hero h1 .line:nth-child(1) span { animation-delay: .25s; }
-.hero h1 .line:nth-child(2) span { animation-delay: .38s; color: var(--mist); }
-
-.hero-sub {
-  margin-top: 30px;
-  max-width: 50ch;
-  color: var(--mist);
-  font-size: 1.18rem;
-  opacity: 0; transform: translateY(14px);
-  animation: rise .9s var(--ease) .6s forwards;
-}
-.hero-sub .hl { color: var(--paper); }
-
-.hero-actions {
-  margin-top: 40px;
-  display: flex; gap: 16px; flex-wrap: wrap;
-  opacity: 0; transform: translateY(14px);
-  animation: rise .9s var(--ease) .78s forwards;
-}
-.btn-primary, .btn-ghost {
-  font-family: var(--mono);
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  padding: 14px 26px;
-  border-radius: 999px;
-  display: inline-flex; align-items: center; gap: 10px;
-  cursor: pointer;
-  transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
-}
-.btn-primary {
-  background: var(--blueprint); color: #fff; border: 1px solid var(--blueprint);
-  box-shadow: 0 8px 30px rgba(59,140,255,0.28);
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(59,140,255,0.4); }
-.btn-ghost { background: transparent; color: var(--paper); border: 1px solid var(--panel-edge); }
-.btn-ghost:hover { border-color: var(--mist); transform: translateY(-3px); }
-
-.hero-hint {
-  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-  z-index: 3;
-  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--mist-dim);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-}
-.hero-hint .bar { width: 1px; height: 34px; background: linear-gradient(var(--mist-dim), transparent); animation: drop 1.8s var(--ease) infinite; }
-
-/* node tooltip */
-.node-tip {
-  position: fixed; z-index: 60; pointer-events: none;
-  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em;
-  background: var(--panel); color: var(--paper);
-  border: 1px solid var(--panel-edge); border-radius: 7px;
-  padding: 6px 10px; transform: translate(-50%, -150%);
-  opacity: 0; transition: opacity .15s var(--ease);
-  white-space: nowrap;
-}
-.node-tip .k { color: var(--blueprint); }
-
-/* ============================================================
-   STATS
-   ============================================================ */
-.stats {
-  border-top: 1px solid var(--panel-edge);
-  border-bottom: 1px solid var(--panel-edge);
-  background: linear-gradient(var(--ink-2), var(--ink));
-}
-/* Self-sufficient grid: renders correctly even if Bootstrap fails to load */
-.stats .row { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; }
-.stats .row > [class*="col-"] { width: auto; max-width: none; flex: none; padding: 0 14px; }
-@media (max-width: 767px) { .stats .row { grid-template-columns: 1fr 1fr; } }
-.stat { padding: 46px 0; text-align: left; position: relative; }
-.stat + .stat::before {
-  content: ""; position: absolute; left: 0; top: 30px; bottom: 30px; width: 1px;
-  background: var(--panel-edge);
-}
-.stat .num {
-  font-family: var(--display); font-weight: 600;
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  letter-spacing: -0.03em; line-height: 1;
-  color: var(--paper);
-}
-.stat .num .u { color: var(--blueprint); }
-.stat .num.word {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  color: var(--blueprint);
-  line-height: 1.05;
-}
-.stat .lbl {
-  font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em;
-  color: var(--mist); margin-top: 14px; max-width: 24ch;
-}
-@media (max-width: 767px) {
-  .stat + .stat::before { display: none; }
-  .stat { padding: 28px 0; border-top: 1px solid var(--panel-edge); }
-  .stats .row > div:first-child .stat { border-top: none; }
-}
-
-/* ============================================================
-   EXPERIENCE TIMELINE
-   ============================================================ */
-.timeline { position: relative; margin-top: 60px; }
-.timeline::before {
-  content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1px;
-  background: linear-gradient(var(--blueprint), var(--panel-edge));
-}
-.tl-item {
-  position: relative; padding: 0 0 56px 44px;
-  opacity: 0; transform: translateX(22px);
-  transition: opacity .7s var(--ease), transform .7s var(--ease);
-}
-.tl-item.in { opacity: 1; transform: none; }
-.tl-item::before {
-  content: ""; position: absolute; left: 0; top: 6px;
-  width: 15px; height: 15px; border-radius: 50%;
-  background: var(--ink); border: 2px solid var(--blueprint);
-  box-shadow: 0 0 0 5px rgba(59,140,255,0.12);
-}
-.tl-item.cur::before { background: var(--signal); border-color: var(--signal); box-shadow: 0 0 0 5px rgba(246,166,35,0.16); }
-
-.tl-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; }
-.tl-role { font-family: var(--display); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
-.tl-co { color: var(--blueprint); font-weight: 600; }
-.tl-date {
-  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
-  color: var(--mist-dim); margin-left: auto;
-}
-.tl-points { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 14px; }
-.tl-points li {
-  position: relative; padding-left: 22px; color: var(--mist); font-size: 0.98rem; max-width: 70ch;
-}
-.tl-points li::before {
-  content: "▹"; position: absolute; left: 0; top: 0; color: var(--blueprint); font-size: 0.85rem;
-}
-.tl-points li b { color: var(--paper); font-weight: 600; }
-
-/* ============================================================
-   SIGNATURE INTERACTIVE — Event-driven vs polling.
-   ============================================================ */
-.demo-wrap {
-  margin-top: 46px;
-  background: var(--panel);
-  border: 1px solid var(--panel-edge);
-  border-radius: 18px;
-  overflow: hidden;
-}
-.demo-toolbar {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
-  padding: 22px 26px; border-bottom: 1px solid var(--panel-edge);
-}
-.toggle {
-  display: inline-flex; background: var(--ink-2); border: 1px solid var(--panel-edge);
-  border-radius: 999px; padding: 4px;
-}
-.toggle button {
-  font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.04em;
-  border: none; background: transparent; color: var(--mist);
-  padding: 9px 18px; border-radius: 999px; cursor: pointer;
-  transition: background .25s var(--ease), color .25s var(--ease);
-}
-.toggle button.active { background: var(--blueprint); color: #fff; }
-.demo-readout { font-family: var(--mono); font-size: 0.78rem; color: var(--mist); }
-.demo-readout b { color: var(--paper); }
-.demo-readout .good { color: var(--signal); }
-
-.demo-stage { position: relative; height: 220px; }
-.demo-stage.tall { height: 360px; }
-@media (max-width: 560px) { .demo-stage.tall { height: 300px; } }
-#demoCanvas, #tenementCanvas { width: 100%; height: 100%; display: block; }
-
-.sub-demo-title {
-  font-family: var(--display); font-weight: 600;
-  font-size: clamp(1.3rem, 3vw, 1.9rem); letter-spacing: -0.01em; margin-top: 64px;
-}
-.steps { display: flex; gap: 18px; flex-wrap: wrap; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.03em; }
-.steps .step { color: var(--mist-dim); display: inline-flex; align-items: center; gap: 8px; transition: color .3s var(--ease); }
-.steps .step .n {
-  width: 21px; height: 21px; border-radius: 50%; border: 1px solid var(--panel-edge);
-  display: grid; place-items: center; font-size: 0.66rem; transition: all .3s var(--ease);
-}
-.steps .step.active { color: var(--paper); }
-.steps .step.active .n { border-color: var(--blueprint); background: var(--blueprint-soft); color: var(--blueprint); }
-.replay {
-  font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.04em;
-  border: 1px solid var(--blueprint); color: var(--blueprint); background: transparent;
-  border-radius: 999px; padding: 9px 16px; cursor: pointer; margin-left: auto;
-  transition: background .25s var(--ease), color .25s var(--ease);
-}
-.replay:hover { background: var(--blueprint); color: #fff; }
-.demo-legend {
-  display: flex; gap: 26px; flex-wrap: wrap;
-  padding: 16px 26px; border-top: 1px solid var(--panel-edge);
-  font-family: var(--mono); font-size: 0.72rem; color: var(--mist-dim);
-}
-.demo-legend span { display: inline-flex; align-items: center; gap: 8px; }
-.demo-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
-
-/* ============================================================
-   PRODUCT OWNERSHIP — the delivery loop
-   Reuses .demo-wrap / .steps so the panel reads as part of the
-   same schematic family as the two engineering demos.
-   ============================================================ */
-.steps button.step {
-  border: none; background: transparent; padding: 0;
-  font-family: inherit; font-size: inherit; letter-spacing: inherit;
-  cursor: pointer; line-height: 1.6;
-}
-.loop-hint { margin-left: auto; color: var(--mist-dim); font-size: 0.72rem; letter-spacing: 0.04em; }
-
-.loop-stage { padding: 30px 20px 12px; }
-.loop-svg { width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto; }
-.loop-svg .ring {
-  fill: none; stroke: rgba(96,130,178,0.22);
-  stroke-width: 1; stroke-dasharray: 4 8;
-  animation: ringdash 7s linear infinite;
-}
-.loop-svg .arc { fill: none; stroke: rgba(96,130,178,0.36); stroke-width: 1.4; }
-.loop-svg .lnode { cursor: pointer; }
-.loop-svg .lnode circle.disc {
-  fill: var(--panel); stroke: var(--panel-edge); stroke-width: 1.5;
-  transition: fill .35s var(--ease), stroke .35s var(--ease);
-}
-.loop-svg .lnode circle.halo {
-  fill: rgba(59,140,255,0.12); stroke: none;
-  opacity: 0; transition: opacity .35s var(--ease);
-}
-.loop-svg .lnode .num {
-  font-family: var(--mono); font-size: 15px; fill: var(--mist);
-  text-anchor: middle; dominant-baseline: central;
-  transition: fill .35s var(--ease);
-}
-.loop-svg .lnode .lbl {
-  font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em;
-  fill: var(--mist-dim); text-transform: uppercase;
-  transition: fill .3s var(--ease);
-}
-.loop-svg .lnode:hover circle.disc { stroke: var(--blueprint); }
-.loop-svg .lnode:hover .lbl { fill: var(--mist); }
-.loop-svg .lnode.on circle.disc { fill: var(--blueprint); stroke: var(--blueprint); }
-.loop-svg .lnode.on circle.halo { opacity: 1; }
-.loop-svg .lnode.on .num { fill: #fff; }
-.loop-svg .lnode.on .lbl { fill: var(--paper); }
-.loop-svg .core-t {
-  font-family: var(--display); font-weight: 600; font-size: 19px;
-  fill: var(--paper); text-anchor: middle;
-}
-.loop-svg .core-m {
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
-  fill: var(--blueprint); text-anchor: middle;
-}
-
-.loop-detail { border-top: 1px solid var(--panel-edge); padding: 26px; min-height: 168px; }
-.loop-detail-inner { transition: opacity .25s var(--ease), transform .25s var(--ease); }
-.loop-detail.fade .loop-detail-inner { opacity: 0; transform: translateY(7px); }
-.loop-detail .idx { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em; color: var(--blueprint); }
-.loop-detail h3 { font-size: 1.32rem; letter-spacing: -0.01em; margin-top: 12px; }
-.loop-detail p { color: var(--mist); margin: 12px 0 0; max-width: 64ch; font-size: 0.98rem; }
-.loop-aside { max-width: 64ch; }
-
-@media (max-width: 700px) {
-  /* keep the diagram, scale its type up so it stays legible when the SVG shrinks */
-  .loop-svg .lnode .lbl { font-size: 23px; letter-spacing: 0.05em; }
-  .loop-svg .lnode .num { font-size: 26px; }
-  .loop-svg .core-t { font-size: 30px; }
-  .loop-svg .core-m { font-size: 19px; }
-  .loop-stage { padding: 22px 6px 6px; }
-  .loop-detail { min-height: 0; }
-}
-@keyframes ringdash { to { stroke-dashoffset: -24; } }
-
-/* ============================================================
-   SKILLS — system map
-   ============================================================ */
-.skill-grid { margin-top: 54px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-@media (max-width: 900px) { .skill-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .skill-grid { grid-template-columns: 1fr; } }
-
-.skill-card {
-  background: var(--panel); border: 1px solid var(--panel-edge);
-  border-radius: 16px; padding: 26px 24px;
-  position: relative; overflow: hidden;
-  transition: transform .35s var(--ease), border-color .35s var(--ease);
-  opacity: 0; transform: translateY(22px);
-}
-.skill-card.in { opacity: 1; transform: none; }
-.skill-card.wide { grid-column: 1 / -1; }
-.skill-card:hover { transform: translateY(-6px); border-color: var(--blueprint); }
-.skill-card::after {
-  content: ""; position: absolute; right: -40px; top: -40px;
-  width: 120px; height: 120px; border-radius: 50%;
-  background: var(--blueprint-soft); filter: blur(10px);
-  opacity: 0; transition: opacity .35s var(--ease);
-}
-.skill-card:hover::after { opacity: 1; }
-.skill-card .idx { font-family: var(--mono); font-size: 0.72rem; color: var(--mist-dim); }
-.skill-card h3 { font-size: 1.12rem; margin: 10px 0 16px; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip {
-  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.02em;
-  color: var(--mist); background: var(--ink-2);
-  border: 1px solid var(--panel-edge); border-radius: 7px; padding: 6px 11px;
-  transition: color .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
-}
-.chip:hover { color: var(--paper); border-color: var(--blueprint); background: var(--blueprint-soft); }
-
-/* ============================================================
-   PROJECT
-   ============================================================ */
-.project {
-  margin-top: 50px;
-  display: grid; grid-template-columns: 1.1fr 1fr; gap: 0;
-  background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 18px;
-  overflow: hidden;
-}
-@media (max-width: 820px) { .project { grid-template-columns: 1fr; } }
-.project-body { padding: 40px; }
-.project-body h3 { font-size: 1.6rem; letter-spacing: -0.01em; }
-.project-body p { color: var(--mist); margin-top: 16px; max-width: 48ch; }
-.project-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-.project-link {
-  margin-top: 28px; font-family: var(--mono); font-size: 0.8rem; color: var(--blueprint);
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.project-link span { transition: transform .25s var(--ease); }
-.project-link:hover span { transform: translateX(5px); }
-
-/* mini schematic visual inside project */
-.project-vis {
-  background: var(--ink-2); border-left: 1px solid var(--panel-edge);
-  display: flex; align-items: center; justify-content: center; padding: 24px;
-  min-height: 240px;
-}
-@media (max-width: 820px) { .project-vis { border-left: none; border-top: 1px solid var(--panel-edge); } }
-.project-vis svg { width: 100%; max-width: 320px; height: auto; }
-
-/* ============================================================
-   EDUCATION
-   ============================================================ */
-.edu-grid { margin-top: 46px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-@media (max-width: 700px) { .edu-grid { grid-template-columns: 1fr; } }
-.edu-card {
-  background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 16px;
-  padding: 28px 26px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
-  opacity: 0; transform: translateY(20px); transition: opacity .7s var(--ease), transform .7s var(--ease);
-}
-.edu-card.in { opacity: 1; transform: none; }
-.edu-card h3 { font-size: 1.16rem; }
-.edu-card .where { color: var(--blueprint); font-family: var(--mono); font-size: 0.78rem; margin-top: 8px; }
-.edu-card .when { color: var(--mist-dim); font-family: var(--mono); font-size: 0.72rem; margin-top: 6px; }
-.edu-cgpa {
-  font-family: var(--display); font-weight: 600; font-size: 1.6rem; color: var(--signal);
-  white-space: nowrap;
-}
-.edu-cgpa small { font-family: var(--mono); font-size: 0.62rem; color: var(--mist-dim); display: block; text-align: right; }
-
-/* ============================================================
-   CONTACT / FOOTER
-   ============================================================ */
-.contact { text-align: center; border-top: 1px solid var(--panel-edge); background: linear-gradient(var(--ink), var(--ink-2)); }
-.contact .eyebrow { justify-content: center; }
-.contact .eyebrow::before { display: none; }
-.contact h2 { font-size: clamp(2.2rem, 6vw, 4.2rem); letter-spacing: -0.03em; margin-top: 18px; }
-.contact-mail {
-  display: inline-block; margin-top: 26px;
-  font-family: var(--display); font-size: clamp(1.2rem, 3vw, 1.8rem);
-  color: var(--blueprint); border-bottom: 1px solid transparent; transition: border-color .25s var(--ease);
-}
-.contact-mail:hover { border-color: var(--blueprint); }
-.socials { margin-top: 40px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.social {
-  font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--mist);
-  border: 1px solid var(--panel-edge); border-radius: 999px; padding: 11px 20px;
-  transition: color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
-}
-.social:hover { color: var(--paper); border-color: var(--blueprint); transform: translateY(-3px); }
-.foot {
-  margin-top: 70px; padding-top: 26px; border-top: 1px solid var(--panel-edge);
-  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-  font-family: var(--mono); font-size: 0.72rem; color: var(--mist-dim);
-}
-
-/* ============================================================
-   ANIMATIONS
-   ============================================================ */
-@keyframes rise { to { transform: translateY(0); opacity: 1; } }
-@keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: .55; } }
-@keyframes drop { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 100% { transform: scaleY(0); transform-origin: bottom; } }
-
-/* ============================================================
-   CONTACT MODAL
-   ============================================================ */
-.modal-overlay {
-  position: fixed; inset: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: center; padding: 24px;
-  background: rgba(6, 10, 16, 0.66); backdrop-filter: blur(8px);
-  opacity: 0; transition: opacity .3s var(--ease);
-}
-.modal-overlay[hidden] { display: none; }
-.modal-overlay.open { opacity: 1; }
-.modal-card {
-  position: relative; width: 100%; max-width: 440px;
-  background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 22px;
-  padding: 34px 30px;
-  transform: translateY(18px) scale(.98); opacity: 0;
-  transition: transform .35s var(--ease), opacity .35s var(--ease);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
-}
-.modal-overlay.open .modal-card { transform: none; opacity: 1; }
-.modal-close {
-  position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border-radius: 50%;
-  border: 1px solid var(--panel-edge); background: var(--ink-2); color: var(--mist);
-  cursor: pointer; font-size: 0.85rem; display: grid; place-items: center;
-  transition: color .2s var(--ease), border-color .2s var(--ease);
-}
-.modal-close:hover { color: var(--paper); border-color: var(--mist); }
-.modal-card .eyebrow::before { display: none; }
-.modal-card h3 { font-size: 1.9rem; letter-spacing: -0.02em; margin-top: 14px; }
-.modal-sub { color: var(--mist); margin-top: 8px; font-size: 0.98rem; }
-.contact-options { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
-.contact-opt {
-  display: flex; align-items: center; gap: 16px; padding: 15px 18px; border-radius: 14px;
-  background: var(--ink-2); border: 1px solid var(--panel-edge);
-  transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
-}
-.contact-opt:hover { transform: translateY(-3px); border-color: var(--blueprint); background: var(--blueprint-soft); }
-.co-icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; flex: none; }
-.co-icon svg { width: 22px; height: 22px; }
-.co-icon.li   { background: rgba(59, 140, 255, 0.14); color: #3B8CFF; }
-.co-icon.mail { background: rgba(246, 166, 35, 0.14); color: #F6A623; }
-.co-icon.tel  { background: rgba(61, 214, 140, 0.14); color: #3DD68C; }
-.co-text { display: flex; flex-direction: column; line-height: 1.25; }
-.co-text b { font-family: var(--display); font-weight: 600; font-size: 1.02rem; }
-.co-text small { font-family: var(--mono); font-size: 0.74rem; color: var(--mist); margin-top: 3px; }
-.co-arrow { margin-left: auto; color: var(--mist-dim); font-family: var(--mono); transition: transform .25s var(--ease), color .25s var(--ease); }
-.contact-opt:hover .co-arrow { color: var(--blueprint); transform: translateX(4px); }
-
-@media (prefers-reduced-motion: reduce) {
-  .modal-overlay, .modal-card { transition: none; }
-}
-
-/* ============================================================
-   ACCESSIBILITY
-   ============================================================ */
-:focus-visible { outline: 2px solid var(--blueprint); outline-offset: 3px; border-radius: 4px; }
-
-@media (prefers-reduced-motion: reduce) {
-  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
-  .hero h1 .line span, .hero-tag, .hero-sub, .hero-actions { opacity: 1 !important; transform: none !important; }
-  .tl-item, .skill-card, .edu-card { opacity: 1 !important; transform: none !important; }
-}
-
-  </style>
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
-
-  <!-- ============================ NAV ============================ -->
-  <nav class="nav">
-    <a href="#top" class="nav-brand"><span class="dot"></span> akshay&nbsp;yadav</a>
-    <div class="nav-links">
-      <a href="#experience"><span class="num">01</span>Experience</a>
-      <a href="#product"><span class="num">02</span>Product</a>
-      <a href="#approach"><span class="num">03</span>How I build</a>
-      <a href="#skills"><span class="num">04</span>Toolkit</a>
-      <a href="#work"><span class="num">05</span>Work</a>
-      <a href="#contact" class="nav-cta" data-open-contact>Get in touch</a>
-    </div>
+<div class="top" id="top">
+  <button id="burger" aria-label="Menu">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <div class="brand">AY<span>.</span></div>
+  <nav class="tnav" id="tnav">
+    <button data-jump="r-exp">Experience</button>
+    <button data-jump="r-build">How I build</button>
+    <button data-jump="r-own">Product ownership</button>
+    <button data-jump="r-kit">Toolkit</button>
+    <button data-jump="r-work">Work</button>
+    <button data-jump="r-edu">Education</button>
   </nav>
+  <div class="tsp">
+    <a class="tbtn" href="https://akshay646.github.io/buildnbeyond/">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg><span>BuildNBeyond</span></a>
+    <button class="tbtn hot" data-open="contact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg><span>Get in touch</span></button>
+  </div>
+</div>
 
-  <!-- ============================ HERO ============================ -->
-  <header class="hero" id="top">
-    <canvas id="net" aria-hidden="true"></canvas>
-    <div class="hero-inner">
-      <div class="container-tight">
-        <p class="hero-tag">Software Engineer · <b>Pune, India</b> · since 2022</p>
-        <h1>
-          <span class="line"><span>Akshay</span></span>
-          <span class="line"><span>Yadav</span></span>
-        </h1>
-        <p class="hero-sub">
-          I own <span class="hl">product areas from discovery to release</span> —
-          and build the <span class="hl">backend systems underneath them</span>:
-          engineered to scale, stay secure, and respond in real time.
-        </p>
-        <div class="hero-actions">
-          <a href="#experience" class="btn-primary">View experience →</a>
-          <a href="#contact" class="btn-ghost" data-open-contact>Get in touch</a>
-        </div>
-      </div>
+<header class="bill" id="home">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="bill-in">
+    <div class="tagrow">
+      <span class="badge">Senior Engineer</span>
+      <span class="meta">Pune, India · .NET · Distributed systems · Since 2022</span>
     </div>
-    <div class="hero-hint" aria-hidden="true">
-      <span>drag your cursor through the graph</span>
-      <span class="bar"></span>
+    <h1>Akshay<em>Yadav</em></h1>
+    <p class="lede">
+      I own <b>product areas from discovery to release</b> — and build the
+      <b>distributed systems underneath them</b>: engineered to scale, stay secure,
+      and stay observable in production.
+    </p>
+    <div class="bill-cta">
+      <button class="btn play" data-open="intro">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>Play intro</button>
+      <button class="btn info" data-jump="r-exp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6v.4"/></svg>Browse work</button>
     </div>
-  </header>
-  <div id="nodeTip" class="node-tip" role="status" aria-live="polite"></div>
-
-  <!-- ============================ STATS ============================ -->
-  <section class="stats">
-    <div class="container-tight">
-      <div class="row">
-        <div class="col-6 col-md-3">
-          <div class="stat">
-            <div class="num"><span data-count="4">0</span><span class="u">+</span></div>
-            <div class="lbl">Years shipping production software, backend through UI</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="stat">
-            <div class="num"><span data-count="50">0</span><span class="u">%</span></div>
-            <div class="lbl">Lower integration complexity via a shared service facade</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="stat">
-            <div class="num word">Automated</div>
-            <div class="lbl">Manual, repetitive workflows engineered to run themselves</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="stat">
-            <div class="num word">Real-time</div>
-            <div class="lbl">Event-driven pipelines that replaced polling overhead</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ EXPERIENCE ============================ -->
-  <section class="section" id="experience">
-    <div class="container-tight">
-      <span class="eyebrow">01 — Experience</span>
-      <h2 class="section-title">Four years turning hard backend problems into shipped product.</h2>
-
-      <div class="timeline">
-        <!-- Current -->
-        <article class="tl-item cur" data-delay="0">
-          <div class="tl-head">
-            <span class="tl-role">Software Developer&nbsp;II · <span class="tl-co">SoftTech Engineers</span></span>
-            <span class="tl-date">MAY 2023 — PRESENT</span>
-          </div>
-          <ul class="tl-points">
-            <li>Designed and led a <b>multi-tenant distributed integration platform</b> that abstracts vendor-specific APIs behind standardized service contracts, enabling multiple internal products to integrate with external platforms through a unified interface while <b>reducing integration complexity by 50%</b></li>
-            <li>Implemented <b>tenant-aware OAuth orchestration</b> for the integration platform using server-side credential management, browser-scoped session identifiers, and ownership validation to securely manage OAuth sessions without exposing third-party access tokens to client applications</li>
-            <li>Owned <b>end-to-end engineering for a core product</b> area of an enterprise BIM-based project management platform, partnering with customers and product teams to <b>refine requirements, define technical scope, and drive implementation through production release.</b></li>
-            <li>Designed and Implemented a scalable <b>semantic search pipeline</b> leveraging embeddings, cosine similarity, hierarchical indexing, and metadata filtering to <b>efficiently match entities across large datasets with confidence scoring.</b></li>
-            <li>Implemented end-to-end real-time status updates by integrating asynchronous callbacks with SignalR across backend and React clients, <b>replacing polling-based status tracking to eliminate artificial latency and reduce unnecessary API traffic.</b></li>
-          </ul>
-        </article>
-
-        <!-- SD1 -->
-        <article class="tl-item" data-delay="80">
-          <div class="tl-head">
-            <span class="tl-role">Software Developer&nbsp;I · <span class="tl-co">SoftTech Engineers</span></span>
-            <span class="tl-date">MAY 2022 — MAY 2023</span>
-          </div>
-          <ul class="tl-points">
-            <li>Built a <b>graph-based detection microservice</b> — modeling spatial data as connectivity graphs and running <b>BFS</b> to find connected components, automating away <b>~70%</b> of previously manual work.</li>
-            <li>Helped migrate desktop workflows to <b>cloud-native services</b>, including a real-time visualization engine and event-driven modules with live updates.</li>
-          </ul>
-        </article>
-
-        <!-- Intern -->
-        <article class="tl-item" data-delay="160">
-          <div class="tl-head">
-            <span class="tl-role">Software Developer Intern · <span class="tl-co">Centre for Computational Technologies</span></span>
-            <span class="tl-date">JAN 2022 — MAY 2022</span>
-          </div>
-          <ul class="tl-points">
-            <li>Implemented core <b>subscription-lifecycle</b> logic — credit expiry/renewal and SES-based notifications — improving accuracy and cutting manual account updates.</li>
-            <li>Optimized simulation APIs by removing redundant DB queries and caching static metadata, improving stage-transition latency and throughput under concurrent load.</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ PRODUCT OWNERSHIP ============================ -->
-  <section class="section" id="product" style="border-top: 1px solid var(--panel-edge);">
-    <div class="container-tight">
-      <span class="eyebrow">02 — Product ownership</span>
-      <h2 class="section-title">I own product areas, not just the code inside them.</h2>
-      <p class="section-lead">
-        I own a capability area of an enterprise platform end to end — discovery through release.
-        Our first large enterprise deployment shaped what that area had to become, so the work ran from
-        early requirement discussions all the way to standing in front of the room and showing it working.
-        Writing the code was the middle third.
-      </p>
-
-      <div class="demo-wrap">
-        <div class="demo-toolbar">
-          <div class="steps" id="loopSteps" role="tablist" aria-label="Stages of the delivery loop">
-            <button class="step active" type="button" role="tab" data-stage="0" aria-selected="true"><span class="n">1</span> Discovery</button>
-            <button class="step" type="button" role="tab" data-stage="1" aria-selected="false"><span class="n">2</span> Scope</button>
-            <button class="step" type="button" role="tab" data-stage="2" aria-selected="false"><span class="n">3</span> Release line</button>
-            <button class="step" type="button" role="tab" data-stage="3" aria-selected="false"><span class="n">4</span> Breakdown</button>
-            <button class="step" type="button" role="tab" data-stage="4" aria-selected="false"><span class="n">5</span> Demo</button>
-          </div>
-          <span class="mono loop-hint">pick a stage</span>
-        </div>
-
-        <div class="loop-stage">
-          <svg class="loop-svg" viewBox="0 0 660 462" xmlns="http://www.w3.org/2000/svg"
-               role="img" aria-label="A five-stage loop: discovery, agreed scope, release line, work breakdown, demo — and back to discovery.">
-            <defs>
-              <marker id="loopArrow" markerWidth="7" markerHeight="7" refX="5.5" refY="2.6" orient="auto">
-                <path d="M0,0 L5.5,2.6 L0,5.2 Z" fill="rgba(96,130,178,0.6)" />
-              </marker>
-            </defs>
-
-            <!-- ambient ring -->
-            <circle class="ring" cx="330" cy="250" r="152" />
-
-            <!-- directed arcs: the loop closes back on itself -->
-            <g class="loop-arcs">
-              <path class="arc" d="M369.3,103.2 A152,152 0 0 1 457.5,167.2" marker-end="url(#loopArrow)" />
-              <path class="arc" d="M481.8,242.0 A152,152 0 0 1 448.1,345.7" marker-end="url(#loopArrow)" />
-              <path class="arc" d="M384.5,391.9 A152,152 0 0 1 275.5,391.9" marker-end="url(#loopArrow)" />
-              <path class="arc" d="M211.9,345.7 A152,152 0 0 1 178.2,242.0" marker-end="url(#loopArrow)" />
-              <path class="arc" d="M202.5,167.2 A152,152 0 0 1 290.7,103.2" marker-end="url(#loopArrow)" />
-            </g>
-
-            <!-- centre readout -->
-            <text class="core-t" x="330" y="244" id="loopCoreTitle">Discovery</text>
-            <text class="core-m" x="330" y="272" id="loopCoreMeta">STAGE 01 / 05</text>
-
-            <!-- stage nodes -->
-            <g class="lnode on" data-stage="0">
-              <circle class="halo" cx="330" cy="98" r="38" />
-              <circle class="disc" cx="330" cy="98" r="27" />
-              <text class="num" x="330" y="98">1</text>
-              <text class="lbl" x="330" y="42" text-anchor="middle">Discovery</text>
-            </g>
-            <g class="lnode" data-stage="1">
-              <circle class="halo" cx="474.6" cy="203" r="38" />
-              <circle class="disc" cx="474.6" cy="203" r="27" />
-              <text class="num" x="474.6" y="203">2</text>
-              <text class="lbl" x="513" y="191" text-anchor="start">Scope</text>
-            </g>
-            <g class="lnode" data-stage="2">
-              <circle class="halo" cx="419.3" cy="373" r="38" />
-              <circle class="disc" cx="419.3" cy="373" r="27" />
-              <text class="num" x="419.3" y="373">3</text>
-              <text class="lbl" x="443" y="424" text-anchor="start">Release line</text>
-            </g>
-            <g class="lnode" data-stage="3">
-              <circle class="halo" cx="240.7" cy="373" r="38" />
-              <circle class="disc" cx="240.7" cy="373" r="27" />
-              <text class="num" x="240.7" y="373">4</text>
-              <text class="lbl" x="217" y="424" text-anchor="end">Breakdown</text>
-            </g>
-            <g class="lnode" data-stage="4">
-              <circle class="halo" cx="185.4" cy="203" r="38" />
-              <circle class="disc" cx="185.4" cy="203" r="27" />
-              <text class="num" x="185.4" y="203">5</text>
-              <text class="lbl" x="147" y="191" text-anchor="end">Demo</text>
-            </g>
-          </svg>
-        </div>
-
-        <div class="loop-detail" id="loopDetail" aria-live="polite">
-          <div class="loop-detail-inner">
-            <div class="idx" id="loopIdx">STAGE 01</div>
-            <h3 id="loopTitle">Understand the real problem</h3>
-            <p id="loopBody">I work from first-hand requirement discussions rather than second-hand tickets, separating what the customer actually needs from how they first described it.</p>
-          </div>
-        </div>
-
-        <div class="demo-legend">
-          <span>Alongside the delivery work: a phased product roadmap, a requirement register mapping scope to delivery phase, and recurring progress reporting for leadership.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ APPROACH / SIGNATURE DEMO ============================ -->
-  <section class="section" id="approach" style="background: var(--ink-2); border-top: 1px solid var(--panel-edge); border-bottom: 1px solid var(--panel-edge);">
-    <div class="container-tight">
-      <span class="eyebrow">03 — How I build</span>
-      <h2 class="section-title">Polling wastes the line. Events fire only when something changes.</h2>
-      <p class="section-lead">
-        One of my favourite refactors: a long-running job that the UI used to poll on a timer. Watch the difference —
-        flip the toggle and count the requests on the wire.
-      </p>
-
-      <div class="demo-wrap">
-        <div class="demo-toolbar">
-          <div class="toggle" role="tablist" aria-label="Workflow mode">
-            <button data-mode="poll" role="tab">Polling</button>
-            <button data-mode="event" role="tab" class="active">Event-driven</button>
-          </div>
-          <div class="demo-readout">
-            requests: <b id="demoReqs">0</b>
-            &nbsp;·&nbsp; wasted: <b id="demoWaste">0</b>
-            &nbsp;·&nbsp; UI update: <b class="good" id="demoLat">real-time</b>
-          </div>
-        </div>
-        <div class="demo-stage">
-          <canvas id="demoCanvas" aria-label="Animated comparison of polling versus event-driven request traffic between a client and a service"></canvas>
-        </div>
-        <div class="demo-legend">
-          <span><i style="background:#3B8CFF"></i> request</span>
-          <span><i style="background:#7b8faa"></i> wasted poll (nothing changed yet)</span>
-          <span><i style="background:#F6A623"></i> event pushed on change</span>
-        </div>
-      </div>
-
-      <h3 class="sub-demo-title">From floor plan to graph — finding tenements with BFS.</h3>
-      <p class="section-lead" style="margin-top:14px;">
-        A real one from my work: given a floor full of rooms, which spaces belong together? I model each
-        room as a node and every door or opening as an edge, then run breadth-first search to pull out the
-        connected components — each one is a tenement. Watch it run.
-      </p>
-
-      <div class="demo-wrap">
-        <div class="demo-toolbar">
-          <div class="steps" id="tenementSteps">
-            <span class="step"><span class="n">1</span> Floor plan</span>
-            <span class="step"><span class="n">2</span> Openings</span>
-            <span class="step"><span class="n">3</span> BFS grouping</span>
-            <span class="step"><span class="n">4</span> Tenements</span>
-          </div>
-          <button class="replay" id="tenementReplay" type="button">↻ Replay</button>
-        </div>
-        <div class="demo-stage tall">
-          <canvas id="tenementCanvas" aria-label="Animation: rooms on a floor plan are connected through doors, then grouped with breadth-first search into three tenements"></canvas>
-        </div>
-        <div class="demo-legend">
-          <span class="mono" id="tenementReadout" style="color:var(--paper)">Reading the floor plan…</span>
-          <span><i style="background:#3B8CFF"></i><i style="background:#F6A623;margin-left:-3px"></i><i style="background:#3DD68C;margin-left:-3px"></i> tenements</span>
-          <span><i style="background:transparent;border:1px solid #F6A623"></i> door / opening</span>
-          <span><i style="width:16px;height:2px;border-radius:2px;background:#8FA7C9"></i> connection</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ SKILLS ============================ -->
-  <section class="section" id="skills">
-    <div class="container-tight">
-      <span class="eyebrow">04 — Toolkit</span>
-      <h2 class="section-title">The toolkit, grouped the way I actually use it.</h2>
-
-      <div class="skill-grid">
-        <div class="skill-card" data-delay="0">
-          <div class="idx">/ 01</div>
-          <h3>Languages</h3>
-          <div class="chips">
-            <span class="chip">C#</span><span class="chip">C++</span>
-            <span class="chip">JavaScript</span><span class="chip">Java</span>
-          </div>
-        </div>
-        <div class="skill-card" data-delay="60">
-          <div class="idx">/ 02</div>
-          <h3>Backend</h3>
-          <div class="chips">
-            <span class="chip">.NET Core</span><span class="chip">ASP.NET MVC</span>
-            <span class="chip">Microservices</span><span class="chip">REST APIs</span>
-          </div>
-        </div>
-        <div class="skill-card" data-delay="120">
-          <div class="idx">/ 03</div>
-          <h3>System Design</h3>
-          <div class="chips">
-            <span class="chip">API Design</span><span class="chip">Event-Driven</span>
-            <span class="chip">OAuth</span><span class="chip">Microservices</span>
-          </div>
-        </div>
-        <div class="skill-card" data-delay="0">
-          <div class="idx">/ 04</div>
-          <h3>Cloud &amp; DevOps</h3>
-          <div class="chips">
-            <span class="chip">Azure Functions</span><span class="chip">Azure Storage</span>
-            <span class="chip">AWS EC2</span><span class="chip">S3</span>
-            <span class="chip">Lambda</span><span class="chip">CI/CD</span><span class="chip">Git</span>
-          </div>
-        </div>
-        <div class="skill-card" data-delay="60">
-          <div class="idx">/ 05</div>
-          <h3>Data</h3>
-          <div class="chips">
-            <span class="chip">MS SQL</span><span class="chip">DynamoDB</span>
-          </div>
-        </div>
-        <div class="skill-card" data-delay="120">
-          <div class="idx">/ 06</div>
-          <h3>Frontend &amp; Testing</h3>
-          <div class="chips">
-            <span class="chip">React UI</span><span class="chip">HTML/CSS</span>
-            <span class="chip">API-driven UI</span><span class="chip">xUnit</span>
-          </div>
-        </div>
-        <div class="skill-card wide" data-delay="0">
-          <div class="idx">/ 07</div>
-          <h3>Leadership</h3>
-          <div class="chips">
-            <span class="chip">Requirement Discovery</span><span class="chip">Scope Definition</span>
-            <span class="chip">Prioritisation</span><span class="chip">Release Planning</span>
-            <span class="chip">Roadmapping</span><span class="chip">User Stories</span>
-            <span class="chip">Task Breakdown</span><span class="chip">Technical Scoping</span>
-            <span class="chip">Estimation</span><span class="chip">Feature Ownership</span>
-            <span class="chip">Product Demos</span><span class="chip">Leadership Reporting</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ WORK / PROJECT ============================ -->
-  <section class="section" id="work" style="background: var(--ink-2); border-top: 1px solid var(--panel-edge);">
-    <div class="container-tight">
-      <span class="eyebrow">05 — Selected work</span>
-      <h2 class="section-title">A full-stack recommendation engine, built end to end.</h2>
-
-      <div class="project">
-        <div class="project-body">
-          <h3>News Recommendation App</h3>
-          <p>
-            A full-stack news platform with user authentication and real-time personalized feeds.
-            A lightweight recommendation service scores and ranks articles by content similarity and
-            user interests, served back to the web app over REST in real time.
-          </p>
-          <div class="project-tech">
-            <span class="chip">Node.js</span><span class="chip">Express</span>
-            <span class="chip">Python</span><span class="chip">MongoDB</span>
-            <span class="chip">JavaScript</span>
-          </div>
-          <a href="https://github.com/Akshay646/News-Recommendation" class="project-link" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
-        </div>
-        <div class="project-vis" aria-hidden="true">
-          <!-- mini recommendation-flow schematic -->
-          <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                <path d="M0,0 L6,3 L0,6 Z" fill="#3B8CFF"/>
-              </marker>
-            </defs>
-            <line x1="60" y1="50" x2="150" y2="100" stroke="#3B8CFF" stroke-width="1.4" marker-end="url(#ah)" opacity=".7"/>
-            <line x1="60" y1="150" x2="150" y2="100" stroke="#3B8CFF" stroke-width="1.4" marker-end="url(#ah)" opacity=".7"/>
-            <line x1="150" y1="100" x2="240" y2="100" stroke="#F6A623" stroke-width="1.6" marker-end="url(#ah)"/>
-            <g font-family="JetBrains Mono, monospace" font-size="9" fill="#8FA7C9" text-anchor="middle">
-              <rect x="18" y="36" width="84" height="28" rx="6" fill="#111E31" stroke="#3B8CFF" stroke-width="1"/>
-              <text x="60" y="54" fill="#EAF1FB">user profile</text>
-              <rect x="18" y="136" width="84" height="28" rx="6" fill="#111E31" stroke="#3B8CFF" stroke-width="1"/>
-              <text x="60" y="154" fill="#EAF1FB">article corpus</text>
-              <circle cx="150" cy="100" r="26" fill="#111E31" stroke="#F6A623" stroke-width="1.4"/>
-              <text x="150" y="97" fill="#EAF1FB">score</text>
-              <text x="150" y="108" fill="#F6A623">+ rank</text>
-              <rect x="200" y="86" width="80" height="28" rx="6" fill="#111E31" stroke="#F6A623" stroke-width="1"/>
-              <text x="240" y="104" fill="#EAF1FB">feed</text>
-            </g>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ EDUCATION ============================ -->
-  <section class="section" id="education">
-    <div class="container-tight">
-      <span class="eyebrow">06 — Education</span>
-      <h2 class="section-title">A strong academic foundation.</h2>
-
-      <div class="edu-grid">
-        <div class="edu-card" data-delay="0">
-          <div>
-            <h3>Master's in Computer Science</h3>
-            <div class="where">University of Pune</div>
-            <div class="when">OCT 2022</div>
-          </div>
-          <div class="edu-cgpa">9.73<small>/ 10 CGPA</small></div>
-        </div>
-        <div class="edu-card" data-delay="80">
-          <div>
-            <h3>Bachelor's in Information Technology</h3>
-            <div class="where">University of Mumbai</div>
-            <div class="when">MAY 2020</div>
-          </div>
-          <div class="edu-cgpa">9.20<small>/ 10 CGPA</small></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ CONTACT ============================ -->
-  <section class="section contact" id="contact">
-    <div class="container-tight">
-      <span class="eyebrow">Let's build something</span>
-      <h2>Have a hard systems problem?</h2>
-      <a class="contact-mail" href="mailto:ady23617@gmail.com">ady23617@gmail.com</a>
-      <div class="socials">
-        <a class="social" href="#contact" data-open-contact>Get in touch ↗</a>
-        <a class="social" href="https://www.linkedin.com/in/akshay-yadav-a412a2147/" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="social" href="https://github.com/Akshay646" target="_blank" rel="noopener">GitHub ↗</a>
-        <a class="social" href="tel:+919850775487">+91 98507 75487</a>
-      </div>
-      <div class="foot">
-        <span>© <span id="year">2026</span> Akshay Yadav · Pune, India</span>
-        <span class="mono">Designed &amp; built as a systems schematic</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ CONTACT MODAL ============================ -->
-  <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="cmTitle" hidden>
-    <div class="modal-card">
-      <button class="modal-close" id="cmClose" type="button" aria-label="Close">✕</button>
-      <span class="eyebrow">Get in touch</span>
-      <h3 id="cmTitle">Let's talk.</h3>
-      <p class="modal-sub">Pick whatever's easiest — I'll get back to you quickly.</p>
-
-      <div class="contact-options">
-        <a class="contact-opt" href="https://www.linkedin.com/in/akshay-yadav-a412a2147/" target="_blank" rel="noopener">
-          <span class="co-icon li" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.78v2.2h.07c.67-1.2 2.3-2.46 4.73-2.46 5.06 0 6 3.33 6 7.66V24h-5v-7.4c0-1.77-.03-4.05-2.47-4.05-2.47 0-2.85 1.93-2.85 3.92V24h-5V8z"/></svg>
-          </span>
-          <span class="co-text"><b>LinkedIn</b><small>in/akshay-yadav</small></span>
-          <span class="co-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a class="contact-opt" href="mailto:ady23617@gmail.com">
-          <span class="co-icon mail" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
-          </span>
-          <span class="co-text"><b>Email</b><small>ady23617@gmail.com</small></span>
-          <span class="co-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a class="contact-opt" href="tel:+919850775487">
-          <span class="co-icon tel" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.66A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92z"/></svg>
-          </span>
-          <span class="co-text"><b>Call or text</b><small>+91 98507 75487</small></span>
-          <span class="co-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+    <div class="bill-stats">
+      <div><b>4<i>+</i></b><span>Years shipping production software</span></div>
+      <div><b>50<i>%</i></b><span>Lower integration complexity</span></div>
+      <div><b>300K<i>+</i></b><span>Entities matched by semantic search</span></div>
+      <div><b>70<i>%</i></b><span>Manual modelling effort removed</span></div>
     </div>
   </div>
+</header>
 
-  <script>
+<main class="rails" id="rails"></main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-links">
+      <a class="sl" href="mailto:ady23617@gmail.com">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4.24l-8 4.99-8-4.99V6l8 5 8-5z"/></svg>ady23617@gmail.com</a>
+      <a class="sl" href="https://www.linkedin.com/in/akshay-yadav-a412a2147/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.75-1.95 4 0 4.4 2.5 4.4 5.8V21h-4v-5.2c0-1.25-.02-2.85-1.8-2.85-1.8 0-2.2 1.35-2.2 2.75V21H9z"/></svg>LinkedIn</a>
+      <a class="sl" href="https://github.com/Akshay646" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0112 6.8c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>GitHub</a>
+      <a class="sl" href="tel:+919850775487">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.57.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg>+91 98507 75487</a>
+    </div>
+    <div class="foot-bar">
+      <span>© <span id="yr"></span> Akshay Yadav · Pune, India</span>
+      <span class="r">Built as a browse experience, not a PDF.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" role="dialog" aria-modal="true" hidden>
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
 /* ============================================================
-   Akshay Yadav — Portfolio interactions
+   Motifs — one per row, drawn inline so the file stays standalone
    ============================================================ */
-(function () {
-  "use strict";
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const M = {
+  exp:`<svg class="motif" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#fff" stroke-width="1.5" opacity=".55"><path d="M20 140h60l24-44 26 70 28-92 24 60h118"/></g><g fill="#fff" opacity=".8"><circle cx="80" cy="140" r="4"/><circle cx="130" cy="166" r="4"/><circle cx="158" cy="74" r="5"/><circle cx="182" cy="134" r="4"/></g></svg>`,
+  build:`<svg class="motif" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#fff" stroke-width="1.6" opacity=".5"><rect x="26" y="66" width="74" height="46" rx="9"/><rect x="220" y="66" width="74" height="46" rx="9"/><path d="M100 89h120" stroke-dasharray="6 7"/></g><g fill="#fff"><circle cx="134" cy="89" r="5" opacity=".9"/><circle cx="166" cy="89" r="4" opacity=".55"/><circle cx="196" cy="89" r="3" opacity=".3"/></g></svg>`,
+  own:`<svg class="motif" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><circle cx="160" cy="90" r="56" fill="none" stroke="#fff" stroke-width="1.4" opacity=".4" stroke-dasharray="5 9"/><g fill="none" stroke="#fff" stroke-width="1.6" opacity=".6"><circle cx="160" cy="34" r="12"/><circle cx="213" cy="71" r="12"/><circle cx="193" cy="134" r="12"/><circle cx="127" cy="134" r="12"/><circle cx="107" cy="71" r="12"/></g><circle cx="160" cy="90" r="5" fill="#fff" opacity=".85"/></svg>`,
+  kit:`<svg class="motif" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><g fill="#fff"><rect x="40" y="46" width="94" height="17" rx="8" opacity=".75"/><rect x="40" y="76" width="140" height="17" rx="8" opacity=".5"/><rect x="40" y="106" width="110" height="17" rx="8" opacity=".3"/></g><g fill="none" stroke="#fff" stroke-width="1.5" opacity=".5"><rect x="206" y="44" width="76" height="76" rx="12"/><path d="M206 82h76M244 44v76"/></g></svg>`,
+  work:`<svg class="motif" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#fff" stroke-width="1.5" opacity=".5"><path d="M60 54l70 36-70 36M196 90h74"/></g><g fill="none" stroke="#fff" stroke-width="1.7" opacity=".65"><circle cx="160" cy="90" r="26"/></g><g fill="#fff" opacity=".8"><circle cx="60" cy="54" r="5"/><circle cx="60" cy="126" r="5"/><circle cx="270" cy="90" r="5"/></g></svg>`,
+  edu:`<svg class="motif" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#fff" stroke-width="1.7" opacity=".6"><path d="M160 46l76 32-76 32-76-32z"/><path d="M110 92v34c0 10 22 18 50 18s50-8 50-18V92"/><path d="M236 78v38"/></g></svg>`
+};
+</script>
+<script>
+/* ============================================================
+   Everything on the page comes from here.
+   Tiles show a title + a two-line hook. Full text lives in the
+   sheet, so nothing is ever clipped.
+   ============================================================ */
 
-  /* ---------------- Nav scroll state ---------------- */
-  const nav = document.querySelector(".nav");
-  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 30);
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+const ROWS = [
+{
+  id:'r-exp', title:'Experience', note:'3 roles · 10 highlights', motif:'exp',
+  items:[
+    { g:'g1', pill:'SoftTech · current', hot:true, label:'Multi-tenant integration platform',
+      hook:'One interface in front of many vendor APIs — and 50% less integration work behind it.',
+      tag:'Architecture',
+      meta:['Senior Software Associate','May 2023 — Present','Architecture'],
+      body:`<p>Architected and led a <b>multi-tenant distributed integration platform</b> that abstracts vendor-specific APIs behind standardized service contracts, letting multiple internal products integrate with external platforms through a single interface and <b>reducing integration complexity by 50%</b>.</p>
+            <h3>Why it mattered</h3>
+            <p>Every product that needed an external platform was previously writing its own client, its own auth handling, and its own error semantics. One contract replaced all of that.</p>` },
 
-  /* ============================================================
-     HERO — interactive competency network
-     Nodes = skills/services. Edges = how they connect in real work.
-     Cursor gently repels nodes; hover highlights neighbours.
-     ============================================================ */
-  const canvas = document.getElementById("net");
-  const tip = document.getElementById("nodeTip");
-  if (canvas) {
-    const ctx = canvas.getContext("2d");
-    let W, H, dpr;
+    { g:'g1', pill:'SoftTech · current', label:'Tenant-aware OAuth orchestration',
+      hook:'Third-party access tokens never reach the browser. Not once.',
+      tag:'Security',
+      meta:['Senior Software Associate','May 2023 — Present','Security'],
+      body:`<p>Implemented tenant-aware <b>OAuth orchestration</b> using server-side credential management, browser-scoped session identifiers, encrypted token storage, and ownership validation, so <b>third-party access tokens are never exposed to client applications</b>.</p>
+            <h3>The pieces</h3>
+            <ul>
+              <li>Server-side credential management per tenant</li>
+              <li>Browser-scoped session identifiers instead of tokens on the client</li>
+              <li>Encrypted token storage</li>
+              <li>Ownership validation on every exchange</li>
+            </ul>` },
 
-    // label, fixed=hub, radius weight
-    const labels = [
-      { id: "core",  t: "Systems",        hub: true,  r: 7 },
-      { id: "ms",    t: "Microservices",  r: 6 },
-      { id: "fac",   t: "API Facade",     r: 5 },
-      { id: "oauth", t: "OAuth Proxy",    r: 5 },
-      { id: "evt",   t: "Event-Driven",   r: 6 },
-      { id: "graph", t: "Graphs · BFS",   r: 6 },
-      { id: "bim",   t: "CI/CD",          r: 5 },
-      { id: "net",   t: ".NET · C#",      r: 6 },
-      { id: "cloud", t: "Azure · AWS",    r: 5 },
-      { id: "data",  t: "SQL · DynamoDB", r: 4 },
-      { id: "react", t: "React UI",       r: 4 }
-    ];
-    const links = [
-      ["core","ms"],["core","net"],["core","evt"],["core","graph"],
-      ["ms","fac"],["ms","oauth"],["ms","evt"],["ms","cloud"],
-      ["fac","react"],["oauth","cloud"],["evt","react"],
-      ["graph","bim"],["bim","net"],["net","data"],["cloud","data"],
-      ["graph","ms"],["fac","data"]
-    ];
+    { g:'g3', pill:'SoftTech · current', label:'Leading a core product area',
+      hook:'Three developers, one BIM platform capability, discovery through release.',
+      tag:'Leadership',
+      meta:['Senior Software Associate','May 2023 — Present','Leadership'],
+      body:`<p><b>Led 3 developers</b> on a core product area of an enterprise BIM-based project management platform — partnered with customers and product teams to refine requirements, define technical scope, and <b>drive implementation through production release</b>.</p>
+            <p>The delivery loop behind this is broken down in the <b>Product ownership</b> row.</p>` },
 
-    let nodes = [];
-    const mouse = { x: -9999, y: -9999, active: false };
-    let hovered = null;
+    { g:'g3', pill:'SoftTech · current', label:'Observability modernization',
+      hook:'OpenTelemetry and App Insights, so a slow request can actually be traced.',
+      tag:'Observability',
+      meta:['Senior Software Associate','In progress','Observability'],
+      body:`<p>Driving production <b>observability modernization</b> by introducing <b>Azure Monitor OpenTelemetry</b> with Application Insights, enabling end-to-end distributed tracing across .NET microservices with visibility into request flows, dependencies, and failures.</p>
+            <h3>What it unlocks</h3>
+            <ul>
+              <li>One trace ID followed across every service a request touches</li>
+              <li>Dependency timings — which call actually cost the 2 seconds</li>
+              <li>Failures grouped by exception rather than hunted per server</li>
+            </ul>` },
 
-    function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = canvas.clientWidth; H = canvas.clientHeight;
-      canvas.width = W * dpr; canvas.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      seed();
-    }
+    { g:'g5', pill:'SoftTech · current', label:'Semantic search at 300K+ entities',
+      hook:'Embeddings, hierarchical indexing, confidence bands — not a LIKE query.',
+      tag:'Search',
+      meta:['Senior Software Associate','May 2023 — Present','Search · ML-adjacent'],
+      body:`<p>Built a <b>scalable semantic search pipeline</b> using embeddings, cosine similarity, hierarchical indexing, and metadata filtering to match records against candidate sets <b>scaling to 300K+ entities</b>, returning <b>confidence-banded results</b>.</p>
+            <p>Hierarchical scoping compares each record only within its own partition rather than the full set — which is what keeps it viable at that size.</p>` },
 
-    function seed() {
-      if (nodes.length === labels.length) {
-        // keep positions on resize, just clamp
-        nodes.forEach(n => { n.x = Math.min(Math.max(n.x, 40), W - 40); n.y = Math.min(Math.max(n.y, 40), H - 40); });
-        return;
+    { g:'g5', pill:'SoftTech · current', label:'Polling → SignalR push',
+      hook:'From one request per interval to one per actual state change.',
+      tag:'Real-time',
+      meta:['Senior Software Associate','May 2023 — Present','Real-time'],
+      body:`<p>Replaced fixed-interval status polling with <b>SignalR</b> push and asynchronous callbacks across backend and React clients, <b>cutting status requests from one per interval to one per state change</b>.</p>
+            <p>There is a live comparison of the two models in the <b>How I build</b> row.</p>` },
+
+    { g:'g2', pill:'SoftTech · 2022–23', label:'Graph-based tenement detection',
+      hook:'Rooms as nodes, doors as edges, BFS for the rest. 70% of manual work gone.',
+      tag:'Algorithms',
+      meta:['Software Developer - 1','May 2022 — May 2023','Algorithms'],
+      body:`<p>Built a <b>graph-based tenement detection microservice</b> for 3D building models, converting spatial units to connectivity graphs and applying <b>BFS</b> to find connected components — <b>eliminated 70% of manual modeling effort</b>.</p>
+            <p>The animation in <b>How I build</b> walks through exactly this.</p>` },
+
+    { g:'g2', pill:'SoftTech · 2022–23', label:'Desktop → cloud-native migration',
+      hook:'A 3D visualization engine and event-driven digital twin modules.',
+      tag:'Migration',
+      meta:['Software Developer - 1','May 2022 — May 2023','Cloud migration'],
+      body:`<p>Contributed to migration of desktop workflows to cloud-native services, including a <b>3D model visualization engine</b> and event-driven digital twin modules with real-time updates.</p>` },
+
+    { g:'g4', pill:'CCTech · intern', label:'Subscription lifecycle system',
+      hook:'Credit expiry, renewals, and SES notifications that stopped manual edits.',
+      tag:'Billing',
+      meta:['Software Developer Intern','Jan 2022 — May 2022','Centre for Computational Technologies'],
+      body:`<p>Implemented key components of the subscription lifecycle system, including credit expiry/renewal logic and <b>SES-based notification workflows</b>, improving accuracy and reducing manual account updates.</p>` },
+
+    { g:'g4', pill:'CCTech · intern', label:'Simulation API optimisation',
+      hook:'Fewer redundant queries, cached metadata, better throughput under load.',
+      tag:'Performance',
+      meta:['Software Developer Intern','Jan 2022 — May 2022','Performance'],
+      body:`<p>Optimized simulation processing APIs by reducing redundant DB queries and caching static metadata, improving stage-transition latency and increasing throughput under concurrent simulation workloads.</p>` }
+  ]
+},
+{
+  id:'r-build', title:'How I build', note:'2 live demos · click to run', motif:'build',
+  items:[
+    { g:'g1', pill:'Interactive', hot:true, label:'Events vs polling',
+      hook:'Flip the toggle and count the requests on the wire.',
+      tag:'Run it', demo:'poll',
+      meta:['Live demo','Event-driven architecture','Real-time'],
+      body:`<p>One of my favourite refactors: a long-running job that the UI used to poll on a timer. Watch the difference — flip the toggle and count the requests on the wire.</p>` },
+
+    { g:'g1', pill:'Interactive', label:'Graphs · BFS tenements',
+      hook:'A floor plan becomes a graph, then breadth-first search groups it.',
+      tag:'Run it', demo:'bfs',
+      meta:['Live demo','Graph algorithms','BFS'],
+      body:`<p>A real one from my work: given a floor full of rooms, which spaces belong together? I model each room as a node and every door or opening as an edge, then run breadth-first search to pull out the connected components — each one is a tenement.</p>` }
+  ]
+},
+{
+  id:'r-own', title:'Product ownership', note:'The delivery loop · 5 stages', motif:'own',
+  items:[
+    { g:'g3', pill:'Stage 01', label:'Discovery',
+      hook:'Understand the real problem, from first-hand conversations.',
+      tag:'Discovery',
+      meta:['Stage 01 of 05','Delivery loop'],
+      body:`<p>I work from first-hand requirement discussions rather than second-hand tickets, separating what the customer actually needs from how they first described it.</p>` },
+    { g:'g3', pill:'Stage 02', label:'Scope',
+      hook:'Turn open requirements into documented, committed scope.',
+      tag:'Scope',
+      meta:['Stage 02 of 05','Delivery loop'],
+      body:`<p>I partner with the business analyst to convert open requirements into documented, committed scope — pushing back where an ask is under-specified, or where it would cost far more than it returns.</p>` },
+    { g:'g3', pill:'Stage 03', label:'Release line',
+      hook:'Decide what ships first. Cutting liked items is the unthanked part.',
+      tag:'Release',
+      meta:['Stage 03 of 05','Delivery loop'],
+      body:`<p>I set the line for release one: sequenced by dependency, and by what the deployment will actually be judged on. Cutting well-liked items is the part nobody thanks you for.</p>` },
+    { g:'g3', pill:'Stage 04', label:'Breakdown',
+      hook:'Stories become sized, ordered tasks the team can run without me.',
+      tag:'Breakdown',
+      meta:['Stage 04 of 05','Delivery loop'],
+      body:`<p>I break agreed user stories into sized, ordered tasks the team can pick up without me in the room, then lead the area through implementation to release.</p>` },
+    { g:'g3', pill:'Stage 05', label:'Demo',
+      hook:'Demo it, then back the people demoing it to the customer.',
+      tag:'Demo',
+      meta:['Stage 05 of 05','Delivery loop'],
+      body:`<p>I run internal demos through the build, then support the BA in front of the customer at the real one — a good forcing function for finding out whether we built the right thing.</p>
+            <h3>Running alongside</h3>
+            <ul>
+              <li>A phased product roadmap</li>
+              <li>A requirement register mapping scope to delivery phase</li>
+              <li>Recurring progress reporting for leadership</li>
+            </ul>` }
+  ]
+},
+{
+  id:'r-kit', title:'Toolkit', note:'Grouped the way I actually use it', motif:'kit',
+  items:[
+    { g:'g2', pill:'01', label:'Languages', hook:'C#, JavaScript, C++, SQL.', tag:'Core',
+      meta:['Toolkit'], chips:['C#','JavaScript','C++','SQL'],
+      body:`<p>The day-to-day is C# and SQL, with JavaScript across the React work.</p>` },
+    { g:'g1', pill:'02', label:'Backend', hook:'.NET 8, ASP.NET Core, microservices, EF Core, SignalR.', tag:'Primary',
+      meta:['Toolkit','Primary stack'], chips:['.NET 8 / .NET Core','ASP.NET Core','Microservices','Distributed Systems','REST APIs','Entity Framework Core','SignalR','xUnit'],
+      body:`<p>Where most of the work happens — distributed .NET services, REST contracts, and the testing around them.</p>` },
+    { g:'g2', pill:'03', label:'System design', hook:'API design, event-driven, OAuth, multi-tenancy.', tag:'Design',
+      meta:['Toolkit'], chips:['API Design','Event-Driven','OAuth','Multi-Tenancy'],
+      body:`<p>The decisions that outlive the code: contracts, boundaries, and who is allowed to do what.</p>` },
+    { g:'g2', pill:'04', label:'Cloud & tooling', hook:'Azure, AWS, IIS, CI/CD, Git.', tag:'Infra',
+      meta:['Toolkit'], chips:['Azure Functions','Azure Storage','AWS EC2','S3','Lambda','IIS','CI/CD','Git'],
+      body:`<p>Deployments run on Windows and IIS today, with Azure and AWS services around them.</p>` },
+    { g:'g2', pill:'05', label:'Frontend & data', hook:'React, HTML/CSS, MS SQL, DynamoDB.', tag:'Full-stack',
+      meta:['Toolkit'], chips:['React','HTML/CSS','MS SQL','DynamoDB'],
+      body:`<p>Enough frontend to own a feature end to end, and the data layer underneath it.</p>` },
+    { g:'g5', pill:'06', label:'Observability', hook:'OpenTelemetry, Application Insights, distributed tracing.', tag:'Current focus',
+      meta:['Toolkit','Current focus'], chips:['OpenTelemetry','Azure Application Insights','Distributed Tracing'],
+      body:`<p>The area I am actively modernising in production right now.</p>` },
+    { g:'g5', pill:'07', label:'AI & engineering tools', hook:'AI-assisted development, Copilot, Claude Code, semantic search.', tag:'Newer',
+      meta:['Toolkit'], chips:['AI-assisted Development','GitHub Copilot','Claude Code','Semantic Search'],
+      body:`<p>Used as part of the normal workflow, not as a novelty.</p>` },
+    { g:'g3', pill:'08', label:'Leadership', hook:'Discovery, scoping, roadmapping, demos, reporting.', tag:'Product',
+      meta:['Toolkit','Product side'], chips:['Requirement Discovery','Scope Definition','Prioritisation','Release Planning','Roadmapping','User Stories','Task Breakdown','Technical Scoping','Estimation','Feature Ownership','Product Demos','Leadership Reporting'],
+      body:`<p>The non-code half of owning a product area.</p>` }
+  ]
+},
+{
+  id:'r-work', title:'Work & side builds', note:'2 projects', motif:'work',
+  items:[
+    { g:'g1', pill:'Side build', hot:true, label:'BuildNBeyond',
+      hook:'An engineering reference I built from my own notes. 12 sections, 124 topics.',
+      tag:'Live', link:'https://akshay646.github.io/buildnbeyond/', linkText:'Open BuildNBeyond', same:true,
+      meta:['Personal project','MVP · still building','HTML · CSS · Vanilla JS'],
+      body:`<p>Wanna be a good software engineer, and <b>build something beyond?</b></p>
+            <p>BuildNBeyond is the reference I wanted to exist — .NET, data, observability and React, written in plain language instead of spec language. Free, no sign-up, works on a phone.</p>
+            <h3>What is in it</h3>
+            <ul>
+              <li>12 sections, each opening with an introduction to the subject</li>
+              <li>124 topics, 145 code samples, 126 links to official docs</li>
+              <li>Progress tracking, a revision list and per-topic notes, saved locally</li>
+              <li>No backend, no build step — one self-contained page that works offline</li>
+            </ul>`,
+      chips:['HTML','CSS','Vanilla JS','No framework','Offline-first','GitHub Pages'] },
+
+    { g:'g4', pill:'Project', label:'News Recommendation App',
+      hook:'Full-stack news platform with a real-time personalised feed.',
+      tag:'GitHub', link:'https://github.com/Akshay646/News-Recommendation', linkText:'View on GitHub',
+      meta:['Full-stack','Node.js · Python · MongoDB'],
+      body:`<p>A full-stack news platform with user authentication and real-time personalized feeds. A lightweight recommendation service scores and ranks articles by content similarity and user interests, served back to the web app over REST in real time.</p>`,
+      chips:['Node.js','Express','Python','MongoDB','JavaScript'] }
+  ]
+},
+{
+  id:'r-edu', title:'Education', note:'2 degrees', motif:'edu',
+  items:[
+    { g:'g2', pill:'2022', label:"Master's in Computer Science",
+      hook:'University of Pune · 9.73 / 10 CGPA', tag:'9.73 CGPA',
+      meta:['University of Pune','Oct 2022','9.73 / 10 CGPA'],
+      body:`<p><b>Master's in Computer Science</b>, University of Pune — completed October 2022 with a <b>9.73 / 10 CGPA</b>.</p>` },
+    { g:'g2', pill:'2020', label:"Bachelor's in Information Technology",
+      hook:'University of Mumbai · 9.20 / 10 CGPA', tag:'9.20 CGPA',
+      meta:['University of Mumbai','May 2020','9.20 / 10 CGPA'],
+      body:`<p><b>Bachelor's in Information Technology</b>, University of Mumbai — completed May 2020 with a <b>9.20 / 10 CGPA</b>.</p>` }
+  ]
+}
+];
+
+const EXTRA = {
+  intro:{
+    g:'g1', motif:'exp', label:'Akshay Yadav',
+    meta:['Senior Software Engineer','Pune, India','4+ years'],
+    body:`<p>Senior software engineer with <b>4+ years</b> designing, developing, testing and supporting distributed enterprise applications using <b>C# and .NET</b>.</p>
+          <p>Strong hands-on experience in RESTful API development, third-party API integration, microservices, multi-tenant service architecture, relational databases, SQL performance optimization, and secure service boundaries.</p>
+          <p>Experienced in taking <b>ambiguous requirements through technical design and implementation to production release</b> and troubleshooting. Additional experience with React, Azure services, event-driven systems, real-time communication, and AI-assisted development.</p>
+          <h3>What I am doing right now</h3>
+          <ul>
+            <li>Leading a core product area of an enterprise BIM-based platform, with 3 developers</li>
+            <li>Modernising production observability with OpenTelemetry and Application Insights</li>
+            <li>Running a multi-tenant integration platform used across internal products</li>
+          </ul>`
+  },
+  contact:{
+    g:'g1', motif:'build', label:"Let's talk.",
+    meta:['Pune, India','Usually replies quickly'],
+    body:`<p>Pick whatever is easiest — email, LinkedIn, or a call.</p>`,
+    links:[
+      ['Email','mailto:ady23617@gmail.com','ady23617@gmail.com'],
+      ['LinkedIn','https://www.linkedin.com/in/akshay-yadav-a412a2147/','in/akshay-yadav'],
+      ['GitHub','https://github.com/Akshay646','github.com/Akshay646'],
+      ['Call or text','tel:+919850775487','+91 98507 75487']
+    ]
+  }
+};
+</script>
+<script>
+(function(){
+"use strict";
+const rm = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)").matches : false;
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+/* ---------------- index every item for lookup ---------------- */
+const INDEX = {};
+ROWS.forEach(r => r.items.forEach((it, i) => { it._id = r.id + '-' + i; it._motif = r.motif; INDEX[it._id] = it; }));
+Object.keys(EXTRA).forEach(k => { EXTRA[k]._id = k; INDEX[k] = EXTRA[k]; });
+
+/* ---------------- render rails ---------------- */
+function tile(it){
+  return '<button class="tile" data-open="'+it._id+'">'+
+    '<span class="art '+it.g+'">'+ (M[it._motif]||'') +
+      (it.pill?'<span class="pill'+(it.hot?' hot':'')+'">'+esc(it.pill)+'</span>':'')+
+      '<span class="lbl">'+esc(it.label)+'</span>'+
+    '</span>'+
+    '<span class="foot"><p>'+esc(it.hook||'')+'</p>'+
+      '<span class="row"><span class="go">▸</span>'+
+      '<span class="tag">'+esc(it.tag||'Open')+'</span></span>'+
+    '</span></button>';
+}
+document.getElementById('rails').innerHTML = ROWS.map(r =>
+  '<section class="rail" id="'+r.id+'">'+
+    '<div class="rail-h"><h2>'+esc(r.title)+'</h2><em>'+esc(r.note)+'</em>'+
+      '<span class="more">Scroll ›</span></div>'+
+    '<button class="arrow l" data-sc="'+r.id+'" data-d="-1" aria-label="Scroll left" disabled>‹</button>'+
+    '<div class="track" id="t-'+r.id+'">'+ r.items.map(tile).join('') +'</div>'+
+    '<button class="arrow r" data-sc="'+r.id+'" data-d="1" aria-label="Scroll right">›</button>'+
+  '</section>').join('');
+
+/* ---------------- rail arrows ---------------- */
+ROWS.forEach(r => {
+  const track = document.getElementById('t-'+r.id);
+  const sec = document.getElementById(r.id);
+  const L = sec.querySelector('.arrow.l'), R = sec.querySelector('.arrow.r');
+  const sync = () => {
+    const max = track.scrollWidth - track.clientWidth - 2;
+    L.disabled = track.scrollLeft <= 2;
+    R.disabled = track.scrollLeft >= max || max <= 0;
+  };
+  [L,R].forEach(b => b.addEventListener('click', () => {
+    track.scrollBy({left:(+b.dataset.d)*track.clientWidth*0.82, behavior: rm?'auto':'smooth'});
+  }));
+  track.addEventListener('scroll', sync, {passive:true});
+  addEventListener('resize', sync);
+  sync();
+});
+
+/* ---------------- sheet ---------------- */
+const scrim = document.getElementById('scrim');
+const sheet = document.getElementById('sheet');
+let lastFocus = null, hideT = null, closers = [];
+
+function sheetHTML(it){
+  let h = '<button class="sheet-close" id="sx" aria-label="Close">✕</button>'+
+    '<div class="sheet-hero '+(it.g||'g1')+'">'+(M[it.motif||it._motif]||'')+
+      '<div class="wrap"><h2>'+esc(it.label)+'</h2></div></div>'+
+    '<div class="sheet-body">';
+  if(it.meta) h += '<div class="sheet-meta">'+it.meta.map((m,i)=>'<span class="m'+(i===0?' ok':'')+'">'+esc(m)+'</span>').join('')+'</div>';
+  h += it.body || '';
+  if(it.demo) h += demoHTML(it.demo);
+  if(it.chips) h += '<div class="chips">'+it.chips.map(c=>'<span class="chip">'+esc(c)+'</span>').join('')+'</div>';
+  if(it.links) h += '<div class="chips" style="margin-top:14px">'+it.links.map(l=>
+      '<a class="chip" href="'+l[1]+'"'+(l[1].indexOf('http')===0?' target="_blank" rel="noopener"':'')+'>'+esc(l[0])+' · '+esc(l[2])+'</a>').join('')+'</div>';
+  if(it.link) h += '<a class="sheet-cta" href="'+it.link+'"'+(it.same?'':' target="_blank" rel="noopener"')+'>'+esc(it.linkText||'Open')+' →</a>';
+  return h + '</div>';
+}
+
+function openSheet(id){
+  const it = INDEX[id]; if(!it) return;
+  lastFocus = document.activeElement;
+  clearTimeout(hideT);
+  sheet.innerHTML = sheetHTML(it);
+  scrim.hidden = false;
+  requestAnimationFrame(()=>scrim.classList.add('open'));
+  document.body.classList.add('lock');
+  scrim.scrollTop = 0;
+  sheet.querySelector('#sx').addEventListener('click', closeSheet);
+  sheet.querySelector('#sx').focus();
+  if(it.demo) startDemo(it.demo);
+}
+function closeSheet(){
+  closers.forEach(f=>{ try{f();}catch(e){} }); closers = [];
+  scrim.classList.remove('open');
+  document.body.classList.remove('lock');
+  hideT = setTimeout(()=>{ scrim.hidden = true; sheet.innerHTML=''; }, 280);
+  if(lastFocus) lastFocus.focus();
+}
+scrim.addEventListener('click', e => { if(e.target === scrim) closeSheet(); });
+addEventListener('keydown', e => { if(e.key === 'Escape' && !scrim.hidden) closeSheet(); });
+
+document.addEventListener('click', e => {
+  const o = e.target.closest('[data-open]');
+  if(o){ openSheet(o.dataset.open); return; }
+  const j = e.target.closest('[data-jump]');
+  if(j){
+    const el = document.getElementById(j.dataset.jump);
+    if(el) el.scrollIntoView({behavior: rm?'auto':'smooth', block:'start'});
+    document.getElementById('tnav').classList.remove('open');
+  }
+});
+
+/* ---------------- chrome ---------------- */
+addEventListener('scroll', ()=>document.getElementById('top').classList.toggle('solid', scrollY>40), {passive:true});
+document.getElementById('burger').addEventListener('click', ()=>document.getElementById('tnav').classList.toggle('open'));
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ============================================================
+   BILLBOARD — competency network
+   ============================================================ */
+const canvas = document.getElementById('net');
+if(canvas){
+  const ctx = canvas.getContext('2d');
+  let W,H,dpr,nodes=[],hovered=null;
+  const mouse={x:-9999,y:-9999,active:false};
+  const labels=[
+    {id:'core',t:'Systems',hub:true,r:7},{id:'ms',t:'Microservices',r:6},
+    {id:'fac',t:'API Facade',r:5},{id:'oauth',t:'OAuth',r:5},
+    {id:'evt',t:'Event-Driven',r:6},{id:'graph',t:'Graphs · BFS',r:6},
+    {id:'otel',t:'OpenTelemetry',r:5},{id:'net',t:'.NET · C#',r:6},
+    {id:'cloud',t:'Azure · AWS',r:5},{id:'data',t:'SQL',r:4},{id:'react',t:'React',r:4}
+  ];
+  const links=[['core','ms'],['core','net'],['core','evt'],['core','graph'],['ms','fac'],
+    ['ms','oauth'],['ms','evt'],['ms','cloud'],['fac','react'],['oauth','cloud'],
+    ['evt','react'],['graph','otel'],['otel','net'],['net','data'],['cloud','data'],
+    ['graph','ms'],['fac','data'],['otel','ms']];
+
+  function resize(){
+    dpr=Math.min(devicePixelRatio||1,2); W=canvas.clientWidth; H=canvas.clientHeight;
+    canvas.width=W*dpr; canvas.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(nodes.length!==labels.length) seed(); else nodes.forEach(n=>{
+      n.x=Math.min(Math.max(n.x,40),W-40); n.y=Math.min(Math.max(n.y,40),H-40);
+    });
+  }
+  function seed(){
+    nodes=labels.map((l,i)=>{
+      const a=(i/labels.length)*Math.PI*2, sp=l.hub?0:0.20+Math.random()*0.26;
+      const hx=W*(0.56+Math.cos(a)*sp), hy=H*(0.46+Math.sin(a)*sp);
+      return Object.assign({},l,{x:hx,y:hy,vx:0,vy:0,hx:hx,hy:hy,phase:Math.random()*6.28});
+    });
+  }
+  const nb = id => { const s=new Set(); links.forEach(([a,b])=>{ if(a===id)s.add(b); if(b===id)s.add(a); }); return s; };
+
+  function frame(time){
+    nodes.forEach(n=>{
+      const fx=n.hx+Math.cos(time/2600+n.phase)*(n.hub?6:24);
+      const fy=n.hy+Math.sin(time/3100+n.phase)*(n.hub?6:24);
+      n.vx+=(fx-n.x)*0.012; n.vy+=(fy-n.y)*0.012;
+      if(mouse.active){
+        const dx=n.x-mouse.x, dy=n.y-mouse.y, d2=dx*dx+dy*dy, R=150;
+        if(d2<R*R){ const d=Math.sqrt(d2)||1, f=(1-d/R)*2.6; n.vx+=(dx/d)*f; n.vy+=(dy/d)*f; }
       }
-      nodes = labels.map((l, i) => {
-        const a = (i / labels.length) * Math.PI * 2;
-        const spread = l.hub ? 0 : 0.22 + Math.random() * 0.3;
-        return {
-          ...l,
-          x: W * (0.5 + Math.cos(a) * spread) + (Math.random() - 0.5) * 60,
-          y: H * (0.5 + Math.sin(a) * spread) + (Math.random() - 0.5) * 60,
-          vx: 0, vy: 0,
-          hx: W * (0.5 + Math.cos(a) * (l.hub ? 0 : spread)), // home
-          hy: H * (0.5 + Math.sin(a) * (l.hub ? 0 : spread)),
-          phase: Math.random() * Math.PI * 2
-        };
-      });
-    }
-
-    function neighbours(id) {
-      const set = new Set();
-      links.forEach(([a, b]) => { if (a === id) set.add(b); if (b === id) set.add(a); });
-      return set;
-    }
-
-    function tickPhysics(time) {
-      nodes.forEach(n => {
-        // gentle float around home
-        const fx = n.hx + Math.cos(time / 2600 + n.phase) * (n.hub ? 6 : 26);
-        const fy = n.hy + Math.sin(time / 3100 + n.phase) * (n.hub ? 6 : 26);
-        n.vx += (fx - n.x) * 0.012;
-        n.vy += (fy - n.y) * 0.012;
-
-        // cursor repulsion
-        if (mouse.active) {
-          const dx = n.x - mouse.x, dy = n.y - mouse.y;
-          const d2 = dx * dx + dy * dy;
-          const R = 150;
-          if (d2 < R * R) {
-            const d = Math.sqrt(d2) || 1;
-            const f = (1 - d / R) * 2.6;
-            n.vx += (dx / d) * f;
-            n.vy += (dy / d) * f;
-          }
-        }
-        n.vx *= 0.86; n.vy *= 0.86;
-        n.x += n.vx; n.y += n.vy;
-      });
-    }
-
-    function draw(time) {
-      ctx.clearRect(0, 0, W, H);
-      const map = Object.fromEntries(nodes.map(n => [n.id, n]));
-      const hot = hovered ? neighbours(hovered) : null;
-
-      // edges
-      links.forEach(([a, b]) => {
-        const na = map[a], nb = map[b];
-        const lit = hovered && (a === hovered || b === hovered);
+      n.vx*=0.86; n.vy*=0.86; n.x+=n.vx; n.y+=n.vy;
+    });
+    ctx.clearRect(0,0,W,H);
+    const map={}; nodes.forEach(n=>map[n.id]=n);
+    const hot = hovered?nb(hovered):null;
+    links.forEach(([a,b])=>{
+      const na=map[a], nbn=map[b], lit=hovered&&(a===hovered||b===hovered);
+      ctx.beginPath(); ctx.moveTo(na.x,na.y); ctx.lineTo(nbn.x,nbn.y);
+      ctx.strokeStyle=lit?'rgba(229,9,20,.9)':'rgba(190,190,205,.14)';
+      ctx.lineWidth=lit?1.5:0.8; ctx.stroke();
+      if(!rm){
+        const t=((time/2200)+(a.charCodeAt(0)+b.charCodeAt(0))/30)%1;
         ctx.beginPath();
-        ctx.moveTo(na.x, na.y);
-        ctx.lineTo(nb.x, nb.y);
-        ctx.strokeStyle = lit ? "rgba(59,140,255,0.85)" : "rgba(96,130,178,0.18)";
-        ctx.lineWidth = lit ? 1.4 : 0.8;
-        ctx.stroke();
-
-        // travelling pulse along edges (data flow)
-        if (!reduceMotion) {
-          const t = ((time / 2200) + (a.charCodeAt(0) + b.charCodeAt(0)) / 30) % 1;
-          const px = na.x + (nb.x - na.x) * t;
-          const py = na.y + (nb.y - na.y) * t;
-          ctx.beginPath();
-          ctx.arc(px, py, lit ? 2.4 : 1.4, 0, Math.PI * 2);
-          ctx.fillStyle = lit ? "rgba(246,166,35,0.95)" : "rgba(59,140,255,0.32)";
-          ctx.fill();
-        }
-      });
-
-      // nodes
-      nodes.forEach(n => {
-        const isHover = n.id === hovered;
-        const isNeighbour = hot && hot.has(n.id);
-        const active = isHover || isNeighbour || !hovered;
-        const r = n.r + (isHover ? 3 : 0);
-
-        if (active) {
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, r + 8, 0, Math.PI * 2);
-          ctx.fillStyle = n.hub ? "rgba(246,166,35,0.10)" : "rgba(59,140,255,0.10)";
-          ctx.fill();
-        }
-
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = n.hub ? "#F6A623" : (active ? "#3B8CFF" : "#33486a");
-        ctx.fill();
-        ctx.lineWidth = 1.5;
-        ctx.strokeStyle = "rgba(10,16,24,0.9)";
-        ctx.stroke();
-
-        // hub always labelled
-        if (n.hub) {
-          ctx.font = "600 13px 'Space Grotesk', sans-serif";
-          ctx.fillStyle = "rgba(234,241,251,0.92)";
-          ctx.textAlign = "center";
-          ctx.fillText(n.t, n.x, n.y - r - 12);
-        }
-      });
-    }
-
-    let raf;
-    function loop(time) {
-      tickPhysics(time);
-      draw(time);
-      raf = requestAnimationFrame(loop);
-    }
-
-    // pointer
-    canvas.addEventListener("pointermove", e => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-      mouse.active = true;
-
-      // hover detection
-      hovered = null;
-      let best = 22 * 22;
-      nodes.forEach(n => {
-        const dx = n.x - mouse.x, dy = n.y - mouse.y;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < best) { best = d2; hovered = n.id; }
-      });
-      if (hovered) {
-        const n = nodes.find(x => x.id === hovered);
-        tip.style.left = (rect.left + n.x) + "px";
-        tip.style.top = (rect.top + n.y) + "px";
-        tip.innerHTML = '<span class="k">●</span> ' + n.t;
-        tip.style.opacity = "1";
-        canvas.style.cursor = "pointer";
-      } else {
-        tip.style.opacity = "0";
-        canvas.style.cursor = "default";
+        ctx.arc(na.x+(nbn.x-na.x)*t, na.y+(nbn.y-na.y)*t, lit?2.5:1.4, 0, 6.3);
+        ctx.fillStyle=lit?'#fff':'rgba(229,9,20,.45)'; ctx.fill();
       }
     });
-    canvas.addEventListener("pointerleave", () => {
-      mouse.active = false; mouse.x = mouse.y = -9999; hovered = null;
-      tip.style.opacity = "0"; canvas.style.cursor = "default";
+    nodes.forEach(n=>{
+      const isH=n.id===hovered, isN=hot&&hot.has(n.id), act=isH||isN||!hovered, r=n.r+(isH?3:0);
+      if(act){ ctx.beginPath(); ctx.arc(n.x,n.y,r+8,0,6.3);
+        ctx.fillStyle=n.hub?'rgba(229,9,20,.16)':'rgba(255,255,255,.07)'; ctx.fill(); }
+      ctx.beginPath(); ctx.arc(n.x,n.y,r,0,6.3);
+      ctx.fillStyle=n.hub?'#E50914':(act?'#E8E8EE':'#4A4A54'); ctx.fill();
+      ctx.lineWidth=1.5; ctx.strokeStyle='rgba(11,11,14,.9)'; ctx.stroke();
+      if(n.hub||isH){
+        ctx.font="600 13px 'Space Grotesk', sans-serif";
+        ctx.fillStyle='rgba(244,244,247,.95)'; ctx.textAlign='center';
+        ctx.fillText(n.t,n.x,n.y-r-12);
+      }
     });
-    canvas.addEventListener("pointerdown", () => {
-      if (hovered) document.getElementById("experience").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
-    });
-
-    window.addEventListener("resize", resize);
-    resize();
-    if (reduceMotion) { draw(0); } else { raf = requestAnimationFrame(loop); }
+    requestAnimationFrame(frame);
   }
+  canvas.addEventListener('pointermove', e=>{
+    const rect=canvas.getBoundingClientRect();
+    mouse.x=e.clientX-rect.left; mouse.y=e.clientY-rect.top; mouse.active=true;
+    hovered=null; let best=24*24;
+    nodes.forEach(n=>{ const dx=n.x-mouse.x,dy=n.y-mouse.y,d2=dx*dx+dy*dy; if(d2<best){best=d2;hovered=n.id;} });
+    canvas.style.cursor=hovered?'pointer':'default';
+  });
+  canvas.addEventListener('pointerleave',()=>{ mouse.active=false; mouse.x=mouse.y=-9999; hovered=null; });
+  addEventListener('resize',resize);
+  resize();
+  if(rm){ /* static */ } else requestAnimationFrame(frame);
+}
 
-  /* ============================================================
-     Scroll reveals
-     ============================================================ */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(en => {
-      if (en.isIntersecting) {
-        const el = en.target;
-        const delay = el.dataset.delay ? parseInt(el.dataset.delay, 10) : 0;
-        setTimeout(() => el.classList.add("in"), reduceMotion ? 0 : delay);
-        io.unobserve(el);
-      }
-    });
-  }, { threshold: 0.18 });
-  document.querySelectorAll(".tl-item, .skill-card, .edu-card").forEach(el => io.observe(el));
-
-  /* ============================================================
-     Animated counters
-     ============================================================ */
-  const fmt = (v, dec) => dec ? v.toFixed(dec) : Math.round(v).toString();
-  const counterIO = new IntersectionObserver((entries) => {
-    entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      const el = en.target;
-      const target = parseFloat(el.dataset.count);
-      const dec = parseInt(el.dataset.dec || "0", 10);
-      const dur = 1300;
-      const start = performance.now();
-      const step = (now) => {
-        const p = Math.min((now - start) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.firstChild.textContent = fmt(target * eased, dec);
-        if (p < 1) requestAnimationFrame(step);
-        else el.firstChild.textContent = fmt(target, dec);
-      };
-      if (reduceMotion) el.firstChild.textContent = fmt(target, dec);
-      else requestAnimationFrame(step);
-      counterIO.unobserve(el);
-    });
-  }, { threshold: 0.6 });
-  document.querySelectorAll("[data-count]").forEach(el => counterIO.observe(el));
-
-  /* ============================================================
-     PRODUCT OWNERSHIP — the delivery loop
-     Five stages on a closed ring: discovery → scope → release line
-     → breakdown → demo → back to discovery. Auto-advances once the
-     section is in view; any interaction hands control to the reader.
-     ============================================================ */
-  const loopSteps = document.getElementById("loopSteps");
-  if (loopSteps) {
-    const stages = [
-      {
-        short: "Discovery",
-        title: "Understand the real problem",
-        body: "I work from first-hand requirement discussions rather than second-hand tickets, separating what the customer actually needs from how they first described it."
-      },
-      {
-        short: "Scope",
-        title: "Turn it into agreed scope",
-        body: "I partner with the business analyst to convert open requirements into documented, committed scope — pushing back where an ask is under-specified, or where it would cost far more than it returns."
-      },
-      {
-        short: "Release line",
-        title: "Decide what ships first",
-        body: "I set the line for release one: sequenced by dependency, and by what the deployment will actually be judged on. Cutting well-liked items is the part nobody thanks you for."
-      },
-      {
-        short: "Breakdown",
-        title: "Translate scope into work",
-        body: "I break agreed user stories into sized, ordered tasks the team can pick up without me in the room, then lead the area through implementation to release."
-      },
-      {
-        short: "Demo",
-        title: "Demo it, then back the people demoing it",
-        body: "I run internal demos through the build, then support the BA in front of the customer at the real one — a good forcing function for finding out whether we built the right thing."
-      }
-    ];
-
-    const stepBtns = [...loopSteps.querySelectorAll(".step")];
-    const svgNodes = [...document.querySelectorAll(".loop-svg .lnode")];
-    const detail = document.getElementById("loopDetail");
-    const idxEl = document.getElementById("loopIdx");
-    const titleEl = document.getElementById("loopTitle");
-    const bodyEl = document.getElementById("loopBody");
-    const coreT = document.getElementById("loopCoreTitle");
-    const coreM = document.getElementById("loopCoreMeta");
-    const hintEl = document.querySelector(".loop-hint");
-
-    let current = 0, timer = null, swapT = null, taken = false;
-    const pad = (n) => String(n + 1).padStart(2, "0");
-
-    function select(i, byUser) {
-      if (byUser) {
-        taken = true;
-        clearInterval(timer); timer = null;
-        if (hintEl) hintEl.textContent = "stage " + pad(i) + " / 05";
-      }
-      if (i === current && byUser) return;
-      current = i;
-
-      stepBtns.forEach((b, n) => {
-        b.classList.toggle("active", n === i);
-        b.setAttribute("aria-selected", n === i ? "true" : "false");
-      });
-      svgNodes.forEach((g, n) => g.classList.toggle("on", n === i));
-      if (coreT) coreT.textContent = stages[i].short;
-      if (coreM) coreM.textContent = "STAGE " + pad(i) + " / 05";
-
-      // fade the detail panel across the swap
-      clearTimeout(swapT);
-      detail.classList.add("fade");
-      swapT = setTimeout(() => {
-        idxEl.textContent = "STAGE " + pad(i);
-        titleEl.textContent = stages[i].title;
-        bodyEl.textContent = stages[i].body;
-        detail.classList.remove("fade");
-      }, reduceMotion ? 0 : 190);
-    }
-
-    stepBtns.forEach(b => b.addEventListener("click", () => select(parseInt(b.dataset.stage, 10), true)));
-    svgNodes.forEach(g => g.addEventListener("click", () => select(parseInt(g.dataset.stage, 10), true)));
-
-    // keyboard: arrow keys walk the loop
-    loopSteps.addEventListener("keydown", (e) => {
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-      e.preventDefault();
-      const next = e.key === "ArrowRight"
-        ? (current + 1) % stages.length
-        : (current - 1 + stages.length) % stages.length;
-      select(next, true);
-      stepBtns[next].focus();
-    });
-
-    const loopIO = new IntersectionObserver((es) => {
-      es.forEach(e => {
-        if (e.isIntersecting && !taken && !timer && !reduceMotion) {
-          timer = setInterval(() => select((current + 1) % stages.length, false), 3400);
-        } else if (!e.isIntersecting && timer) {
-          clearInterval(timer); timer = null;
-        }
-      });
-    }, { threshold: 0.35 });
-    loopIO.observe(document.getElementById("product"));
-
-    select(0, false);
+/* ============================================================
+   DEMOS — mounted inside the sheet, torn down on close
+   ============================================================ */
+function demoHTML(kind){
+  if(kind==='poll'){
+    return '<div class="demo"><div class="demo-bar">'+
+      '<div class="toggle"><button data-mode="poll">Polling</button><button data-mode="event" class="active">Event-driven</button></div>'+
+      '<div class="readout">requests: <b id="dReq">0</b> · wasted: <b id="dWaste">0</b> · UI update: <b class="good" id="dLat">real-time</b></div>'+
+      '</div><div class="stage"><canvas id="dCanvas"></canvas></div>'+
+      '<div class="legend"><span><i style="background:#E8E8EE"></i> request</span>'+
+      '<span><i style="background:#5A5A66"></i> wasted poll</span>'+
+      '<span><i style="background:#E50914"></i> event pushed on change</span></div></div>';
   }
+  return '<div class="demo"><div class="demo-bar">'+
+    '<div class="steps" id="tSteps">'+
+      '<span class="step"><span class="n">1</span> Floor plan</span>'+
+      '<span class="step"><span class="n">2</span> Openings</span>'+
+      '<span class="step"><span class="n">3</span> BFS grouping</span>'+
+      '<span class="step"><span class="n">4</span> Tenements</span>'+
+    '</div><button class="replay" id="tReplay">↻ Replay</button>'+
+    '</div><div class="stage tall"><canvas id="tCanvas"></canvas></div>'+
+    '<div class="legend"><span class="mono" id="tRead" style="color:var(--fg)">Reading the floor plan…</span>'+
+    '<span><i style="background:#E50914"></i><i style="background:#E8E8EE;margin-left:-2px"></i><i style="background:#46D369;margin-left:-2px"></i> tenements</span></div></div>';
+}
 
-  /* ============================================================
-     SIGNATURE DEMO — Event-driven vs Polling
-     Shows why he replaced polling with an event-driven workflow:
-     polling = constant wasted requests + latency; events = fire on change.
-     ============================================================ */
-  const dc = document.getElementById("demoCanvas");
-  if (dc) {
-    const x = dc.getContext("2d");
-    let DW, DH, ddpr;
-    let mode = "event"; // 'poll' | 'event'
-    let reqs = 0, wasted = 0;
-    const reqEl = document.getElementById("demoReqs");
-    const wasteEl = document.getElementById("demoWaste");
-    const latEl = document.getElementById("demoLat");
+function startDemo(kind){ kind==='poll' ? pollDemo() : bfsDemo(); }
 
-    function dResize() {
-      ddpr = Math.min(window.devicePixelRatio || 1, 2);
-      DW = dc.clientWidth; DH = dc.clientHeight;
-      dc.width = DW * ddpr; dc.height = DH * ddpr;
-      x.setTransform(ddpr, 0, 0, ddpr, 0, 0);
-    }
-
-    const client = () => ({ x: DW * 0.16, y: DH / 2 });
-    const server = () => ({ x: DW * 0.84, y: DH / 2 });
-    let pulses = []; // {t, dir, kind}
-    let lastPoll = 0;
-    let nextEvent = 0;
-    let jobDone = false;
-    let jobTimer = 0;
-
-    function spawnPoll(time) {
-      pulses.push({ start: time, dur: 900, dir: 1, kind: "poll" });
-      reqs++;
-    }
-    function spawnEvent(time) {
-      pulses.push({ start: time, dur: 900, dir: -1, kind: "event" });
-      reqs++;
-    }
-
-    function dDraw(time) {
-      x.clearRect(0, 0, DW, DH);
-      const c = client(), s = server();
-
-      // schedule traffic
-      if (mode === "poll") {
-        if (time - lastPoll > 700) { spawnPoll(time); lastPoll = time; }
-      } else {
-        if (time > nextEvent) {
-          spawnEvent(time);
-          nextEvent = time + 1600 + Math.random() * 1800; // events only when something changes
-        }
-      }
-
-      // connection line
-      x.strokeStyle = "rgba(96,130,178,0.25)";
-      x.lineWidth = 1; x.setLineDash([5, 6]);
-      x.beginPath(); x.moveTo(c.x, c.y); x.lineTo(s.x, s.y); x.stroke();
-      x.setLineDash([]);
-
-      // pulses
-      pulses = pulses.filter(p => time - p.start < p.dur);
-      pulses.forEach(p => {
-        const t = (time - p.start) / p.dur;
-        const fromX = p.dir === 1 ? c.x : s.x;
-        const toX = p.dir === 1 ? s.x : c.x;
-        const px = fromX + (toX - fromX) * t;
-        const isWaste = p.kind === "poll" && !jobDone; // polling before job ready = wasted
-        if (p.kind === "poll" && t > 0.98) { if (!jobDone) wasted++; }
-        x.beginPath();
-        x.arc(px, c.y, 5, 0, Math.PI * 2);
-        x.fillStyle = p.kind === "event" ? "#F6A623" : (isWaste ? "rgba(123,143,170,0.7)" : "#3B8CFF");
-        x.fill();
-      });
-
-      // nodes
-      function box(p, label, color) {
-        const w = 92, h = 54;
-        x.fillStyle = "rgba(17,30,49,0.95)";
-        x.strokeStyle = color; x.lineWidth = 1.5;
-        roundRect(x, p.x - w / 2, p.y - h / 2, w, h, 10);
-        x.fill(); x.stroke();
-        x.fillStyle = "#EAF1FB";
-        x.font = "600 13px 'Space Grotesk', sans-serif";
-        x.textAlign = "center"; x.textBaseline = "middle";
-        x.fillText(label, p.x, p.y - 6);
-        x.font = "10px 'JetBrains Mono', monospace";
-        x.fillStyle = "#8FA7C9";
-        x.fillText(p.x === c.x ? "React UI" : "long job", p.x, p.y + 12);
-      }
-      box(c, "Client", "#3B8CFF");
-      box(s, "Service", mode === "event" ? "#F6A623" : "#3B8CFF");
-
-      // readouts
-      if (reqEl) reqEl.textContent = reqs;
-      if (wasteEl) wasteEl.textContent = mode === "poll" ? wasted : 0;
-      if (latEl) latEl.textContent = mode === "poll" ? "~700ms" : "real-time";
-
-      requestAnimationFrame(dDraw);
-    }
-
-    function roundRect(c, x0, y0, w, h, r) {
-      c.beginPath();
-      c.moveTo(x0 + r, y0);
-      c.arcTo(x0 + w, y0, x0 + w, y0 + h, r);
-      c.arcTo(x0 + w, y0 + h, x0, y0 + h, r);
-      c.arcTo(x0, y0 + h, x0, y0, r);
-      c.arcTo(x0, y0, x0 + w, y0, r);
-      c.closePath();
-    }
-
-    document.querySelectorAll(".toggle button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".toggle button").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        mode = btn.dataset.mode;
-        reqs = 0; wasted = 0; pulses = []; lastPoll = 0; nextEvent = 0;
-      });
+function pollDemo(){
+  const c=document.getElementById('dCanvas'); if(!c) return;
+  const x=c.getContext('2d');
+  let DW,DH,dd,mode='event',reqs=0,wasted=0,pulses=[],lastPoll=0,nextEvent=0,raf;
+  const reqEl=document.getElementById('dReq'),wEl=document.getElementById('dWaste'),lEl=document.getElementById('dLat');
+  function size(){ dd=Math.min(devicePixelRatio||1,2); DW=c.clientWidth; DH=c.clientHeight;
+    c.width=DW*dd; c.height=DH*dd; x.setTransform(dd,0,0,dd,0,0); }
+  function rr(ctx,x0,y0,w,h,r){ ctx.beginPath(); ctx.moveTo(x0+r,y0);
+    ctx.arcTo(x0+w,y0,x0+w,y0+h,r); ctx.arcTo(x0+w,y0+h,x0,y0+h,r);
+    ctx.arcTo(x0,y0+h,x0,y0,r); ctx.arcTo(x0,y0,x0+w,y0,r); ctx.closePath(); }
+  function draw(t){
+    x.clearRect(0,0,DW,DH);
+    const cl={x:DW*0.17,y:DH/2}, sv={x:DW*0.83,y:DH/2};
+    if(mode==='poll'){ if(t-lastPoll>700){ pulses.push({s:t,dur:900,dir:1,k:'poll'}); reqs++; lastPoll=t; } }
+    else if(t>nextEvent){ pulses.push({s:t,dur:900,dir:-1,k:'event'}); reqs++; nextEvent=t+1600+Math.random()*1800; }
+    x.strokeStyle='rgba(190,190,205,.22)'; x.lineWidth=1; x.setLineDash([5,6]);
+    x.beginPath(); x.moveTo(cl.x,cl.y); x.lineTo(sv.x,sv.y); x.stroke(); x.setLineDash([]);
+    pulses=pulses.filter(p=>t-p.s<p.dur);
+    pulses.forEach(p=>{
+      const pr=(t-p.s)/p.dur, fx=p.dir===1?cl.x:sv.x, tx=p.dir===1?sv.x:cl.x;
+      if(p.k==='poll'&&pr>0.98) wasted++;
+      x.beginPath(); x.arc(fx+(tx-fx)*pr, cl.y, 5, 0, 6.3);
+      x.fillStyle=p.k==='event'?'#E50914':(p.k==='poll'?'rgba(120,120,134,.85)':'#E8E8EE'); x.fill();
     });
-
-    window.addEventListener("resize", dResize);
-    dResize();
-    requestAnimationFrame(dDraw);
+    [[cl,'Client','React UI','#E8E8EE'],[sv,'Service','long job',mode==='event'?'#E50914':'#E8E8EE']]
+      .forEach(([p,a,b,col])=>{
+        x.fillStyle='rgba(27,27,33,.96)'; x.strokeStyle=col; x.lineWidth=1.5;
+        rr(x,p.x-46,p.y-27,92,54,10); x.fill(); x.stroke();
+        x.fillStyle='#F4F4F7'; x.font="600 13px 'Space Grotesk', sans-serif";
+        x.textAlign='center'; x.textBaseline='middle'; x.fillText(a,p.x,p.y-6);
+        x.font="10px 'JetBrains Mono', monospace"; x.fillStyle='#A6A6B0'; x.fillText(b,p.x,p.y+12);
+      });
+    if(reqEl) reqEl.textContent=reqs;
+    if(wEl) wEl.textContent=mode==='poll'?wasted:0;
+    if(lEl) lEl.textContent=mode==='poll'?'~700ms':'real-time';
+    raf=requestAnimationFrame(draw);
   }
+  document.querySelectorAll('.toggle button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.toggle button').forEach(o=>o.classList.remove('active'));
+    b.classList.add('active'); mode=b.dataset.mode;
+    reqs=0; wasted=0; pulses=[]; lastPoll=0; nextEvent=0;
+  }));
+  const onR=()=>size(); addEventListener('resize',onR);
+  size(); raf=requestAnimationFrame(draw);
+  closers.push(()=>{ cancelAnimationFrame(raf); removeEventListener('resize',onR); });
+}
 
-  /* ============================================================
-     SIGNATURE DEMO 2 — BFS tenement detection
-     Rooms = nodes, doors/openings = edges. BFS finds the
-     connected components; each component is a tenement.
-     Beats: floor plan → detect openings → BFS grouping → tenements.
-     ============================================================ */
-  const tc = document.getElementById("tenementCanvas");
-  if (tc) {
-    const g = tc.getContext("2d");
-    const COLS = 4, ROWS = 3, CW = 150, CH = 120;
-    const LW = COLS * CW, LH = ROWS * CH;
-
-    // doors are within-tenement connections; cross-tenement walls stay solid
-    const doors = [
-      [0,1],[0,4],[1,5],[4,5],      // tenement 1 (2x2 top-left)
-      [2,3],[2,6],[3,7],[6,7],      // tenement 2 (2x2 top-right)
-      [8,9],[9,10],[10,11]          // tenement 3 (bottom row)
-    ];
-    const doorSet = new Set(doors.map(d => d[0] + "-" + d[1]));
-    const tenements = [
-      { rooms: [0,1,4,5],   color: "#3B8CFF", seed: 0 },
-      { rooms: [2,3,6,7],   color: "#F6A623", seed: 2 },
-      { rooms: [8,9,10,11], color: "#3DD68C", seed: 8 }
-    ];
-
-    const adj = {}; for (let i = 0; i < 12; i++) adj[i] = [];
-    doors.forEach(([a, b]) => { adj[a].push(b); adj[b].push(a); });
-
-    // BFS per component → reveal fraction + colour per room
-    const reveal = {}, colorOf = {};
-    tenements.forEach(t => {
-      const order = [], seen = new Set([t.seed]), q = [t.seed];
-      while (q.length) { const x = q.shift(); order.push(x); adj[x].forEach(y => { if (!seen.has(y)) { seen.add(y); q.push(y); } }); }
-      order.forEach((id, i) => { reveal[id] = order.length > 1 ? i / (order.length - 1) : 0; colorOf[id] = t.color; });
-    });
-
-    const room = (id) => { const c = id % COLS, r = (id / COLS | 0); return { x: c*CW, y: r*CH, w: CW, h: CH, cx: c*CW + CW/2, cy: r*CH + CH/2 }; };
-
-    // all adjacent room pairs (for walls)
-    const pairs = [];
-    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-      const id = r*COLS + c;
-      if (c < COLS-1) pairs.push([id, id+1, "V"]);
-      if (r < ROWS-1) pairs.push([id, id+COLS, "H"]);
-    }
-
-    let TW, TH, tdpr, pad, scale;
-    function tResize() {
-      tdpr = Math.min(window.devicePixelRatio || 1, 2);
-      TW = tc.clientWidth; TH = tc.clientHeight;
-      tc.width = TW * tdpr; tc.height = TH * tdpr; g.setTransform(tdpr, 0, 0, tdpr, 0, 0);
-      const padX = 44, padY = 38;
-      scale = Math.min((TW - padX*2) / LW, (TH - padY*2) / LH);
-      pad = { x: (TW - LW*scale) / 2, y: (TH - LH*scale) / 2 };
-    }
-    const X = lx => pad.x + lx*scale, Y = ly => pad.y + ly*scale, S = v => v*scale;
-    const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
-    const hexA = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`; };
-    function rr(x, y, w, h, r) { g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
-    function seg(x1,y1,x2,y2,a) { g.lineWidth = 2.2; g.strokeStyle = `rgba(176,200,230,${0.55*a})`; g.beginPath(); g.moveTo(X(x1),Y(y1)); g.lineTo(X(x2),Y(y2)); g.stroke(); }
-    function wall(a, b, o, fade) {
-      const ra = room(a);
-      const isDoor = doorSet.has(a+"-"+b) || doorSet.has(b+"-"+a);
-      const gap = 0.42;
-      if (o === "V") {
-        const wx = ra.x + CW;
-        if (!isDoor) seg(wx, ra.y, wx, ra.y+CH, fade);
-        else { seg(wx, ra.y, wx, ra.y+CH*(0.5-gap/2), fade); seg(wx, ra.y+CH*(0.5+gap/2), wx, ra.y+CH, fade); }
-      } else {
-        const wy = ra.y + CH;
-        if (!isDoor) seg(ra.x, wy, ra.x+CW, wy, fade);
-        else { seg(ra.x, wy, ra.x+CW*(0.5-gap/2), wy, fade); seg(ra.x+CW*(0.5+gap/2), wy, ra.x+CW, wy, fade); }
-      }
-    }
-
-    const P0 = 1100, P1 = 2700, P2 = 2700, P3 = 2000, GAP = 1800;
-    const TOTAL = P0 + P1 + P2 + P3 + GAP;
-    let start = 0, rafT = null, started = false;
-    const stepEls = [...document.querySelectorAll("#tenementSteps .step")];
-    const readout = document.getElementById("tenementReadout");
-    const texts = [
-      "Reading the floor plan…",
-      "Detecting openings between adjacent spaces",
-      "Grouping connected spaces with BFS",
-      "3 tenements identified — connected components"
-    ];
-
-    function draw(now) {
-      let t = now - start;
-      if (reduceMotion) t = P0 + P1 + P2 + P3 - 1;
-      else if (t >= TOTAL) { start = now; t = 0; }
-
-      g.clearRect(0, 0, TW, TH);
-      const pFloor = clamp(t / P0, 0, 1);
-      const p1 = clamp((t - P0) / P1, 0, 1);
-      const p2 = clamp((t - P0 - P1) / P2, 0, 1);
-      const p3 = clamp((t - P0 - P1 - P2) / P3, 0, 1);
-      const phase = t < P0 ? 0 : t < P0+P1 ? 1 : t < P0+P1+P2 ? 2 : 3;
-
-      // floor
-      g.globalAlpha = pFloor; g.fillStyle = "rgba(18,30,49,0.7)"; rr(X(0), Y(0), S(LW), S(LH), 10); g.fill(); g.globalAlpha = 1;
-
-      // tenement room fills
-      for (let id = 0; id < 12; id++) {
-        const on = (phase >= 2 && p2 >= reveal[id]) || phase >= 3;
-        if (on) { const rm = room(id); g.fillStyle = hexA(colorOf[id], phase >= 3 ? 0.22 : 0.15); rr(X(rm.x)+3, Y(rm.y)+3, S(rm.w)-6, S(rm.h)-6, 7); g.fill(); }
-      }
-
-      // walls + outer border
-      pairs.forEach(([a, b, o]) => wall(a, b, o, pFloor));
-      g.lineWidth = 2.6; g.strokeStyle = `rgba(196,216,240,${0.72*pFloor})`; rr(X(0), Y(0), S(LW), S(LH), 10); g.stroke();
-
-      // graph edges + door markers
-      if (phase >= 1) {
-        doors.forEach(([a, b], di) => {
-          const ea = phase >= 2 ? 1 : clamp((p1 - di/doors.length) / (1/doors.length), 0, 1);
-          if (ea <= 0) return;
-          const ra = room(a), rb = room(b);
-          g.lineWidth = 1.6;
-          g.strokeStyle = phase >= 2 ? hexA(colorOf[a], 0.85) : `rgba(130,158,193,${0.8*ea})`;
-          g.beginPath(); g.moveTo(X(ra.cx), Y(ra.cy)); g.lineTo(X(rb.cx), Y(rb.cy)); g.stroke();
-          if (phase === 1) {
-            const mx = (ra.cx + rb.cx) / 2, my = (ra.cy + rb.cy) / 2;
-            const pr = 4 + Math.sin(now/180 + di) * 1.6;
-            g.beginPath(); g.arc(X(mx), Y(my), pr, 0, 7); g.fillStyle = hexA("#F6A623", 0.9*ea); g.fill();
-          }
-        });
-      }
-
-      // nodes (room centres)
-      if (phase >= 1) {
-        for (let id = 0; id < 12; id++) {
-          const rm = room(id);
-          const colored = (phase >= 2 && p2 >= reveal[id]) || phase >= 3;
-          if (phase === 2 && Math.abs(p2 - reveal[id]) < 0.07) {
-            g.beginPath(); g.arc(X(rm.cx), Y(rm.cy), 13, 0, 7); g.strokeStyle = hexA(colorOf[id], 0.6); g.lineWidth = 2; g.stroke();
-          }
-          g.beginPath(); g.arc(X(rm.cx), Y(rm.cy), colored ? 6 : 5, 0, 7);
-          g.fillStyle = colored ? colorOf[id] : "rgba(150,172,203,0.92)"; g.fill();
-          g.lineWidth = 1.5; g.strokeStyle = "rgba(10,16,24,0.9)"; g.stroke();
-        }
-      }
-
-      // tenement badges
-      if (phase >= 3) {
-        g.globalAlpha = p3;
-        tenements.forEach((t0, i) => {
-          let cx = 0, cy = 0; t0.rooms.forEach(id => { const r = room(id); cx += r.cx; cy += r.cy; });
-          cx /= t0.rooms.length; cy /= t0.rooms.length;
-          const label = "Tenement " + (i+1);
-          g.font = "600 12px 'Space Grotesk', sans-serif";
-          const tw = g.measureText(label).width + 30;
-          g.fillStyle = "rgba(10,16,24,0.88)"; rr(X(cx)-tw/2, Y(cy)-12, tw, 24, 12); g.fill();
-          g.strokeStyle = t0.color; g.lineWidth = 1.3; rr(X(cx)-tw/2, Y(cy)-12, tw, 24, 12); g.stroke();
-          g.fillStyle = t0.color; g.beginPath(); g.arc(X(cx)-tw/2+12, Y(cy), 3.5, 0, 7); g.fill();
-          g.fillStyle = "#EAF1FB"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(label, X(cx)+6, Y(cy));
-        });
-        g.globalAlpha = 1;
-      }
-
-      stepEls.forEach((el, i) => el.classList.toggle("active", i === phase));
-      if (readout) readout.textContent = texts[phase];
-
-      if (!reduceMotion) rafT = requestAnimationFrame(draw); else rafT = null;
-    }
-
-    function run() { tResize(); start = performance.now(); if (rafT) cancelAnimationFrame(rafT); draw(performance.now()); }
-
-    const tio = new IntersectionObserver((es) => {
-      es.forEach(e => { if (e.isIntersecting && !started) { started = true; run(); tio.disconnect(); } });
-    }, { threshold: 0.3 });
-    tio.observe(tc);
-
-    const replayBtn = document.getElementById("tenementReplay");
-    if (replayBtn) replayBtn.addEventListener("click", () => { started = true; run(); });
-    window.addEventListener("resize", () => { if (started) tResize(); });
+function bfsDemo(){
+  const tc=document.getElementById('tCanvas'); if(!tc) return;
+  const g=tc.getContext('2d');
+  const COLS=4,ROWSN=3,CW=150,CH=120,LW=COLS*CW,LH=ROWSN*CH;
+  const doors=[[0,1],[0,4],[1,5],[4,5],[2,3],[2,6],[3,7],[6,7],[8,9],[9,10],[10,11]];
+  const dset=new Set(doors.map(d=>d[0]+'-'+d[1]));
+  const tens=[{rooms:[0,1,4,5],color:'#E50914',seed:0},
+              {rooms:[2,3,6,7],color:'#E8E8EE',seed:2},
+              {rooms:[8,9,10,11],color:'#46D369',seed:8}];
+  const adj={}; for(let i=0;i<12;i++) adj[i]=[];
+  doors.forEach(([a,b])=>{adj[a].push(b); adj[b].push(a);});
+  const reveal={},colorOf={};
+  tens.forEach(t=>{ const ord=[],seen=new Set([t.seed]),q=[t.seed];
+    while(q.length){ const v=q.shift(); ord.push(v); adj[v].forEach(y=>{ if(!seen.has(y)){seen.add(y);q.push(y);} }); }
+    ord.forEach((id,i)=>{ reveal[id]=ord.length>1?i/(ord.length-1):0; colorOf[id]=t.color; }); });
+  const room=id=>{ const c=id%COLS,r=(id/COLS|0); return {x:c*CW,y:r*CH,w:CW,h:CH,cx:c*CW+CW/2,cy:r*CH+CH/2}; };
+  const pairs=[]; for(let r=0;r<ROWSN;r++) for(let c=0;c<COLS;c++){ const id=r*COLS+c;
+    if(c<COLS-1) pairs.push([id,id+1,'V']); if(r<ROWSN-1) pairs.push([id,id+COLS,'H']); }
+  let TW,TH,td,pad,scale,start=0,raf=null;
+  function size(){ td=Math.min(devicePixelRatio||1,2); TW=tc.clientWidth; TH=tc.clientHeight;
+    tc.width=TW*td; tc.height=TH*td; g.setTransform(td,0,0,td,0,0);
+    scale=Math.min((TW-80)/LW,(TH-70)/LH); pad={x:(TW-LW*scale)/2,y:(TH-LH*scale)/2}; }
+  const X=v=>pad.x+v*scale, Y=v=>pad.y+v*scale, S=v=>v*scale;
+  const cl=(v,a,b)=>Math.min(Math.max(v,a),b);
+  const hexA=(h,a)=>{const n=parseInt(h.slice(1),16);return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';};
+  function rr(x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r);
+    g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+  function seg(x1,y1,x2,y2,a){ g.lineWidth=2.2; g.strokeStyle='rgba(200,200,214,'+(0.5*a)+')';
+    g.beginPath(); g.moveTo(X(x1),Y(y1)); g.lineTo(X(x2),Y(y2)); g.stroke(); }
+  function wall(a,b,o,f){ const ra=room(a), isD=dset.has(a+'-'+b)||dset.has(b+'-'+a), gp=0.42;
+    if(o==='V'){ const wx=ra.x+CW;
+      if(!isD) seg(wx,ra.y,wx,ra.y+CH,f);
+      else { seg(wx,ra.y,wx,ra.y+CH*(0.5-gp/2),f); seg(wx,ra.y+CH*(0.5+gp/2),wx,ra.y+CH,f); } }
+    else { const wy=ra.y+CH;
+      if(!isD) seg(ra.x,wy,ra.x+CW,wy,f);
+      else { seg(ra.x,wy,ra.x+CW*(0.5-gp/2),wy,f); seg(ra.x+CW*(0.5+gp/2),wy,ra.x+CW,wy,f); } } }
+  const P0=1100,P1=2700,P2=2700,P3=2000,GAP=1800,TOTAL=P0+P1+P2+P3+GAP;
+  const texts=['Reading the floor plan…','Detecting openings between adjacent spaces',
+    'Grouping connected spaces with BFS','3 tenements identified — connected components'];
+  function draw(now){
+    let t=now-start;
+    if(rm) t=P0+P1+P2+P3-1; else if(t>=TOTAL){ start=now; t=0; }
+    g.clearRect(0,0,TW,TH);
+    const pF=cl(t/P0,0,1), p1=cl((t-P0)/P1,0,1), p2=cl((t-P0-P1)/P2,0,1), p3=cl((t-P0-P1-P2)/P3,0,1);
+    const ph = t<P0?0 : t<P0+P1?1 : t<P0+P1+P2?2 : 3;
+    g.globalAlpha=pF; g.fillStyle='rgba(28,28,35,.8)'; rr(X(0),Y(0),S(LW),S(LH),10); g.fill(); g.globalAlpha=1;
+    for(let id=0;id<12;id++){ if((ph>=2&&p2>=reveal[id])||ph>=3){ const r=room(id);
+      g.fillStyle=hexA(colorOf[id], ph>=3?0.2:0.13); rr(X(r.x)+3,Y(r.y)+3,S(r.w)-6,S(r.h)-6,7); g.fill(); } }
+    pairs.forEach(([a,b,o])=>wall(a,b,o,pF));
+    g.lineWidth=2.6; g.strokeStyle='rgba(214,214,228,'+(0.66*pF)+')'; rr(X(0),Y(0),S(LW),S(LH),10); g.stroke();
+    if(ph>=1) doors.forEach(([a,b],di)=>{
+      const ea = ph>=2?1:cl((p1-di/doors.length)/(1/doors.length),0,1); if(ea<=0) return;
+      const ra=room(a), rb=room(b);
+      g.lineWidth=1.6; g.strokeStyle = ph>=2?hexA(colorOf[a],0.85):'rgba(166,166,176,'+(0.8*ea)+')';
+      g.beginPath(); g.moveTo(X(ra.cx),Y(ra.cy)); g.lineTo(X(rb.cx),Y(rb.cy)); g.stroke();
+      if(ph===1){ const mx=(ra.cx+rb.cx)/2,my=(ra.cy+rb.cy)/2, pr=4+Math.sin(now/180+di)*1.6;
+        g.beginPath(); g.arc(X(mx),Y(my),pr,0,6.3); g.fillStyle=hexA('#E50914',0.9*ea); g.fill(); } });
+    if(ph>=1) for(let id=0;id<12;id++){ const r=room(id);
+      const col=(ph>=2&&p2>=reveal[id])||ph>=3;
+      if(ph===2&&Math.abs(p2-reveal[id])<0.07){ g.beginPath(); g.arc(X(r.cx),Y(r.cy),13,0,6.3);
+        g.strokeStyle=hexA(colorOf[id],0.6); g.lineWidth=2; g.stroke(); }
+      g.beginPath(); g.arc(X(r.cx),Y(r.cy),col?6:5,0,6.3);
+      g.fillStyle=col?colorOf[id]:'rgba(170,170,186,.9)'; g.fill();
+      g.lineWidth=1.5; g.strokeStyle='rgba(11,11,14,.9)'; g.stroke(); }
+    if(ph>=3){ g.globalAlpha=p3;
+      tens.forEach((t0,i)=>{ let cx=0,cy=0; t0.rooms.forEach(id=>{const r=room(id); cx+=r.cx; cy+=r.cy;});
+        cx/=t0.rooms.length; cy/=t0.rooms.length;
+        const lab='Tenement '+(i+1); g.font="600 12px 'Space Grotesk', sans-serif";
+        const tw=g.measureText(lab).width+30;
+        g.fillStyle='rgba(11,11,14,.9)'; rr(X(cx)-tw/2,Y(cy)-12,tw,24,12); g.fill();
+        g.strokeStyle=t0.color; g.lineWidth=1.3; rr(X(cx)-tw/2,Y(cy)-12,tw,24,12); g.stroke();
+        g.fillStyle=t0.color; g.beginPath(); g.arc(X(cx)-tw/2+12,Y(cy),3.5,0,6.3); g.fill();
+        g.fillStyle='#F4F4F7'; g.textAlign='center'; g.textBaseline='middle'; g.fillText(lab,X(cx)+6,Y(cy)); });
+      g.globalAlpha=1; }
+    const steps=document.querySelectorAll('#tSteps .step');
+    steps.forEach((el,i)=>el.classList.toggle('active',i===ph));
+    const rd=document.getElementById('tRead'); if(rd) rd.textContent=texts[ph];
+    if(!rm) raf=requestAnimationFrame(draw);
   }
-
-  /* ============================================================
-     CONTACT MODAL
-     ============================================================ */
-  const cm = document.getElementById("contactModal");
-  if (cm) {
-    const closeEl = document.getElementById("cmClose");
-    let lastFocus = null, hideTimer = null;
-    const openModal = (e) => {
-      if (e) e.preventDefault();
-      lastFocus = document.activeElement;
-      clearTimeout(hideTimer);
-      cm.hidden = false;
-      requestAnimationFrame(() => cm.classList.add("open"));
-      document.body.style.overflow = "hidden";
-      closeEl.focus();
-    };
-    const closeModal = () => {
-      cm.classList.remove("open");
-      document.body.style.overflow = "";
-      hideTimer = setTimeout(() => { cm.hidden = true; }, 320);
-      if (lastFocus) lastFocus.focus();
-    };
-    document.querySelectorAll("[data-open-contact]").forEach(b => b.addEventListener("click", openModal));
-    closeEl.addEventListener("click", closeModal);
-    cm.addEventListener("click", (e) => { if (e.target === cm) closeModal(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !cm.hidden) closeModal(); });
-  }
-
-  /* ---------------- footer year ---------------- */
-  const y = document.getElementById("year");
-  if (y) y.textContent = new Date().getFullYear();
+  function run(){ size(); start=performance.now(); if(raf) cancelAnimationFrame(raf); draw(performance.now()); }
+  const rp=document.getElementById('tReplay'); if(rp) rp.addEventListener('click',run);
+  const onR=()=>size(); addEventListener('resize',onR);
+  run();
+  closers.push(()=>{ if(raf) cancelAnimationFrame(raf); removeEventListener('resize',onR); });
+}
 })();
-
-  </script>
+</script>
 </body>
 </html>
